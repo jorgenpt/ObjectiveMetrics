@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8E8A0EB61337FBA500CA6E47 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */; };
 		8E8A0EC01337FBA500CA6E47 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
+		8EF751B21339006600609001 /* DMTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B01339006600609001 /* DMTracker.h */; };
+		8EF751B31339006600609001 /* DMTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B11339006600609001 /* DMTracker.m */; };
+		8EF751B7133900F700609001 /* DMEventQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B5133900F700609001 /* DMEventQueue.h */; };
+		8EF751B8133900F700609001 /* DMEventQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B6133900F700609001 /* DMEventQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,9 +21,13 @@
 		8E8A0EB81337FBA500CA6E47 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8E8A0EB91337FBA500CA6E47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8E8A0EBA1337FBA500CA6E47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		8E8A0EBD1337FBA500CA6E47 /* CocoaMetrics-Info.plist */ = {isa = PBXFileReference; path = "CocoaMetrics-Info.plist"; sourceTree = "<group>"; };
+		8E8A0EBD1337FBA500CA6E47 /* CocoaMetrics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CocoaMetrics-Info.plist"; sourceTree = "<group>"; };
 		8E8A0EBF1337FBA500CA6E47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8E8A0EC11337FBA500CA6E47 /* CocoaMetrics-Prefix.pch */ = {isa = PBXFileReference; path = "CocoaMetrics-Prefix.pch"; sourceTree = "<group>"; };
+		8E8A0EC11337FBA500CA6E47 /* CocoaMetrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaMetrics-Prefix.pch"; sourceTree = "<group>"; };
+		8EF751B01339006600609001 /* DMTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTracker.h; sourceTree = "<group>"; };
+		8EF751B11339006600609001 /* DMTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTracker.m; sourceTree = "<group>"; };
+		8EF751B5133900F700609001 /* DMEventQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMEventQueue.h; sourceTree = "<group>"; };
+		8EF751B6133900F700609001 /* DMEventQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMEventQueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +81,7 @@
 		8E8A0EBB1337FBA500CA6E47 /* CocoaMetrics */ = {
 			isa = PBXGroup;
 			children = (
+				8E8A0EC71337FC7600CA6E47 /* Classes */,
 				8E8A0EBC1337FBA500CA6E47 /* Supporting Files */,
 			);
 			path = CocoaMetrics;
@@ -88,6 +97,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8E8A0EC71337FC7600CA6E47 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8EF751B5133900F700609001 /* DMEventQueue.h */,
+				8EF751B6133900F700609001 /* DMEventQueue.m */,
+				8EF751B01339006600609001 /* DMTracker.h */,
+				8EF751B11339006600609001 /* DMTracker.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -95,6 +115,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF751B21339006600609001 /* DMTracker.h in Headers */,
+				8EF751B7133900F700609001 /* DMEventQueue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +182,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF751B31339006600609001 /* DMTracker.m in Sources */,
+				8EF751B8133900F700609001 /* DMEventQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +288,7 @@
 				8E8A0EC61337FBA500CA6E47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
