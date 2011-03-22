@@ -6,7 +6,7 @@
 //  Copyright 2011 devSoft. All rights reserved.
 //
 
-#import <Cococa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
 
 #import "DMEventQueue.h"
 //#import "DMSubmitter.h"
@@ -16,10 +16,10 @@
 @private
     NSString *appId;
     DMEventQueue *queue;
+    int flow;
 }
 
 @property (retain) NSString *appId;
-@property (retain) DMEventQueue *queue;
 
 - (id)initWithAppId:(NSString *)theAppId;
 
