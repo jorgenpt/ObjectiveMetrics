@@ -5,8 +5,6 @@
 //  Copyright 2008 Andy Matuschak. All rights reserved.
 //
 
-#import "Sparkle.h"
-
 @interface SUHost : NSObject
 {
 @private
@@ -24,7 +22,6 @@
 - (NSImage *)icon;
 - (BOOL)isRunningOnReadOnlyVolume;
 - (BOOL)isBackgroundApplication;
-- (NSString *)publicDSAKey;
 - (NSArray *)systemProfile;
 
 - (id)objectForInfoDictionaryKey:(NSString *)key;

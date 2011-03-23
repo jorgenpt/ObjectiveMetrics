@@ -115,19 +115,6 @@
 	return isElement;
 }
 
-- (NSString *)publicDSAKey
-{
-	// Maybe the key is just a string in the Info.plist.
-	NSString *key = [bundle objectForInfoDictionaryKey:SUPublicDSAKeyKey];
-	if (key) { return key; }
-	
-	// More likely, we've got a reference to a Resources file by filename:
-	NSString *keyFilename = [self objectForInfoDictionaryKey:SUPublicDSAKeyFileKey];
-	if (!keyFilename) { return nil; }
-	NSError *ignoreErr = nil;
-	return [NSString stringWithContentsOfFile:[bundle pathForResource:keyFilename ofType:nil] encoding:NSASCIIStringEncoding error: &ignoreErr];
-}
-
 - (NSArray *)systemProfile
 {
 	return [[SUSystemProfiler sharedSystemProfiler] systemProfileArrayForHost:self];
