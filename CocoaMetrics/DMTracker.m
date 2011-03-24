@@ -8,122 +8,137 @@
 
 #import "DMTracker.h"
 
-static NSString *DMTypeEvent = @"ev";
-static NSString *DMTypeEventValue = @"evV";
-static NSString *DMTypeEventTimedStart = @"evS";
-static NSString *DMTypeEventTimedStop = @"evST";
-static NSString *DMTypeEventCancel = @"evC";
-static NSString *DMTypeEventPeriod = @"evP";
-static NSString *DMTypeLog = @"lg";
-static NSString *DMTypeCustomData = @"ctD";
-static NSString *DMTypeCustomDataR = @"ctDR";
-static NSString *DMTypeException = @"exC";
+#import "NSString+DMUUID.h"
+
+static NSString * const DMTypeStartApp = @"strApp";
+static NSString * const DMTypeStopApp = @"stApp";
+static NSString * const DMTypeEvent = @"ev";
+static NSString * const DMTypeEventValue = @"evV";
+static NSString * const DMTypeEventTimedStart = @"evS";
+static NSString * const DMTypeEventTimedStop = @"evST";
+static NSString * const DMTypeEventCancel = @"evC";
+static NSString * const DMTypeEventPeriod = @"evP";
+static NSString * const DMTypeLog = @"lg";
+static NSString * const DMTypeCustomData = @"ctD";
+static NSString * const DMTypeCustomDataR = @"ctDR";
+static NSString * const DMTypeException = @"exC";
 
 
 @interface DMTracker ()
 
-@property (retain) DMEventQueue *queue;
+@property (retain) DMTrackingQueue *queue;
+@property (retain) NSString *session;
 
-- (NSDictionary *)event;
-
-- (NSDictionary *)eventInCategory:(NSString *)theCategory
-                         withName:(NSString *)theName;
-
-- (NSDictionary *)eventInCategory:(NSString *)theCategory
-                         withName:(NSString *)theName
-                            value:(NSString *)theValue;
-
-- (NSDictionary *)eventInCategory:(NSString *)theCategory
-                         withName:(NSString *)theName
-                     secondsSpent:(int)theSeconds
-                        completed:(BOOL)wasCompleted;
-
-- (NSDictionary *)log:(NSString *)message;
-
-- (NSDictionary *)customDataWithName:(NSString *)theName
-                               value:(NSString *)theValue;
-
-- (NSDictionary *)customDataRealtimeWithName:(NSString *)theName
-                                       value:(NSString *)theValue;
-
-- (NSDictionary *)exception:(NSException *)theException;
+- (NSMutableDictionary *)infoStartApp;
+- (NSMutableDictionary *)infoStopApp;
 
 @end
 
 
 @implementation DMTracker
 
-@synthesize appId;
 @synthesize queue;
+@synthesize session;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        [self setAppId:nil];
-        [self setQueue:[[[DMEventQueue alloc] init] autorelease]];
+        [self setQueue:[[[DMTrackingQueue alloc] init] autorelease]];
+        [self setSession:[NSString uuid]];
         flow = 1;
+
+        [queue send:[self infoStartApp]];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillTerminate:)
+                                                     name:NSApplicationWillTerminateNotification
+                                                   object:nil];
     }
 
     return self;
 }
 
-- (id)initWithAppId:(NSString *)theAppId
+- (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-    self = [self init];
-    if (self) {
-        [self setAppId:theAppId];
-    }
-
-    return self;
+    [self endSession];
 }
+
 
 - (void)dealloc
 {
-    [self setAppId:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self endSession];
+
     [self setQueue:nil];
-    
+    [self setSession:nil];
+
     [super dealloc];
 }
 
-- (NSDictionary *)event
+- (void)endSession
 {
-    // TODO: Verify this.
+    if (session && queue)
+    {
+        [queue add:[self infoStopApp]];
+        [queue flush];
+    }
+
+    [self setSession:nil];
+    [self setQueue:nil];
+}
+
+- (NSMutableDictionary *)infoWithType:(NSString *)type
+{
+    // TODO: Verify this - timezones?
     NSDate *timestamp = [NSDate date];
-    [timestamp setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSString stringWithFormat:@"%d", [self hash]], @"ss",
-            [NSString stringWithFormat:@"%d", flow++], @"fl",
-            timestamp, @"ts",
+
+    return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+            [self session], @"ss",
+            type, @"tp",
+            [NSNumber numberWithInt:(int)[timestamp timeIntervalSince1970]], @"ts",
             nil];
 }
 
-- (NSDictionary *)eventInCategory:(NSString *)theCategory
-                         withName:(NSString *)theName
+- (NSMutableDictionary *)infoForEventNamed:(NSString *)name
+                                  withType:(NSString *)type
 {
-    NSDictionary *event = [self event];
-    [event setValue:DMTypeEvent
-             forKey:@"tp"];
-    [event setValue:theCategory
-             forKey:@"ca"];
-    [event setValue:theName
-             forKey:@"nm"];
+    NSMutableDictionary *info = [self infoWithType:type];
+    [info setValue:[NSString stringWithFormat:@"%d", flow++]
+            forKey:@"fl"];
+    [info setValue:name
+            forKey:@"nm"];
+    return info;
+}
+
+
+- (NSMutableDictionary *)infoStartApp
+{
+    NSMutableDictionary *event = [self infoWithType:DMTypeStartApp];
     return event;
 }
 
-- (void)trackEventInCategory:(NSString *)theCategory
-                    withName:(NSString *)theName
+- (NSMutableDictionary *)infoStopApp
 {
-    
+    return [self infoWithType:DMTypeStopApp];
 }
 
-- (NSDictionary *)eventInCategory:(NSString *)theCategory
-                         withName:(NSString *)theName
-                            value:(NSString *)theValue
+- (NSMutableDictionary *)infoForEventWithCategory:(NSString *)theCategory
+                                             name:(NSString *)theName
 {
-    NSDictionary *event = [self eventInCategory:theCategory
-                                       withName:theName];
+    NSMutableDictionary *event = [self infoForEventNamed:theName
+                                                withType:DMTypeEvent];
+    [event setValue:theCategory
+             forKey:@"ca"];
+    return event;
+}
+
+- (NSMutableDictionary *)infoForEventWithCategory:(NSString *)theCategory
+                                             name:(NSString *)theName
+                                            value:(NSString *)theValue
+{
+    NSMutableDictionary *event = [self infoForEventWithCategory:theCategory
+                                                           name:theName];
     [event setValue:DMTypeEventValue
              forKey:@"tp"];
     [event setValue:theValue
@@ -131,59 +146,35 @@ static NSString *DMTypeException = @"exC";
     return event;
 }
 
-- (void)trackEventInCategory:(NSString *)theCategory
-                    withName:(NSString *)theName
-                       value:(NSString *)theValue
+- (NSMutableDictionary *)infoForEventWithCategory:(NSString *)theCategory
+                                             name:(NSString *)theName
+                                     secondsSpent:(int)theSeconds
+                                        completed:(BOOL)wasCompleted
 {
-    
-}
-
-- (NSDictionary *)eventInCategory:(NSString *)theCategory
-                         withName:(NSString *)theName
-                     secondsSpent:(int)theSeconds
-                        completed:(BOOL)wasCompleted
-{
-    NSDictionary *event = [self eventInCategory:theCategory
-                                       withName:theName];
+    NSMutableDictionary *event = [self infoForEventWithCategory:theCategory
+                                                           name:theName];
     [event setValue:DMTypeEventPeriod
              forKey:@"tp"];
     [event setValue:[NSString stringWithFormat:@"%d", theSeconds]
              forKey:@"tm"];
     [event setValue:[NSString stringWithFormat:@"%d", wasCompleted]
              forKey:@"ec"];
-    
     return event;
 }
 
-- (void)trackEventInCategory:(NSString *)theCategory
-                    withName:(NSString *)theName
-                secondsSpent:(int)theSeconds
-                   completed:(BOOL)wasCompleted
+- (NSMutableDictionary *)infoForLogMessage:(NSString *)message
 {
-    
-}
-
-- (NSDictionary *)log:(NSString *)message
-{
-    NSDictionary *event = [self event];
-    [event setValue:DMTypeLog
-             forKey:@"tp"];
+    NSMutableDictionary *event = [self infoWithType:DMTypeLog];
     [event setValue:message
              forKey:@"ms"];
     return event;
 }
 
-- (void)trackLog:(NSString *)message
-{
-    
-}
 
-- (NSDictionary *)customDataWithName:(NSString *)theName
-                               value:(NSString *)theValue
+- (NSMutableDictionary *)infoForCustomDataWithName:(NSString *)theName
+                                             value:(NSString *)theValue
 {
-    NSDictionary *event = [self event];
-    [event setValue:DMTypeCustomData
-             forKey:@"tp"];
+    NSMutableDictionary *event = [self infoWithType:DMTypeCustomData];
     [event setValue:theName
              forKey:@"nm"];
     [event setValue:theValue
@@ -191,33 +182,21 @@ static NSString *DMTypeException = @"exC";
     return event;
 }
 
-- (void)trackCustomDataWithName:(NSString *)theName
-                          value:(NSString *)theValue
-{
-    
-}
 
-- (NSDictionary *)customDataRealtimeWithName:(NSString *)theName
-                                       value:(NSString *)theValue
+- (NSMutableDictionary *)infoForCustomDataRealtimeWithName:(NSString *)theName
+                                                     value:(NSString *)theValue
 {
-    NSDictionary *event = [self customDataWithName:theName
-                                             value:theValue];
+    NSMutableDictionary *event = [self infoForCustomDataWithName:theName
+                                                           value:theValue];
     [event setValue:DMTypeCustomDataR
              forKey:@"tp"];
     return event;
 }
 
-- (void)trackCustomDataRealtimeWithName:(NSString *)theName
-                                  value:(NSString *)theValue
-{
-    
-}
 
-- (NSDictionary *)exception:(NSException *)theException
+- (NSMutableDictionary *)infoForException:(NSException *)theException
 {
-    NSDictionary *event = [self event];
-    [event setValue:DMTypeException
-             forKey:@"tp"];
+    NSMutableDictionary *event = [self infoWithType:DMTypeException];
     [event setValue:@"" // event.message
              forKey:@"msg"];
     [event setValue:[theException name]
@@ -229,9 +208,53 @@ static NSString *DMTypeException = @"exC";
     return event;
 }
 
+- (void)trackEventInCategory:(NSString *)theCategory
+                    withName:(NSString *)theName
+{
+    [queue add:[self infoForEventWithCategory:theCategory name:theName]];
+}
+
+
+- (void)trackEventInCategory:(NSString *)theCategory
+                    withName:(NSString *)theName
+                       value:(NSString *)theValue
+{
+    [queue add:[self infoForEventWithCategory:theCategory
+                                   name:theName
+                                      value:theValue]];    
+}
+
+- (void)trackEventInCategory:(NSString *)theCategory
+                    withName:(NSString *)theName
+                secondsSpent:(int)theSeconds
+                   completed:(BOOL)wasCompleted
+{
+    [queue add:[self infoForEventWithCategory:theCategory
+                                   name:theName
+                               secondsSpent:theSeconds
+                                  completed:wasCompleted]];
+}
+
+- (void)trackLog:(NSString *)message
+{
+    [queue add:[self infoForLogMessage:message]];
+}
+
+- (void)trackCustomDataWithName:(NSString *)theName
+                          value:(NSString *)theValue
+{
+    [queue add:[self infoForCustomDataWithName:theName value:theValue]];
+}
+
+- (void)trackCustomDataRealtimeWithName:(NSString *)theName
+                                  value:(NSString *)theValue
+{
+    [queue send:[self infoForCustomDataRealtimeWithName:theName value:theValue]];
+}
+
 - (void)trackException:(NSException *)theException
 {
-    
+    [queue send:[self infoForException:theException]];
 }
 
 @end

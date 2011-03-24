@@ -7,16 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E8A0EB61337FBA500CA6E47 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */; };
-		8E8A0EC01337FBA500CA6E47 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
-		8EF751B21339006600609001 /* DMTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B01339006600609001 /* DMTracker.h */; };
-		8EF751B31339006600609001 /* DMTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B11339006600609001 /* DMTracker.m */; };
-		8EF751B7133900F700609001 /* DMEventQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B5133900F700609001 /* DMEventQueue.h */; };
-		8EF751B8133900F700609001 /* DMEventQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B6133900F700609001 /* DMEventQueue.m */; };
+		8E279CDF133AC0EB00B4CB82 /* DMTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B11339006600609001 /* DMTracker.m */; };
+		8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B6133900F700609001 /* DMTrackingQueue.m */; };
+		8E279CE1133AC0EB00B4CB82 /* SUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BA5E6133984F60018E4A3 /* SUHost.m */; };
+		8E279CE2133AC0EB00B4CB82 /* SUSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BA5E8133984F60018E4A3 /* SUSystemProfiler.m */; };
+		8E279CE3133AC0EB00B4CB82 /* DMCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BA5F1133987200018E4A3 /* DMCommon.m */; };
+		8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */; };
+		8E279CE6133AC0EB00B4CB82 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */; };
+		8E279CE8133AC0EB00B4CB82 /* DMTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B01339006600609001 /* DMTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E279CE9133AC0EB00B4CB82 /* DMTrackingQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B5133900F700609001 /* DMTrackingQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E279CEA133AC0EB00B4CB82 /* SUHost.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6BA5E5133984F60018E4A3 /* SUHost.h */; };
+		8E279CEB133AC0EB00B4CB82 /* SUSystemProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6BA5E7133984F60018E4A3 /* SUSystemProfiler.h */; };
+		8E279CEC133AC0EB00B4CB82 /* DMCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6BA5F0133987200018E4A3 /* DMCommon.h */; };
+		8E279CED133AC0EB00B4CB82 /* NSString+DMUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */; };
+		8E279CEF133AC0EB00B4CB82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8E8A0EB21337FBA500CA6E47 /* CocoaMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DMUUID.h"; sourceTree = "<group>"; };
+		8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DMUUID.m"; sourceTree = "<group>"; };
+		8E279CF3133AC0EB00B4CB82 /* CocoaMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E6BA5E5133984F60018E4A3 /* SUHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUHost.h; sourceTree = "<group>"; };
+		8E6BA5E6133984F60018E4A3 /* SUHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUHost.m; sourceTree = "<group>"; };
+		8E6BA5E7133984F60018E4A3 /* SUSystemProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSystemProfiler.h; sourceTree = "<group>"; };
+		8E6BA5E8133984F60018E4A3 /* SUSystemProfiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSystemProfiler.m; sourceTree = "<group>"; };
+		8E6BA5F0133987200018E4A3 /* DMCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMCommon.h; sourceTree = "<group>"; };
+		8E6BA5F1133987200018E4A3 /* DMCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMCommon.m; sourceTree = "<group>"; };
 		8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8E8A0EB81337FBA500CA6E47 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8E8A0EB91337FBA500CA6E47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -26,37 +42,49 @@
 		8E8A0EC11337FBA500CA6E47 /* CocoaMetrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaMetrics-Prefix.pch"; sourceTree = "<group>"; };
 		8EF751B01339006600609001 /* DMTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTracker.h; sourceTree = "<group>"; };
 		8EF751B11339006600609001 /* DMTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTracker.m; sourceTree = "<group>"; };
-		8EF751B5133900F700609001 /* DMEventQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMEventQueue.h; sourceTree = "<group>"; };
-		8EF751B6133900F700609001 /* DMEventQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMEventQueue.m; sourceTree = "<group>"; };
+		8EF751B5133900F700609001 /* DMTrackingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTrackingQueue.h; sourceTree = "<group>"; };
+		8EF751B6133900F700609001 /* DMTrackingQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTrackingQueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8E8A0EAE1337FBA500CA6E47 /* Frameworks */ = {
+		8E279CE5133AC0EB00B4CB82 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E8A0EB61337FBA500CA6E47 /* Cocoa.framework in Frameworks */,
+				8E279CE6133AC0EB00B4CB82 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E6BA5E4133984F60018E4A3 /* Sparkle */ = {
+			isa = PBXGroup;
+			children = (
+				8E6BA5EF1339850D0018E4A3 /* Classes */,
+			);
+			path = Sparkle;
+			sourceTree = SOURCE_ROOT;
+		};
+		8E6BA5EF1339850D0018E4A3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8E6BA5E5133984F60018E4A3 /* SUHost.h */,
+				8E6BA5E6133984F60018E4A3 /* SUHost.m */,
+				8E6BA5E7133984F60018E4A3 /* SUSystemProfiler.h */,
+				8E6BA5E8133984F60018E4A3 /* SUSystemProfiler.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		8E8A0EA61337FBA500CA6E47 = {
 			isa = PBXGroup;
 			children = (
 				8E8A0EBB1337FBA500CA6E47 /* CocoaMetrics */,
+				8E6BA5E4133984F60018E4A3 /* Sparkle */,
 				8E8A0EB41337FBA500CA6E47 /* Frameworks */,
-				8E8A0EB31337FBA500CA6E47 /* Products */,
+				8E279CF3133AC0EB00B4CB82 /* CocoaMetrics.framework */,
 			);
-			sourceTree = "<group>";
-		};
-		8E8A0EB31337FBA500CA6E47 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8E8A0EB21337FBA500CA6E47 /* CocoaMetrics.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		8E8A0EB41337FBA500CA6E47 /* Frameworks */ = {
@@ -100,10 +128,14 @@
 		8E8A0EC71337FC7600CA6E47 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8EF751B5133900F700609001 /* DMEventQueue.h */,
-				8EF751B6133900F700609001 /* DMEventQueue.m */,
+				8EF751B5133900F700609001 /* DMTrackingQueue.h */,
+				8EF751B6133900F700609001 /* DMTrackingQueue.m */,
 				8EF751B01339006600609001 /* DMTracker.h */,
 				8EF751B11339006600609001 /* DMTracker.m */,
+				8E6BA5F0133987200018E4A3 /* DMCommon.h */,
+				8E6BA5F1133987200018E4A3 /* DMCommon.m */,
+				8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */,
+				8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -111,26 +143,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8E8A0EAF1337FBA500CA6E47 /* Headers */ = {
+		8E279CE7133AC0EB00B4CB82 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EF751B21339006600609001 /* DMTracker.h in Headers */,
-				8EF751B7133900F700609001 /* DMEventQueue.h in Headers */,
+				8E279CE8133AC0EB00B4CB82 /* DMTracker.h in Headers */,
+				8E279CE9133AC0EB00B4CB82 /* DMTrackingQueue.h in Headers */,
+				8E279CEA133AC0EB00B4CB82 /* SUHost.h in Headers */,
+				8E279CEB133AC0EB00B4CB82 /* SUSystemProfiler.h in Headers */,
+				8E279CEC133AC0EB00B4CB82 /* DMCommon.h in Headers */,
+				8E279CED133AC0EB00B4CB82 /* NSString+DMUUID.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8E8A0EB11337FBA500CA6E47 /* CocoaMetrics */ = {
+		8E279CDD133AC0EB00B4CB82 /* CocoaMetrics */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E8A0EC41337FBA500CA6E47 /* Build configuration list for PBXNativeTarget "CocoaMetrics" */;
+			buildConfigurationList = 8E279CF0133AC0EB00B4CB82 /* Build configuration list for PBXNativeTarget "CocoaMetrics" */;
 			buildPhases = (
-				8E8A0EAD1337FBA500CA6E47 /* Sources */,
-				8E8A0EAE1337FBA500CA6E47 /* Frameworks */,
-				8E8A0EAF1337FBA500CA6E47 /* Headers */,
-				8E8A0EB01337FBA500CA6E47 /* Resources */,
+				8E279CDE133AC0EB00B4CB82 /* Sources */,
+				8E279CE5133AC0EB00B4CB82 /* Frameworks */,
+				8E279CE7133AC0EB00B4CB82 /* Headers */,
+				8E279CEE133AC0EB00B4CB82 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -138,7 +174,7 @@
 			);
 			name = CocoaMetrics;
 			productName = CocoaMetrics;
-			productReference = 8E8A0EB21337FBA500CA6E47 /* CocoaMetrics.framework */;
+			productReference = 8E279CF3133AC0EB00B4CB82 /* CocoaMetrics.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -157,33 +193,37 @@
 				en,
 			);
 			mainGroup = 8E8A0EA61337FBA500CA6E47;
-			productRefGroup = 8E8A0EB31337FBA500CA6E47 /* Products */;
+			productRefGroup = 8E8A0EA61337FBA500CA6E47;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8E8A0EB11337FBA500CA6E47 /* CocoaMetrics */,
+				8E279CDD133AC0EB00B4CB82 /* CocoaMetrics */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8E8A0EB01337FBA500CA6E47 /* Resources */ = {
+		8E279CEE133AC0EB00B4CB82 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E8A0EC01337FBA500CA6E47 /* InfoPlist.strings in Resources */,
+				8E279CEF133AC0EB00B4CB82 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8E8A0EAD1337FBA500CA6E47 /* Sources */ = {
+		8E279CDE133AC0EB00B4CB82 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EF751B31339006600609001 /* DMTracker.m in Sources */,
-				8EF751B8133900F700609001 /* DMEventQueue.m in Sources */,
+				8E279CDF133AC0EB00B4CB82 /* DMTracker.m in Sources */,
+				8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */,
+				8E279CE1133AC0EB00B4CB82 /* SUHost.m in Sources */,
+				8E279CE2133AC0EB00B4CB82 /* SUSystemProfiler.m in Sources */,
+				8E279CE3133AC0EB00B4CB82 /* DMCommon.m in Sources */,
+				8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +241,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8E279CF1133AC0EB00B4CB82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaMetrics/CocoaMetrics-Prefix.pch";
+				INFOPLIST_FILE = "CocoaMetrics/CocoaMetrics-Info.plist";
+				PRODUCT_NAME = CocoaMetrics;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		8E279CF2133AC0EB00B4CB82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaMetrics/CocoaMetrics-Prefix.pch";
+				INFOPLIST_FILE = "CocoaMetrics/CocoaMetrics-Info.plist";
+				PRODUCT_NAME = CocoaMetrics;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
 		8E8A0EC21337FBA500CA6E47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -233,59 +309,23 @@
 			};
 			name = Release;
 		};
-		8E8A0EC51337FBA500CA6E47 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CocoaMetrics/CocoaMetrics-Prefix.pch";
-				INFOPLIST_FILE = "CocoaMetrics/CocoaMetrics-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Debug;
-		};
-		8E8A0EC61337FBA500CA6E47 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CocoaMetrics/CocoaMetrics-Prefix.pch";
-				INFOPLIST_FILE = "CocoaMetrics/CocoaMetrics-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8E279CF0133AC0EB00B4CB82 /* Build configuration list for PBXNativeTarget "CocoaMetrics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E279CF1133AC0EB00B4CB82 /* Debug */,
+				8E279CF2133AC0EB00B4CB82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8E8A0EAB1337FBA500CA6E47 /* Build configuration list for PBXProject "CocoaMetrics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E8A0EC21337FBA500CA6E47 /* Debug */,
 				8E8A0EC31337FBA500CA6E47 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8E8A0EC41337FBA500CA6E47 /* Build configuration list for PBXNativeTarget "CocoaMetrics" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8E8A0EC51337FBA500CA6E47 /* Debug */,
-				8E8A0EC61337FBA500CA6E47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

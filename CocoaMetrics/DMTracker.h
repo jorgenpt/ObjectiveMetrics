@@ -8,20 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "DMEventQueue.h"
-//#import "DMSubmitter.h"
-
+#import "DMTrackingQueue.h"
 
 @interface DMTracker : NSObject {
 @private
-    NSString *appId;
-    DMEventQueue *queue;
+    DMTrackingQueue *queue;
+    NSString *session;
     int flow;
 }
 
-@property (retain) NSString *appId;
-
-- (id)initWithAppId:(NSString *)theAppId;
+- (void)endSession;
 
 #pragma mark -
 
