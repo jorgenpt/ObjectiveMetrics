@@ -18,7 +18,8 @@
 }
 
 + (id) defaultTracker;
-- (void)endSession;
+- (void)startApp;
+- (void)stopApp;
 
 #pragma mark -
 

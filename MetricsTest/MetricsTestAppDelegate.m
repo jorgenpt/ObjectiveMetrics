@@ -17,6 +17,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     DMTracker *tracker = [DMTracker defaultTracker];
+    [tracker startApp];
+
     [tracker trackEventInCategory:@"General" withName:@"Startup"];
     [tracker trackLog:@"Hello world!"];
 }

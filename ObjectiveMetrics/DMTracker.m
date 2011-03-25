@@ -112,22 +112,22 @@ static DMTracker* defaultInstance = nil;
             self = [super init];
             if (self) {
                 [self setQueue:[[[DMTrackingQueue alloc] init] autorelease]];
-                [self setSession:[NSString uuid]];
-                flow = 1;
-                
                 if ([queue count] > 0)
                 {
-                    if ([[[queue eventAtIndex:[queue count] - 1] objectForKey:DMFieldType] isNotEqualTo:DMTypeStopApp])
-                        [queue add:[self infoStopApp]];
+                    /* If the queue isn't empty, that means we were unable to send some items last session.
+                     * Check that the last session had the time to queue a stopApp, otherwise fabricate our own.
+                     */
+                    NSDictionary *lastEvent = [queue eventAtIndex:[queue count] - 1];
+                    if ([[lastEvent objectForKey:DMFieldType] isNotEqualTo:DMTypeStopApp])
+                    {
+                        /* Create a new stopApp, but set the session to the previous session. */
+                        NSMutableDictionary *stopApp = [self infoStopApp];
+                        [stopApp setValue:[lastEvent objectForKey:DMFieldSession]
+                                   forKey:DMFieldSession];
+                        [queue add:lastEvent];
+                    }
                     [queue flush];
                 }
-
-                [queue send:[self infoStartApp]];
-                
-                [[NSNotificationCenter defaultCenter] addObserver:self
-                                                         selector:@selector(applicationWillTerminate:)
-                                                             name:NSApplicationWillTerminateNotification
-                                                           object:nil];
 
                 defaultInstance = self;
             }
@@ -144,20 +144,46 @@ static DMTracker* defaultInstance = nil;
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-    [self endSession];
+    [self stopApp];
 }
 
-- (void)endSession
+- (void)startApp
 {
-    if (session && queue)
+    if (!session)
     {
-        [queue add:[self infoStopApp]];
-        [queue blockingFlush];
-    }
+        flow = 1;
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self setSession:nil];
-    [self setQueue:nil];
+        [self setSession:[NSString uuid]];
+        [queue send:[self infoStartApp]];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillTerminate:)
+                                                     name:NSApplicationWillTerminateNotification
+                                                   object:nil];
+    }
+    else
+    {
+        NSLog(@"Warning! -[DMTracker startApp] called more than once!");
+    }
+}
+
+- (void)stopApp
+{
+    if (session)
+    {
+        if (queue)
+        {
+            [queue add:[self infoStopApp]];
+            [queue blockingFlush];
+        }
+
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self setSession:nil];
+    }
+    else
+    {
+        NSLog(@"Warning! -[DMTracker stopApp] called more than once or before startApp!");
+    }
 }
 
 - (NSMutableDictionary *)infoWithType:(NSString *)type
