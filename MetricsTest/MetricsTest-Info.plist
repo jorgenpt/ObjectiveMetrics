@@ -22,13 +22,13 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>DMAppId</key>
+	<string>YOUR_APP_ID_HERE!</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>DMAppId</key>
-	<string>YOUR_APP_ID_GOES_HERE!</string>
 </dict>
 </plist>

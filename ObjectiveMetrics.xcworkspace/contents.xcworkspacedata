@@ -5,6 +5,6 @@
       location = "group:MetricsTest.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:CocoaMetrics.xcodeproj">
+      location = "container:ObjectiveMetrics.xcodeproj">
    </FileRef>
 </Workspace>

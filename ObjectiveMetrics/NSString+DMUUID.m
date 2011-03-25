@@ -1,6 +1,6 @@
 //
 //  NSString+DMUUID.m
-//  CocoaMetrics
+//  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 3/23/11.
 //  Copyright 2011 devSoft. All rights reserved.

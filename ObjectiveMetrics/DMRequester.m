@@ -1,6 +1,6 @@
 //
 //  DMRequester.m
-//  CocoaMetrics
+//  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 3/24/11.
 //  Copyright 2011 devSoft. All rights reserved.

@@ -2,13 +2,13 @@
 //  MetricsTestAppDelegate.m
 //  MetricsTest
 //
-//  Created by J√∏rgen P. Tjern√∏ on 3/23/11.
+//  Created by Jørgen P. Tjernø on 3/23/11.
 //  Copyright 2011 devSoft. All rights reserved.
 //
 
 #import "MetricsTestAppDelegate.h"
 
-#import "CocoaMetrics/DMTracker.h"
+#import "ObjectiveMetrics/DMTracker.h"
 
 @implementation MetricsTestAppDelegate
 

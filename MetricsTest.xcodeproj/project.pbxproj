@@ -13,7 +13,7 @@
 		8E279CC7133AC06D00B4CB82 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8E279CC5133AC06D00B4CB82 /* Credits.rtf */; };
 		8E279CCA133AC06D00B4CB82 /* MetricsTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E279CC9133AC06D00B4CB82 /* MetricsTestAppDelegate.m */; };
 		8E279CCD133AC06D00B4CB82 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E279CCB133AC06D00B4CB82 /* MainMenu.xib */; };
-		8E279CFE133AC24500B4CB82 /* CocoaMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E279CFD133AC24500B4CB82 /* CocoaMetrics.framework */; };
+		8E6D6A39133C76AA00E5F8A8 /* ObjectiveMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6D6A38133C76AA00E5F8A8 /* ObjectiveMetrics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +30,7 @@
 		8E279CC8133AC06D00B4CB82 /* MetricsTestAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetricsTestAppDelegate.h; sourceTree = "<group>"; };
 		8E279CC9133AC06D00B4CB82 /* MetricsTestAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetricsTestAppDelegate.m; sourceTree = "<group>"; };
 		8E279CCC133AC06D00B4CB82 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		8E279CFD133AC24500B4CB82 /* CocoaMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E6D6A38133C76AA00E5F8A8 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjectiveMetrics.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E279CFE133AC24500B4CB82 /* CocoaMetrics.framework in Frameworks */,
+				8E6D6A39133C76AA00E5F8A8 /* ObjectiveMetrics.framework in Frameworks */,
 				8E279CB7133AC06D00B4CB82 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +66,7 @@
 		8E279CB5133AC06D00B4CB82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8E279CFD133AC24500B4CB82 /* CocoaMetrics.framework */,
+				8E6D6A38133C76AA00E5F8A8 /* ObjectiveMetrics.framework */,
 				8E279CB6133AC06D00B4CB82 /* Cocoa.framework */,
 				8E279CB8133AC06D00B4CB82 /* Other Frameworks */,
 			);
@@ -249,6 +249,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -265,6 +269,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MetricsTest/MetricsTest-Prefix.pch";

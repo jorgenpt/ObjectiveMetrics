@@ -1,6 +1,6 @@
 //
 //  DMCommon.m
-//  CocoaMetrics
+//  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 3/22/11.
 //  Copyright 2011 devSoft. All rights reserved.
@@ -25,7 +25,7 @@ static SUHost *sharedFrameworkHost = nil;
 + (SUHost *)sharedFrameworkHost
 {
     if (!sharedFrameworkHost)
-        sharedFrameworkHost = [[SUHost alloc] initWithBundle:[NSBundle bundleWithIdentifier:@"no.devsoft.CocoaMetrics"]];
+        sharedFrameworkHost = [[SUHost alloc] initWithBundle:[NSBundle bundleWithIdentifier:@"no.devsoft.ObjectiveMetrics"]];
     return [[sharedFrameworkHost retain] autorelease];
 }
 

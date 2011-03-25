@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'CocoaMetrics' target in the 'CocoaMetrics' project
+// Prefix header for all source files of the 'ObjectiveMetrics' target in the 'ObjectiveMetrics' project
 //
 
 #ifdef __OBJC__
