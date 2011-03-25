@@ -5,6 +5,8 @@
 //  Copyright 2008 Andy Matuschak. All rights reserved.
 //
 
+#include <Cocoa/Cocoa.h>
+
 @interface SUHost : NSObject
 {
 @private

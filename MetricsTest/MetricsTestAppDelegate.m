@@ -8,7 +8,7 @@
 
 #import "MetricsTestAppDelegate.h"
 
-#import "ObjectiveMetrics/DMTracker.h"
+#import "ObjectiveMetrics/ObjectiveMetrics.h"
 
 @implementation MetricsTestAppDelegate
 
@@ -16,7 +16,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    DMTracker *tracker = [[[DMTracker alloc] init] autorelease];
+    DMTracker *tracker = [DMTracker defaultTracker];
     [tracker trackEventInCategory:@"General" withName:@"Startup"];
     [tracker trackLog:@"Hello world!"];
 }
