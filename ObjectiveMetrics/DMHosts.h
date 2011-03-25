@@ -1,5 +1,5 @@
 //
-//  DMCommon.h
+//  DMHosts.h
 //  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 3/22/11.
@@ -8,7 +8,7 @@
 
 #import "SUHost.h"
 
-@interface DMCommon : NSObject
+@interface DMHosts : NSObject
 
 + (SUHost *)sharedAppHost;
 + (SUHost *)sharedFrameworkHost;

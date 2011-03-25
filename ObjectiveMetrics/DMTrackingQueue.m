@@ -8,7 +8,6 @@
 
 #import "DMTrackingQueue.h"
 
-#import "DMCommon.h"
 #import "DMRequester.h"
 
 static NSString * const DMEventQueueKey = @"DMEventQueue";
@@ -38,7 +37,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 {
     self = [super init];
     if (self) {        
-        SUHost *host = [DMCommon sharedAppHost];
+        SUHost *host = [DMHosts sharedAppHost];
         [self setRequester:[[[DMRequester alloc] initWithDelegate:self] autorelease]];
 
         [self setEvents:[host objectForUserDefaultsKey:DMEventQueueKey]];

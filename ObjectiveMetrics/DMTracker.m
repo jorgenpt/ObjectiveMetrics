@@ -8,7 +8,6 @@
 
 #import "DMTracker.h"
 
-#import "DMCommon.h"
 #import "DMTrackingQueue.h"
 #import "NSString+DMUUID.h"
 
@@ -214,7 +213,7 @@ static DMTracker* defaultInstance = nil;
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeStartApp];
 
-    SUHost *host = [DMCommon sharedFrameworkHost], *app = [DMCommon sharedAppHost];
+    SUHost *host = [DMHosts sharedFrameworkHost], *app = [DMHosts sharedAppHost];
     
     NSString *uuid = [host objectForUserDefaultsKey:DMUserIdKey];
     if (!uuid)

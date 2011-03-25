@@ -1,19 +1,17 @@
 //
-//  DMCommon.m
+//  DMHosts.m
 //  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 3/22/11.
 //  Copyright 2011 devSoft. All rights reserved.
 //
 
-#import "DMCommon.h"
-
 #import "NSString+DMUUID.h"
 
 static SUHost *sharedAppHost = nil;
 static SUHost *sharedFrameworkHost = nil;
 
-@implementation DMCommon
+@implementation DMHosts
 
 + (SUHost *)sharedAppHost
 {

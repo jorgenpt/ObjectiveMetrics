@@ -8,7 +8,6 @@
 
 #import "DMRequester.h"
 
-#import "DMCommon.h"
 #import "JSON.h"
 
 static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
@@ -33,7 +32,7 @@ static NSString * const DMStatusCodeKey = @"status_code";
 {
     self = [super init];
     if (self) {
-        SUHost *host = [DMCommon sharedAppHost];
+        SUHost *host = [DMHosts sharedAppHost];
         NSString *URL = [host objectForInfoDictionaryKey:DMAnalyticsURLKey];
         if (!URL)
         {
