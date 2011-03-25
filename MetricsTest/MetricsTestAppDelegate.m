@@ -8,7 +8,7 @@
 
 #import "MetricsTestAppDelegate.h"
 
-#import "ObjectiveMetrics/ObjectiveMetrics.h"
+#import <ObjectiveMetrics/ObjectiveMetrics.h>
 
 @implementation MetricsTestAppDelegate
 
