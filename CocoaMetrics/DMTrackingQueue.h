@@ -15,18 +15,16 @@
     NSMutableArray *events;
     int maxSize;
     double maxSecondsOld;
-    NSUInteger numberOfPendingEvents;
+    NSInteger numberOfPendingEvents;
     DMRequester *requester;
 }
 
 - (void)add:(NSDictionary *)event;
 - (void)send:(NSDictionary *)event;
-- (void)sendBatch:(NSArray *)events;
 
 - (NSUInteger)count;
 - (NSDictionary *)eventAtIndex:(NSUInteger)index;
 
-- (BOOL)flushIfExceedsBounds;
 - (void)flush;
 - (BOOL)blockingFlush;
 

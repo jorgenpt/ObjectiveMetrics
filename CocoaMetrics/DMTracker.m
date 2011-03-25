@@ -8,12 +8,18 @@
 
 #import "DMTracker.h"
 
+#import "DMCommon.h"
 #import "DMTrackingQueue.h"
 #import "NSString+DMUUID.h"
 
+static NSString * const DMUserIdKey = @"DMUserId";
+
+/* These are the basic fields all requests contain. */
 static NSString * const DMFieldSession = @"ss";
 static NSString * const DMFieldType = @"tp";
 static NSString * const DMFieldTimestamp = @"ts";
+
+/* These are various fields that the requests can contain. */
 static NSString * const DMFieldFlow = @"fl";
 static NSString * const DMFieldCategory = @"ca";
 static NSString * const DMFieldName = @"nm";
@@ -25,6 +31,27 @@ static NSString * const DMFieldExceptionMessage = @"msg";
 static NSString * const DMFieldExceptionSource = @"src";
 static NSString * const DMFieldExceptionStack = @"stk";
 static NSString * const DMFieldExceptionTargetSite = @"tgs";
+
+/* These are all the fields that DMTypeStartApp wants. */
+static NSString * const DMFieldUserId = @"ID";
+static NSString * const DMFieldInfoApplicationVersion = @"aver";
+static NSString * const DMFieldInfoOSVersion = @"osv";
+static NSString * const DMFieldInfoOSServicePack = @"ossp";
+static NSString * const DMFieldInfoOSArchitecture = @"osar";
+static NSString * const DMFieldInfoJavaVersion = @"osjv";
+static NSString * const DMFieldInfoDotNetVersion = @"osnet";
+static NSString * const DMFieldInfoDotNetServicePack = @"osnsp";
+static NSString * const DMFieldInfoOSLanguage = @"oslng";
+static NSString * const DMFieldInfoScreenResolution = @"osscn";
+static NSString * const DMFieldInfoProcessorName = @"cnm";
+static NSString * const DMFieldInfoProcessorBrand = @"cbr";
+static NSString * const DMFieldInfoProcessorFrequency = @"cfr";
+static NSString * const DMFieldInfoProcessorCores = @"ccr";
+static NSString * const DMFieldInfoProcessorArchitecture = @"car";
+static NSString * const DMFieldInfoMemoryTotal = @"mtt";
+static NSString * const DMFieldInfoMemoryFree = @"mfr";
+static NSString * const DMFieldInfoDiskTotal = @"dtt";
+static NSString * const DMFieldInfoDiskFree = @"dfr";
 
 static NSString * const DMTypeStartApp = @"strApp";
 static NSString * const DMTypeStopApp = @"stApp";
@@ -65,7 +92,6 @@ static DMTracker* defaultInstance = nil;
             [[self alloc] init];
     }
     return defaultInstance;
-    
 }
 
 + (id)allocWithZone:(NSZone *)zone
@@ -161,8 +187,84 @@ static DMTracker* defaultInstance = nil;
 - (NSMutableDictionary *)infoStartApp
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeStartApp];
+
+    SUHost *host = [DMCommon sharedFrameworkHost], *app = [DMCommon sharedAppHost];
+    
+    NSString *uuid = [host objectForUserDefaultsKey:DMUserIdKey];
+    if (!uuid)
+    {
+        uuid = [NSString uuid];
+        [host setObject:uuid forUserDefaultsKey:DMUserIdKey];
+    }    
+
+    [event setValue:uuid
+             forKey:DMFieldUserId];
+
+    [event setValue:[app version]
+             forKey:DMFieldInfoApplicationVersion];
+    
+    NSArray *systemProfileArray = [app systemProfile];
+    NSMutableDictionary *systemProfile = [NSMutableDictionary dictionary];
+    for (NSDictionary *dict in systemProfileArray)
+    {
+        [systemProfile setValue:[dict objectForKey:@"value"]
+                         forKey:[dict objectForKey:@"key"]];
+    }
+    DLog(@"System profile: %@", systemProfile);
+    
+    NSArray *osVersion = [[systemProfile objectForKey:@"osVersion"] componentsSeparatedByString:@"."];
+    if ([osVersion count] > 1)
+        [event setValue:[NSString stringWithFormat:@"Mac OS X %@.%@",
+                         [osVersion objectAtIndex:0],
+                         [osVersion objectAtIndex:1]]
+                 forKey:DMFieldInfoOSVersion];    
+    else
+        [event setValue:[NSString stringWithFormat:@"UNKNOWN",
+                         [osVersion objectAtIndex:0],
+                         [osVersion objectAtIndex:1]]
+                 forKey:DMFieldInfoOSVersion];    
+
+    if ([osVersion count] > 2)
+        [event setValue:[osVersion objectAtIndex:2]
+                 forKey:DMFieldInfoOSServicePack];
+    else
+        [event setValue:@""
+                 forKey:DMFieldInfoOSServicePack];
+
+    [event setValue:@""
+             forKey:DMFieldInfoOSArchitecture];
+    [event setValue:@""
+             forKey:DMFieldInfoJavaVersion];
+    [event setValue:@""
+             forKey:DMFieldInfoDotNetVersion];
+    [event setValue:@""
+             forKey:DMFieldInfoDotNetServicePack];
+    [event setValue:@""
+             forKey:DMFieldInfoOSLanguage];
+    [event setValue:@""
+             forKey:DMFieldInfoScreenResolution];
+    [event setValue:[systemProfile objectForKey:@"model"]
+             forKey:DMFieldInfoProcessorName];
+    [event setValue:@""
+             forKey:DMFieldInfoProcessorBrand];
+    [event setValue:[systemProfile objectForKey:@"cpuFreqMHz"]
+             forKey:DMFieldInfoProcessorFrequency];
+    [event setValue:[systemProfile objectForKey:@"ncpu"]
+             forKey:DMFieldInfoProcessorCores];
+    [event setValue:@""
+             forKey:DMFieldInfoProcessorArchitecture];
+    [event setValue:[NSNumber numberWithInteger:[[systemProfile objectForKey:@"ramMB"] integerValue] * 1024 * 1024]
+             forKey:DMFieldInfoMemoryTotal];
+    [event setValue:@""
+             forKey:DMFieldInfoMemoryFree];
+    [event setValue:@""
+             forKey:DMFieldInfoDiskTotal];
+    [event setValue:@""
+             forKey:DMFieldInfoDiskFree];
+
     return event;
 }
+
 
 - (NSMutableDictionary *)infoStopApp
 {

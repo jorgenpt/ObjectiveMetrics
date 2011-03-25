@@ -10,8 +10,6 @@
 
 #import "NSString+DMUUID.h"
 
-static NSString * const DMUserIdKey = @"DMUserId";
-
 static SUHost *sharedAppHost = nil;
 static SUHost *sharedFrameworkHost = nil;
 
@@ -29,19 +27,6 @@ static SUHost *sharedFrameworkHost = nil;
     if (!sharedFrameworkHost)
         sharedFrameworkHost = [[SUHost alloc] initWithBundle:[NSBundle bundleWithIdentifier:@"no.devsoft.CocoaMetrics"]];
     return [[sharedFrameworkHost retain] autorelease];
-}
-
-+ (NSString *)userUUID
-{
-    SUHost *host = [self sharedFrameworkHost];
-    NSString *uuid = [host objectForUserDefaultsKey:DMUserIdKey];
-    if (!uuid)
-    {
-        uuid = [NSString uuid];
-        [host setObject:uuid forUserDefaultsKey:DMUserIdKey];
-    }
-    
-    return uuid;
 }
 
 @end

@@ -15,6 +15,8 @@ static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
 static NSString * const DMAppIdKey = @"DMAppId";
 static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/sendData";
 
+static NSString * const DMStatusCodeKey = @"status_code";
+
 @interface DMRequester ()
 
 @property (retain) NSURLConnection *connection;
@@ -46,6 +48,8 @@ static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/s
             URL = [NSString stringWithFormat:DMAnalyticsURLFormat, appId];
         }
 
+        DLog(@"URL: %@", URL);
+
         [self setRequest:[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL]]];
         [request setHTTPMethod:@"POST"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -62,7 +66,7 @@ static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/s
     self = [self init];
     if (self)
     {
-        [self setDelegate:delegate];
+        [self setDelegate:theDelegate];
     }
     
     return self;
@@ -81,8 +85,10 @@ static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/s
     NSData *json = [[data JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableURLRequest *sentRequest = [request copy];
 
-    [request setValue:[NSString stringWithFormat:@"%d", [json length]] forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:json];
+    [sentRequest setValue:[NSString stringWithFormat:@"%d", [json length]] forHTTPHeaderField:@"Content-Length"];
+    [sentRequest setHTTPBody:json];
+    
+    DLog(@"Sending data: %@", [data JSONRepresentation]);
 
     encounteredError = NO;
     [self setConnection:[NSURLConnection connectionWithRequest:[sentRequest autorelease] delegate:self]];
@@ -113,8 +119,16 @@ static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/s
             NSLog(@"Request fail: %ld", [httpResponse statusCode]);
             encounteredError = YES;
         }
+        
+        DLog(@"Got DeskMetrics response, encoding: %@, status code: %ld",
+             [httpResponse textEncodingName], [httpResponse statusCode]);
+    }
+    else
+    {
+        NSLog(@"Got DeskMetrics response, but not HTTP. Encoding: %@", [response textEncodingName]);
     }
 
+    
     encoding = NSUTF8StringEncoding;
     CFStringEncoding cfEncoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)[response textEncodingName]);
     if (cfEncoding != kCFStringEncodingInvalidId) {
@@ -126,20 +140,28 @@ static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/s
 {
     if (!encounteredError)
     {
-        
-        NSInteger result = [[[[NSString alloc] initWithData:data encoding:encoding] autorelease] integerValue];
-        if (result == 0 || result == 1)
+        NSString *responseBody = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
+        id result = [responseBody JSONValue];
+        DLog(@"Received data: %@", result);
+        if ([result isKindOfClass:[NSDictionary class]])
         {
-            encounteredError = NO;
+            id status = [result objectForKey:DMStatusCodeKey];
+            NSInteger statuscode = [status integerValue];
+            if (statuscode == 0 || statuscode == 1)
+                encounteredError = NO;
+            else
+            {
+                if (statuscode < 0)
+                    NSLog(@"Got error code from DeskMetrics: %ld", statuscode);
+                else
+                    NSLog(@"Got unexpected positive code from DeskMetrics: %ld", statuscode);
+                encounteredError = YES;
+            }
         }
         else 
         {
             encounteredError = YES;
-
-            if (result < 0)
-                NSLog(@"Got error code from DeskMetrics: %ld", result);
-            else
-                NSLog(@"Got unexpected positive code from DeskMetrics: %ld", result);
+            NSLog(@"Got unknown JSON from DeskMetrics: %@ (%@)", responseBody, result);
         }
     }
 }
@@ -149,11 +171,15 @@ static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/s
     if ([delegate respondsToSelector:@selector(requestFailed:)])
         [delegate requestFailed:self];
 
+    NSLog(@"DeskMetrics connection failed: %@", error);
+
     [self setConnection:nil];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    DLog(@"DeskMetrics connection finished: %@error", (encounteredError ? @"" : @"no "));
+
     if (encounteredError)
     {
         if ([delegate respondsToSelector:@selector(requestFailed:)])

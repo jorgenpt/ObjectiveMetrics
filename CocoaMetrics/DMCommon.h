@@ -8,7 +8,6 @@
 
 #import "SUHost.h"
 
-
 @interface DMCommon : NSObject
 
 + (SUHost *)sharedAppHost;

@@ -25,6 +25,9 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 @property (retain) NSMutableArray *events, *pending;
 @property (retain) DMRequester *requester;
 
+- (void)sendBatch:(NSArray *)events;
+- (BOOL)flushIfExceedsBounds;
+
 @end
 
 @implementation DMTrackingQueue
@@ -81,12 +84,18 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 - (void)send:(NSDictionary *)event
 {
+    if (numberOfPendingEvents != 0)
+    {
+        [requester wait];
+    }
+
+    numberOfPendingEvents = -1;
     [self sendBatch:[NSArray arrayWithObject:event]];
 }
 
-- (void)sendBatch:(NSArray *)events
+- (void)sendBatch:(NSArray *)theEvents
 {
-    
+    [requester send:theEvents];
 }
 
 - (NSUInteger)count
@@ -123,7 +132,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 - (void)flush
 {
-    if (numberOfPendingEvents > 0)
+    if (numberOfPendingEvents != 0)
     {
         [requester wait];
     }
@@ -142,10 +151,16 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 - (void)requestSucceeded:(DMRequester *)requester
 {
-    [events removeObjectsInRange:NSMakeRange(0, numberOfPendingEvents)];
-    [[NSUserDefaults standardUserDefaults] setObject:events
-                                              forKey:DMEventQueueKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    DLog(@"Request succeeded. %ld pending events.", numberOfPendingEvents);
+    if (numberOfPendingEvents > 0)
+    {
+        [events removeObjectsInRange:NSMakeRange(0, numberOfPendingEvents)];
+        [[NSUserDefaults standardUserDefaults] setObject:events
+                                                  forKey:DMEventQueueKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
+    numberOfPendingEvents = 0;
 }
 
 @end
