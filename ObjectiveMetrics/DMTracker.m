@@ -254,35 +254,38 @@ static DMTracker* defaultInstance = nil;
         [event setValue:@""
                  forKey:DMFieldInfoOSServicePack];
 
-    [event setValue:@""
+    // TODO: this is wrong.
+    [event setValue:[NSNumber numberWithInt:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
              forKey:DMFieldInfoOSArchitecture];
-    [event setValue:@""
+    [event setValue:@"null"
              forKey:DMFieldInfoJavaVersion];
-    [event setValue:@""
+    [event setValue:@"null"
              forKey:DMFieldInfoDotNetVersion];
-    [event setValue:@""
+    // TODO: this is wrong.
+    [event setValue:[NSNumber numberWithInt:0]
              forKey:DMFieldInfoDotNetServicePack];
-    [event setValue:@""
+    // TODO: this is wrong.
+    [event setValue:[NSNumber numberWithInt:1046]
              forKey:DMFieldInfoOSLanguage];
-    [event setValue:@""
+    [event setValue:@"null"
              forKey:DMFieldInfoScreenResolution];
     [event setValue:[systemProfile objectForKey:@"model"]
              forKey:DMFieldInfoProcessorName];
-    [event setValue:@""
+    [event setValue:@"null"
              forKey:DMFieldInfoProcessorBrand];
     [event setValue:[systemProfile objectForKey:@"cpuFreqMHz"]
              forKey:DMFieldInfoProcessorFrequency];
     [event setValue:[systemProfile objectForKey:@"ncpu"]
              forKey:DMFieldInfoProcessorCores];
-    [event setValue:@""
+    [event setValue:[NSNumber numberWithInt:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
              forKey:DMFieldInfoProcessorArchitecture];
     [event setValue:[NSNumber numberWithInteger:[[systemProfile objectForKey:@"ramMB"] integerValue] * 1024 * 1024]
              forKey:DMFieldInfoMemoryTotal];
-    [event setValue:@""
+    [event setValue:@"null"
              forKey:DMFieldInfoMemoryFree];
-    [event setValue:@""
+    [event setValue:@"null"
              forKey:DMFieldInfoDiskTotal];
-    [event setValue:@""
+    [event setValue:@"null"
              forKey:DMFieldInfoDiskFree];
 
     return event;
