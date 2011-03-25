@@ -187,13 +187,11 @@ static DMTracker* defaultInstance = nil;
 
 - (NSMutableDictionary *)infoWithType:(NSString *)type
 {
-    // TODO: Verify this - timezones?
-    NSDate *timestamp = [NSDate date];
-
+    // TODO: Verify that this gives us time in GMT+0.
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
             [self session], DMFieldSession,
             type, DMFieldType,
-            [NSNumber numberWithInt:(int)[timestamp timeIntervalSince1970]], DMFieldTimestamp,
+            [NSNumber numberWithInt:(int)[[NSDate date] timeIntervalSince1970]], DMFieldTimestamp,
             nil];
 }
 
