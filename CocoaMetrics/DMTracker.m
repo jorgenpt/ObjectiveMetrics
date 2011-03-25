@@ -8,7 +8,23 @@
 
 #import "DMTracker.h"
 
+#import "DMTrackingQueue.h"
 #import "NSString+DMUUID.h"
+
+static NSString * const DMFieldSession = @"ss";
+static NSString * const DMFieldType = @"tp";
+static NSString * const DMFieldTimestamp = @"ts";
+static NSString * const DMFieldFlow = @"fl";
+static NSString * const DMFieldCategory = @"ca";
+static NSString * const DMFieldName = @"nm";
+static NSString * const DMFieldValue = @"vl";
+static NSString * const DMFieldEventTime = @"tm";
+static NSString * const DMFieldEventConcluded = @"ec";
+static NSString * const DMFieldMessage = @"ms";
+static NSString * const DMFieldExceptionMessage = @"msg";
+static NSString * const DMFieldExceptionSource = @"src";
+static NSString * const DMFieldExceptionStack = @"stk";
+static NSString * const DMFieldExceptionTargetSite = @"tgs";
 
 static NSString * const DMTypeStartApp = @"strApp";
 static NSString * const DMTypeStopApp = @"stApp";
@@ -23,6 +39,7 @@ static NSString * const DMTypeCustomData = @"ctD";
 static NSString * const DMTypeCustomDataR = @"ctDR";
 static NSString * const DMTypeException = @"exC";
 
+static DMTracker* defaultInstance = nil;
 
 @interface DMTracker ()
 
@@ -40,40 +57,68 @@ static NSString * const DMTypeException = @"exC";
 @synthesize queue;
 @synthesize session;
 
++ (id) defaultTracker
+{
+    @synchronized(self)
+    {
+        if (defaultInstance == nil)
+            [[self alloc] init];
+    }
+    return defaultInstance;
+    
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    @synchronized(self) {
+        if (defaultInstance == nil) {
+            return [super allocWithZone:zone];
+        }
+    }
+    return defaultInstance;
+}
+
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        [self setQueue:[[[DMTrackingQueue alloc] init] autorelease]];
-        [self setSession:[NSString uuid]];
-        flow = 1;
+    Class myClass = [self class];
+    @synchronized(myClass) {
+        if (defaultInstance == nil) {
+            self = [super init];
+            if (self) {
+                [self setQueue:[[[DMTrackingQueue alloc] init] autorelease]];
+                [self setSession:[NSString uuid]];
+                flow = 1;
+                
+                if ([queue count] > 0)
+                {
+                    if ([[[queue eventAtIndex:[queue count] - 1] objectForKey:DMFieldType] isNotEqualTo:DMTypeStopApp])
+                        [queue add:[self infoStopApp]];
+                    [queue flush];
+                }
 
-        [queue send:[self infoStartApp]];
+                [queue send:[self infoStartApp]];
+                
+                [[NSNotificationCenter defaultCenter] addObserver:self
+                                                         selector:@selector(applicationWillTerminate:)
+                                                             name:NSApplicationWillTerminateNotification
+                                                           object:nil];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationWillTerminate:)
-                                                     name:NSApplicationWillTerminateNotification
-                                                   object:nil];
+                defaultInstance = self;
+            }
+        }
     }
-
-    return self;
+    return defaultInstance;
 }
+
+- (id) copyWithZone:(NSZone *)zone { return self; }
+- (id) retain { return self; }
+- (NSUInteger) retainCount { return UINT_MAX; }
+- (void) release {}
+- (id) autorelease { return self; }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     [self endSession];
-}
-
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self endSession];
-
-    [self setQueue:nil];
-    [self setSession:nil];
-
-    [super dealloc];
 }
 
 - (void)endSession
@@ -81,9 +126,10 @@ static NSString * const DMTypeException = @"exC";
     if (session && queue)
     {
         [queue add:[self infoStopApp]];
-        [queue flush];
+        [queue blockingFlush];
     }
 
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self setSession:nil];
     [self setQueue:nil];
 }
@@ -94,9 +140,9 @@ static NSString * const DMTypeException = @"exC";
     NSDate *timestamp = [NSDate date];
 
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-            [self session], @"ss",
-            type, @"tp",
-            [NSNumber numberWithInt:(int)[timestamp timeIntervalSince1970]], @"ts",
+            [self session], DMFieldSession,
+            type, DMFieldType,
+            [NSNumber numberWithInt:(int)[timestamp timeIntervalSince1970]], DMFieldTimestamp,
             nil];
 }
 
@@ -105,9 +151,9 @@ static NSString * const DMTypeException = @"exC";
 {
     NSMutableDictionary *info = [self infoWithType:type];
     [info setValue:[NSString stringWithFormat:@"%d", flow++]
-            forKey:@"fl"];
+            forKey:DMFieldFlow];
     [info setValue:name
-            forKey:@"nm"];
+            forKey:DMFieldName];
     return info;
 }
 
@@ -129,7 +175,7 @@ static NSString * const DMTypeException = @"exC";
     NSMutableDictionary *event = [self infoForEventNamed:theName
                                                 withType:DMTypeEvent];
     [event setValue:theCategory
-             forKey:@"ca"];
+             forKey:DMFieldCategory];
     return event;
 }
 
@@ -140,9 +186,9 @@ static NSString * const DMTypeException = @"exC";
     NSMutableDictionary *event = [self infoForEventWithCategory:theCategory
                                                            name:theName];
     [event setValue:DMTypeEventValue
-             forKey:@"tp"];
+             forKey:DMFieldType];
     [event setValue:theValue
-             forKey:@"vl"];
+             forKey:DMFieldValue];
     return event;
 }
 
@@ -154,11 +200,11 @@ static NSString * const DMTypeException = @"exC";
     NSMutableDictionary *event = [self infoForEventWithCategory:theCategory
                                                            name:theName];
     [event setValue:DMTypeEventPeriod
-             forKey:@"tp"];
+             forKey:DMFieldType];
     [event setValue:[NSString stringWithFormat:@"%d", theSeconds]
-             forKey:@"tm"];
+             forKey:DMFieldEventTime];
     [event setValue:[NSString stringWithFormat:@"%d", wasCompleted]
-             forKey:@"ec"];
+             forKey:DMFieldEventConcluded];
     return event;
 }
 
@@ -166,7 +212,7 @@ static NSString * const DMTypeException = @"exC";
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeLog];
     [event setValue:message
-             forKey:@"ms"];
+             forKey:DMFieldMessage];
     return event;
 }
 
@@ -176,9 +222,9 @@ static NSString * const DMTypeException = @"exC";
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeCustomData];
     [event setValue:theName
-             forKey:@"nm"];
+             forKey:DMFieldName];
     [event setValue:theValue
-             forKey:@"vl"];
+             forKey:DMFieldValue];
     return event;
 }
 
@@ -189,7 +235,7 @@ static NSString * const DMTypeException = @"exC";
     NSMutableDictionary *event = [self infoForCustomDataWithName:theName
                                                            value:theValue];
     [event setValue:DMTypeCustomDataR
-             forKey:@"tp"];
+             forKey:DMFieldType];
     return event;
 }
 
@@ -198,13 +244,13 @@ static NSString * const DMTypeException = @"exC";
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeException];
     [event setValue:@"" // event.message
-             forKey:@"msg"];
+             forKey:DMFieldExceptionMessage];
     [event setValue:[theException name]
-             forKey:@"src"];
+             forKey:DMFieldExceptionSource];
     [event setValue:@"" // [theException callStackSymbols]
-             forKey:@"stk"];
+             forKey:DMFieldExceptionStack];
     [event setValue:@"" // Top of stack trace, location ("target site")
-             forKey:@"tgs"];
+             forKey:DMFieldExceptionTargetSite];
     return event;
 }
 

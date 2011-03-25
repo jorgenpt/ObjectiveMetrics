@@ -21,6 +21,19 @@
 		8E279CEC133AC0EB00B4CB82 /* DMCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6BA5F0133987200018E4A3 /* DMCommon.h */; };
 		8E279CED133AC0EB00B4CB82 /* NSString+DMUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */; };
 		8E279CEF133AC0EB00B4CB82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
+		8E6D6A1E133BF9F900E5F8A8 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A13133BF9F900E5F8A8 /* JSON.h */; };
+		8E6D6A1F133BF9F900E5F8A8 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A14133BF9F900E5F8A8 /* NSObject+SBJSON.h */; };
+		8E6D6A20133BF9F900E5F8A8 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A15133BF9F900E5F8A8 /* NSObject+SBJSON.m */; };
+		8E6D6A21133BF9F900E5F8A8 /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A16133BF9F900E5F8A8 /* NSString+SBJSON.h */; };
+		8E6D6A22133BF9F900E5F8A8 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A17133BF9F900E5F8A8 /* NSString+SBJSON.m */; };
+		8E6D6A23133BF9F900E5F8A8 /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A18133BF9F900E5F8A8 /* SBJsonBase.h */; };
+		8E6D6A24133BF9F900E5F8A8 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A19133BF9F900E5F8A8 /* SBJsonBase.m */; };
+		8E6D6A25133BF9F900E5F8A8 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A1A133BF9F900E5F8A8 /* SBJsonParser.h */; };
+		8E6D6A26133BF9F900E5F8A8 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A1B133BF9F900E5F8A8 /* SBJsonParser.m */; };
+		8E6D6A27133BF9F900E5F8A8 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A1C133BF9F900E5F8A8 /* SBJsonWriter.h */; };
+		8E6D6A28133BF9F900E5F8A8 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */; };
+		8E6D6A2D133BFC5700E5F8A8 /* DMRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */; };
+		8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +46,19 @@
 		8E6BA5E8133984F60018E4A3 /* SUSystemProfiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSystemProfiler.m; sourceTree = "<group>"; };
 		8E6BA5F0133987200018E4A3 /* DMCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMCommon.h; sourceTree = "<group>"; };
 		8E6BA5F1133987200018E4A3 /* DMCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMCommon.m; sourceTree = "<group>"; };
+		8E6D6A13133BF9F900E5F8A8 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		8E6D6A14133BF9F900E5F8A8 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		8E6D6A15133BF9F900E5F8A8 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		8E6D6A16133BF9F900E5F8A8 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		8E6D6A17133BF9F900E5F8A8 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		8E6D6A18133BF9F900E5F8A8 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		8E6D6A19133BF9F900E5F8A8 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		8E6D6A1A133BF9F900E5F8A8 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		8E6D6A1B133BF9F900E5F8A8 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		8E6D6A1C133BF9F900E5F8A8 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMRequester.h; sourceTree = "<group>"; };
+		8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMRequester.m; sourceTree = "<group>"; };
 		8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8E8A0EB81337FBA500CA6E47 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8E8A0EB91337FBA500CA6E47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -77,9 +103,36 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		8E6D6A12133BF9F900E5F8A8 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				8E6D6A2A133BFA0400E5F8A8 /* Classes */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		8E6D6A2A133BFA0400E5F8A8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8E6D6A13133BF9F900E5F8A8 /* JSON.h */,
+				8E6D6A14133BF9F900E5F8A8 /* NSObject+SBJSON.h */,
+				8E6D6A15133BF9F900E5F8A8 /* NSObject+SBJSON.m */,
+				8E6D6A16133BF9F900E5F8A8 /* NSString+SBJSON.h */,
+				8E6D6A17133BF9F900E5F8A8 /* NSString+SBJSON.m */,
+				8E6D6A18133BF9F900E5F8A8 /* SBJsonBase.h */,
+				8E6D6A19133BF9F900E5F8A8 /* SBJsonBase.m */,
+				8E6D6A1A133BF9F900E5F8A8 /* SBJsonParser.h */,
+				8E6D6A1B133BF9F900E5F8A8 /* SBJsonParser.m */,
+				8E6D6A1C133BF9F900E5F8A8 /* SBJsonWriter.h */,
+				8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		8E8A0EA61337FBA500CA6E47 = {
 			isa = PBXGroup;
 			children = (
+				8E6D6A12133BF9F900E5F8A8 /* JSON */,
 				8E8A0EBB1337FBA500CA6E47 /* CocoaMetrics */,
 				8E6BA5E4133984F60018E4A3 /* Sparkle */,
 				8E8A0EB41337FBA500CA6E47 /* Frameworks */,
@@ -128,12 +181,14 @@
 		8E8A0EC71337FC7600CA6E47 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8EF751B5133900F700609001 /* DMTrackingQueue.h */,
-				8EF751B6133900F700609001 /* DMTrackingQueue.m */,
-				8EF751B01339006600609001 /* DMTracker.h */,
-				8EF751B11339006600609001 /* DMTracker.m */,
 				8E6BA5F0133987200018E4A3 /* DMCommon.h */,
 				8E6BA5F1133987200018E4A3 /* DMCommon.m */,
+				8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */,
+				8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */,
+				8EF751B01339006600609001 /* DMTracker.h */,
+				8EF751B11339006600609001 /* DMTracker.m */,
+				8EF751B5133900F700609001 /* DMTrackingQueue.h */,
+				8EF751B6133900F700609001 /* DMTrackingQueue.m */,
 				8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */,
 				8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */,
 			);
@@ -153,6 +208,13 @@
 				8E279CEB133AC0EB00B4CB82 /* SUSystemProfiler.h in Headers */,
 				8E279CEC133AC0EB00B4CB82 /* DMCommon.h in Headers */,
 				8E279CED133AC0EB00B4CB82 /* NSString+DMUUID.h in Headers */,
+				8E6D6A1E133BF9F900E5F8A8 /* JSON.h in Headers */,
+				8E6D6A1F133BF9F900E5F8A8 /* NSObject+SBJSON.h in Headers */,
+				8E6D6A21133BF9F900E5F8A8 /* NSString+SBJSON.h in Headers */,
+				8E6D6A23133BF9F900E5F8A8 /* SBJsonBase.h in Headers */,
+				8E6D6A25133BF9F900E5F8A8 /* SBJsonParser.h in Headers */,
+				8E6D6A27133BF9F900E5F8A8 /* SBJsonWriter.h in Headers */,
+				8E6D6A2D133BFC5700E5F8A8 /* DMRequester.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +286,12 @@
 				8E279CE2133AC0EB00B4CB82 /* SUSystemProfiler.m in Sources */,
 				8E279CE3133AC0EB00B4CB82 /* DMCommon.m in Sources */,
 				8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */,
+				8E6D6A20133BF9F900E5F8A8 /* NSObject+SBJSON.m in Sources */,
+				8E6D6A22133BF9F900E5F8A8 /* NSString+SBJSON.m in Sources */,
+				8E6D6A24133BF9F900E5F8A8 /* SBJsonBase.m in Sources */,
+				8E6D6A26133BF9F900E5F8A8 /* SBJsonParser.m in Sources */,
+				8E6D6A28133BF9F900E5F8A8 /* SBJsonWriter.m in Sources */,
+				8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

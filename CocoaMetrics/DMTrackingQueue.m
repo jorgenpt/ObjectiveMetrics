@@ -9,44 +9,41 @@
 #import "DMTrackingQueue.h"
 
 #import "DMCommon.h"
+#import "DMRequester.h"
 
 static NSString * const DMEventQueueKey = @"DMEventQueue";
 static NSString * const DMEventQueueMaxSizeKey = @"DMEventQueueMaxSize";
 static NSString * const DMEventQueueMaxDaysOldKey = @"DMEventQueueMaxDaysOld";
-static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
-static NSString * const DMAppIdKey = @"DMAppId";
 
-static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/sendData";
 static int const DMEventQueueDefaultMaxSize = 100;
 static int const DMEventQueueDefaultMaxDaysOld = 7;
 
 static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
-@interface DMTrackingQueue ()
+@interface DMTrackingQueue () <DMRequesterDelegate>
 
-@property (retain) NSMutableArray *events;
-@property (retain) NSString *analyticsURL;
+@property (retain) NSMutableArray *events, *pending;
+@property (retain) DMRequester *requester;
 
 @end
 
 @implementation DMTrackingQueue
 
-@synthesize events;
-@synthesize analyticsURL;
+@synthesize events, pending, requester;
 
 - (id)init
 {
     self = [super init];
     if (self) {        
         SUHost *host = [DMCommon sharedAppHost];
+        [self setRequester:[[[DMRequester alloc] initWithDelegate:self] autorelease]];
 
-        [self setEvents:[host objectForUserDefaultsKey: DMEventQueueKey]];
-        if (!events) {
+        [self setEvents:[host objectForUserDefaultsKey:DMEventQueueKey]];
+        if (!events)
             [self setEvents:[NSMutableArray array]];
-        }
 
-        NSArray *supportDirectories = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-        NSLog(@"%@", supportDirectories);
+        /*NSArray *supportDirectories = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+        NSLog(@"%@", supportDirectories);*/
 
         if ([host objectForKey:DMEventQueueMaxSizeKey] == nil)
             maxSize = DMEventQueueDefaultMaxSize;
@@ -60,22 +57,6 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
             maxDaysOld = [[host objectForKey:DMEventQueueMaxDaysOldKey] intValue];
 
         maxSecondsOld = maxDaysOld * kDMEventQueueSecondsInADay;
-        
-        [self setAnalyticsURL:[host objectForInfoDictionaryKey:DMAnalyticsURLKey]];
-        if (!analyticsURL)
-        {
-            NSString *appId = [host objectForInfoDictionaryKey:DMAppIdKey];
-            if (!appId)
-            {
-                NSLog(@"Could not find neither %@ nor %@ in Info.plist!", DMAnalyticsURLKey, DMAppIdKey);
-                [self release];
-                return nil;
-            }
-
-            [self setAnalyticsURL:[NSString stringWithFormat:DMAnalyticsURLFormat, appId]];
-        }
-        
-        [self flushIfExceedsBounds];
     }
     
     return self;
@@ -92,8 +73,9 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 {
     [events addObject:event];
     [[NSUserDefaults standardUserDefaults] setObject:events
-                                              forKey: DMEventQueueKey];
-    
+                                              forKey:DMEventQueueKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     [self flushIfExceedsBounds];
 }
 
@@ -107,6 +89,16 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
     
 }
 
+- (NSUInteger)count
+{
+    return [events count];
+}
+
+- (NSDictionary *)eventAtIndex:(NSUInteger)index
+{
+    return (NSDictionary *)[events objectAtIndex:index];
+}
+
 - (BOOL)flushIfExceedsBounds
 {
     if ([events count] > 0)
@@ -115,22 +107,45 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
         NSDate *oldestEventDate = [NSDate dateWithTimeIntervalSince1970:[[oldestEvent objectForKey:@"ts"] intValue]];
         
         if (oldestEventDate == nil)
-            return [self flush];
-        
-        if ([[NSDate date] timeIntervalSinceDate:oldestEventDate] >= maxSecondsOld)
-            return [self flush];
+            [self flush];
+        else if ([[NSDate date] timeIntervalSinceDate:oldestEventDate] >= maxSecondsOld)
+            [self flush];
+        else if ([events count] >= maxSize)
+            [self flush];
+        else
+            return NO;
 
-        if ([events count] >= maxSize)
-            return [self flush];
+        return YES;
     }
 
     return NO;
 }
 
-- (BOOL)flush
+- (void)flush
 {
-    [self sendBatch:[self events]];
-    return YES;
+    if (numberOfPendingEvents > 0)
+    {
+        [requester wait];
+    }
+
+    numberOfPendingEvents = [events count];
+    [self sendBatch:events];
+}
+
+- (BOOL)blockingFlush
+{
+    [self flush];
+    [requester wait];
+    
+    return [events count] == 0;
+}
+
+- (void)requestSucceeded:(DMRequester *)requester
+{
+    [events removeObjectsInRange:NSMakeRange(0, numberOfPendingEvents)];
+    [[NSUserDefaults standardUserDefaults] setObject:events
+                                              forKey:DMEventQueueKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

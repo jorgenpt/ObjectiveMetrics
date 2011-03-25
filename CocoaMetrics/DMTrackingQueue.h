@@ -8,22 +8,26 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class DMRequester;
 
 @interface DMTrackingQueue : NSObject {
 @private
     NSMutableArray *events;
     int maxSize;
     double maxSecondsOld;
-    NSString *analyticsURL;
+    NSUInteger numberOfPendingEvents;
+    DMRequester *requester;
 }
-
-- (id)init;
 
 - (void)add:(NSDictionary *)event;
 - (void)send:(NSDictionary *)event;
 - (void)sendBatch:(NSArray *)events;
 
+- (NSUInteger)count;
+- (NSDictionary *)eventAtIndex:(NSUInteger)index;
+
 - (BOOL)flushIfExceedsBounds;
-- (BOOL)flush;
+- (void)flush;
+- (BOOL)blockingFlush;
 
 @end

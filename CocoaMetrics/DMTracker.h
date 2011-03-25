@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "DMTrackingQueue.h"
+@class DMTrackingQueue;
 
 @interface DMTracker : NSObject {
 @private
@@ -17,6 +17,7 @@
     int flow;
 }
 
++ (id) defaultTracker;
 - (void)endSession;
 
 #pragma mark -
