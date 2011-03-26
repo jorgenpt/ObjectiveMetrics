@@ -24,7 +24,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 @property (retain) NSMutableArray *events, *pending;
 @property (retain) DMRequester *requester;
 
-- (void)sendBatch:(NSArray *)events;
+- (void)sendRange:(NSRange)range;
 - (BOOL)flushIfExceedsBounds;
 
 @end
@@ -36,7 +36,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 - (id)init
 {
     self = [super init];
-    if (self) {        
+    if (self) {
         SUHost *host = [DMHosts sharedAppHost];
         [self setRequester:[[[DMRequester alloc] initWithDelegate:self] autorelease]];
 
@@ -60,7 +60,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
         maxSecondsOld = maxDaysOld * kDMEventQueueSecondsInADay;
     }
-    
+
     return self;
 }
 
@@ -69,6 +69,16 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
     [self setEvents:nil];
 
     [super dealloc];
+}
+
+- (NSUInteger)count
+{
+    return [events count];
+}
+
+- (NSDictionary *)eventAtIndex:(NSUInteger)index
+{
+    return (NSDictionary *)[events objectAtIndex:index];
 }
 
 - (void)add:(NSDictionary *)event
@@ -83,28 +93,35 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 - (void)send:(NSDictionary *)event
 {
-    if (numberOfPendingEvents != 0)
-    {
+    if (pendingEvents.length > 0)
         [requester wait];
-    }
 
-    numberOfPendingEvents = -1;
-    [self sendBatch:[NSArray arrayWithObject:event]];
+    [events addObject:event];
+    NSRange toSend = NSMakeRange([events count] - 1, 1);
+
+    [self sendRange:toSend];
 }
 
-- (void)sendBatch:(NSArray *)theEvents
+- (void)sendRange:(NSRange)range;
 {
-    [requester send:theEvents];
+    pendingEvents = range;
+    [requester send:[events subarrayWithRange:range]];
 }
 
-- (NSUInteger)count
+- (void)flush
 {
-    return [events count];
+    if (pendingEvents.length > 0)
+        [requester wait];
+
+    [self sendRange:NSMakeRange(0, [events count])];
 }
 
-- (NSDictionary *)eventAtIndex:(NSUInteger)index
+- (BOOL)blockingFlush
 {
-    return (NSDictionary *)[events objectAtIndex:index];
+    [self flush];
+    [requester wait];
+
+    return [events count] == 0;
 }
 
 - (BOOL)flushIfExceedsBounds
@@ -113,7 +130,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
     {
         NSDictionary *oldestEvent = [events objectAtIndex:0];
         NSDate *oldestEventDate = [NSDate dateWithTimeIntervalSince1970:[[oldestEvent objectForKey:@"ts"] intValue]];
-        
+
         if (oldestEventDate == nil)
             [self flush];
         else if ([[NSDate date] timeIntervalSinceDate:oldestEventDate] >= maxSecondsOld)
@@ -129,37 +146,18 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
     return NO;
 }
 
-- (void)flush
-{
-    if (numberOfPendingEvents != 0)
-    {
-        [requester wait];
-    }
-
-    numberOfPendingEvents = [events count];
-    [self sendBatch:events];
-}
-
-- (BOOL)blockingFlush
-{
-    [self flush];
-    [requester wait];
-    
-    return [events count] == 0;
-}
-
 - (void)requestSucceeded:(DMRequester *)requester
 {
-    DLog(@"Request succeeded. %ld pending events.", numberOfPendingEvents);
-    if (numberOfPendingEvents > 0)
+    DLog(@"Request succeeded. Removing events [%ld, %ld)", pendingEvents.location, pendingEvents.location + pendingEvents.length);
+    if (pendingEvents.length > 0)
     {
-        [events removeObjectsInRange:NSMakeRange(0, numberOfPendingEvents)];
+        [events removeObjectsInRange:pendingEvents];
         [[NSUserDefaults standardUserDefaults] setObject:events
                                                   forKey:DMEventQueueKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 
-    numberOfPendingEvents = 0;
+    pendingEvents.location = pendingEvents.length = 0;
 }
 
 @end
