@@ -13,7 +13,6 @@
 static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
 static NSString * const DMAppIdKey = @"DMAppId";
 static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/sendData";
-
 static NSString * const DMStatusCodeKey = @"status_code";
 
 @interface DMRequester ()
@@ -48,11 +47,16 @@ static NSString * const DMStatusCodeKey = @"status_code";
         }
 
         DLog(@"URL: %@", URL);
+        SUHost *frameworkHost = [DMHosts sharedFrameworkHost];
+        NSString *userAgent = [NSString stringWithFormat:@"%@ v%@",
+                               [frameworkHost objectForInfoDictionaryKey:@"CFBundleName"],
+                               [frameworkHost version]];
 
         [self setRequest:[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL]]];
         [request setHTTPMethod:@"POST"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
 
         [self setConnection:nil];
     }
