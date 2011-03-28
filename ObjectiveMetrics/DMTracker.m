@@ -281,11 +281,11 @@ static DMTracker* defaultInstance = nil;
              forKey:DMFieldInfoProcessorArchitecture];
     [event setValue:[NSNumber numberWithInteger:[[systemProfile objectForKey:@"ramMB"] integerValue] * 1024 * 1024]
              forKey:DMFieldInfoMemoryTotal];
-    [event setValue:@"null"
+    [event setValue:[NSNumber numberWithInt:0]
              forKey:DMFieldInfoMemoryFree];
-    [event setValue:@"null"
+    [event setValue:[NSNumber numberWithInt:0]
              forKey:DMFieldInfoDiskTotal];
-    [event setValue:@"null"
+    [event setValue:[NSNumber numberWithInt:0]
              forKey:DMFieldInfoDiskFree];
 
     return event;
