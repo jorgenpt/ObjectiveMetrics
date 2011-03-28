@@ -264,8 +264,7 @@ static DMTracker* defaultInstance = nil;
     // TODO: this is wrong.
     [event setValue:[NSNumber numberWithInt:0]
              forKey:DMFieldInfoDotNetServicePack];
-    // TODO: this is wrong.
-    [event setValue:[NSNumber numberWithInt:1046]
+    [event setValue:[systemProfile objectForKey:@"lang"]
              forKey:DMFieldInfoOSLanguage];
     [event setValue:@"null"
              forKey:DMFieldInfoScreenResolution];
