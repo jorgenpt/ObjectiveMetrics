@@ -346,10 +346,10 @@ static DMTracker* defaultInstance = nil;
     return event;
 }
 
-- (NSMutableDictionary *)infoForLogMessage:(NSString *)message
+- (NSMutableDictionary *)infoForLogMessage:(NSString *)theMessage
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeLog];
-    [event setValue:message
+    [event setValue:theMessage
              forKey:DMFieldMessage];
     return event;
 }
