@@ -7,6 +7,8 @@ against ObjectiveMetrics and specify what events you want to track via an
 intuitive API, and we take care of having them delivered to DeskMetrics, so that
 they'll show up on your dashboard.
 
+ObejctiveMetrics is licensed under the [simplified BSD license][license].
+
 Getting started
 ---------------
 
@@ -80,3 +82,4 @@ a list that's guaranteed updated)
 [dm]: http://www.deskmetrics.com
 [header]: DMTracker.h
 [download]: /downloads/jorgenpt/ObjectiveMetrics/ObjectiveMetrics%201.0.zip
+[license]: http://www.opensource.org/licenses/bsd-license.php
