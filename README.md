@@ -12,10 +12,15 @@ Getting started
 
 Using ObjectiveMetrics is hopefully very straightforward.
 
-1. Build it using the enclosed Xcode project.
-2. Link your project with `ObjectiveMetrics.framework`.
-3. Find your application id on the DeskMetrics dashboard page, and put this in your applications Info.plist as `DMAppId`.
-4. Make sure you send the DMTracker a startApp message as soon as your app is starting up, to initialize your session.
+1. Build it using the enclosed Xcode project or download a prebuilt framework.
+2. Link your project with `ObjectiveMetrics.framework` - and set your project up
+   to copy the framework into its bundle. To do this, you need a `Copy Files`
+   build phase which copies `ObjectiveMetrics.framework` to the `Framework`
+   path.
+3. Find your **application id** on the DeskMetrics dashboard page, and put this
+   in your applications `Info.plist` as a string with key `DMAppId`.
+4. Make sure you send the `DMTracker` a `startApp` message as soon as your app
+   is starting up, to initialize your session.
 5. Add tracking to any file you want. See below for syntax.
 
 Tracking events
