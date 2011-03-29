@@ -13,8 +13,22 @@
 		8E279CC7133AC06D00B4CB82 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8E279CC5133AC06D00B4CB82 /* Credits.rtf */; };
 		8E279CCA133AC06D00B4CB82 /* MetricsTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E279CC9133AC06D00B4CB82 /* MetricsTestAppDelegate.m */; };
 		8E279CCD133AC06D00B4CB82 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E279CCB133AC06D00B4CB82 /* MainMenu.xib */; };
-		8E6D6A39133C76AA00E5F8A8 /* ObjectiveMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6D6A38133C76AA00E5F8A8 /* ObjectiveMetrics.framework */; };
+		8EED564E13423367006AF2E0 /* ObjectiveMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED564D13423367006AF2E0 /* ObjectiveMetrics.framework */; };
+		8EED5651134233F0006AF2E0 /* ObjectiveMetrics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8EED564D13423367006AF2E0 /* ObjectiveMetrics.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8EED564F134233A0006AF2E0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8EED5651134233F0006AF2E0 /* ObjectiveMetrics.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8E279CB2133AC06D00B4CB82 /* MetricsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetricsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,7 +44,7 @@
 		8E279CC8133AC06D00B4CB82 /* MetricsTestAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetricsTestAppDelegate.h; sourceTree = "<group>"; };
 		8E279CC9133AC06D00B4CB82 /* MetricsTestAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetricsTestAppDelegate.m; sourceTree = "<group>"; };
 		8E279CCC133AC06D00B4CB82 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		8E6D6A38133C76AA00E5F8A8 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjectiveMetrics.framework; sourceTree = SOURCE_ROOT; };
+		8EED564D13423367006AF2E0 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjectiveMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E6D6A39133C76AA00E5F8A8 /* ObjectiveMetrics.framework in Frameworks */,
+				8EED564E13423367006AF2E0 /* ObjectiveMetrics.framework in Frameworks */,
 				8E279CB7133AC06D00B4CB82 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +80,7 @@
 		8E279CB5133AC06D00B4CB82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8E6D6A38133C76AA00E5F8A8 /* ObjectiveMetrics.framework */,
+				8EED564D13423367006AF2E0 /* ObjectiveMetrics.framework */,
 				8E279CB6133AC06D00B4CB82 /* Cocoa.framework */,
 				8E279CB8133AC06D00B4CB82 /* Other Frameworks */,
 			);
@@ -124,6 +138,7 @@
 				8E279CAE133AC06D00B4CB82 /* Sources */,
 				8E279CAF133AC06D00B4CB82 /* Frameworks */,
 				8E279CB0133AC06D00B4CB82 /* Resources */,
+				8EED564F134233A0006AF2E0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
