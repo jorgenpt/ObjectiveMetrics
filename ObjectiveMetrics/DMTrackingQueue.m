@@ -22,7 +22,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 @interface DMTrackingQueue () <DMRequesterDelegate>
 
-@property (retain) NSMutableArray *events, *pending;
+@property (retain) NSMutableArray *events;
 @property (retain) DMRequester *requester;
 
 - (void)sendRange:(NSRange)range;
@@ -34,7 +34,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 @implementation DMTrackingQueue
 
-@synthesize events, pending, requester;
+@synthesize events, requester;
 
 - (id)init
 {
