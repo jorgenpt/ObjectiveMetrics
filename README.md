@@ -10,7 +10,8 @@ they'll show up on your dashboard.
 Getting started
 ---------------
 
-Using ObjectiveMetrics is hopefully very straightforward.
+Using ObjectiveMetrics is hopefully very straightforward. You can either build
+it from source or get a prebuilt binary [from GitHub][download].
 
 1. Build it using the enclosed Xcode project or download a prebuilt framework.
 2. Link your project with `ObjectiveMetrics.framework` - and set your project up
@@ -78,3 +79,4 @@ a list that's guaranteed updated)
 
 [dm]: http://www.deskmetrics.com
 [header]: DMTracker.h
+[download]: /downloads/jorgenpt/ObjectiveMetrics/ObjectiveMetrics%201.0.zip
