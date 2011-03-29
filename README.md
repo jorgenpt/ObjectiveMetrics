@@ -38,7 +38,9 @@ tracking events:
     [[DMTracker defaultInstance] startApp];
 
 While there is a matching `stopApp`, you should never need to call it. It is
-called automatically for you when your NSApplication terminates.
+called automatically for you when your NSApplication terminates. If the app is
+stopped abruptly and it cannot send stopApp, then it'll queue the events and
+send `stopApp` along with the events the next time the app is started.
 
 Here are the different methods you can call: (See [DMTracker.h][header] for
 a list that's guaranteed updated)

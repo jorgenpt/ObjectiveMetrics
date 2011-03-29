@@ -124,7 +124,10 @@ static DMTracker* defaultInstance = nil;
                         NSMutableDictionary *stopApp = [self infoStopApp];
                         [stopApp setValue:[lastEvent objectForKey:DMFieldSession]
                                    forKey:DMFieldSession];
-                        [queue add:lastEvent];
+                        NSInteger timestampEstimate = [[lastEvent objectForKey:DMFieldTimestamp] integerValue] + 1;
+                        [stopApp setValue:[NSNumber numberWithInteger:timestampEstimate]
+                                   forKey:DMFieldTimestamp];
+                        [queue add:stopApp];
                     }
                     [queue flush];
                 }
