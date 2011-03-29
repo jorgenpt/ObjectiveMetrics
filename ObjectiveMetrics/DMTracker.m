@@ -10,6 +10,7 @@
 
 #import "DMTrackingQueue.h"
 #import "NSString+DMUUID.h"
+#import "NSNull+DMTranslate.h"
 
 static NSString * const DMUserIdKey = @"DMUserId";
 
@@ -212,20 +213,20 @@ static DMTracker* defaultInstance = nil;
     NSMutableDictionary *event = [self infoWithType:DMTypeStartApp];
 
     SUHost *host = [DMHosts sharedFrameworkHost], *app = [DMHosts sharedAppHost];
-    
+
     NSString *uuid = [host objectForUserDefaultsKey:DMUserIdKey];
     if (!uuid)
     {
         uuid = [NSString uuid];
         [host setObject:uuid forUserDefaultsKey:DMUserIdKey];
-    }    
+    }
 
     [event setValue:uuid
              forKey:DMFieldUserId];
 
     [event setValue:[app version]
              forKey:DMFieldInfoApplicationVersion];
-    
+
     NSArray *systemProfileArray = [app systemProfile];
     NSMutableDictionary *systemProfile = [NSMutableDictionary dictionary];
     for (NSDictionary *dict in systemProfileArray)
@@ -234,57 +235,64 @@ static DMTracker* defaultInstance = nil;
                          forKey:[dict objectForKey:@"key"]];
     }
     DLog(@"System profile: %@", systemProfile);
-    
+
     NSArray *osVersion = [[systemProfile objectForKey:@"osVersion"] componentsSeparatedByString:@"."];
     if ([osVersion count] > 1)
+    {
         [event setValue:[NSString stringWithFormat:@"Mac OS X %@.%@",
                          [osVersion objectAtIndex:0],
                          [osVersion objectAtIndex:1]]
-                 forKey:DMFieldInfoOSVersion];    
+                 forKey:DMFieldInfoOSVersion];
+    }
     else
-        [event setValue:[NSString stringWithFormat:@"UNKNOWN",
-                         [osVersion objectAtIndex:0],
-                         [osVersion objectAtIndex:1]]
-                 forKey:DMFieldInfoOSVersion];    
+    {
+        [event setValue:[NSNull null]
+                 forKey:DMFieldInfoOSVersion];
+    }
 
     if ([osVersion count] > 2)
+    {
         [event setValue:[osVersion objectAtIndex:2]
                  forKey:DMFieldInfoOSServicePack];
+    }
     else
-        [event setValue:@""
+    {
+        [event setValue:[NSNull null]
                  forKey:DMFieldInfoOSServicePack];
+    }
 
-    // TODO: this is wrong.
-    [event setValue:[NSNumber numberWithInt:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
+    // TODO: Ths is the CPU arch and not the OS arch.
+    [event setValue:[NSNumber numberWithInteger:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
              forKey:DMFieldInfoOSArchitecture];
-    [event setValue:@"null"
-             forKey:DMFieldInfoJavaVersion];
-    [event setValue:@"null"
-             forKey:DMFieldInfoDotNetVersion];
-    // TODO: this is wrong.
-    [event setValue:[NSNumber numberWithInt:0]
-             forKey:DMFieldInfoDotNetServicePack];
-    [event setValue:[systemProfile objectForKey:@"lang"]
+    [event setValue:[NSNull translate:[systemProfile objectForKey:@"lang"]]
              forKey:DMFieldInfoOSLanguage];
-    [event setValue:@"null"
-             forKey:DMFieldInfoScreenResolution];
-    [event setValue:[systemProfile objectForKey:@"model"]
+    [event setValue:[NSNull translate:[systemProfile objectForKey:@"model"]]
              forKey:DMFieldInfoProcessorName];
-    [event setValue:@"null"
-             forKey:DMFieldInfoProcessorBrand];
-    [event setValue:[systemProfile objectForKey:@"cpuFreqMHz"]
+
+    [event setValue:[NSNull translate:[systemProfile objectForKey:@"cpuFreqMHz"]]
              forKey:DMFieldInfoProcessorFrequency];
-    [event setValue:[systemProfile objectForKey:@"ncpu"]
+    [event setValue:[NSNull translate:[systemProfile objectForKey:@"ncpu"]]
              forKey:DMFieldInfoProcessorCores];
-    [event setValue:[NSNumber numberWithInt:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
+    [event setValue:[NSNumber numberWithInteger:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
              forKey:DMFieldInfoProcessorArchitecture];
     [event setValue:[NSNumber numberWithInteger:[[systemProfile objectForKey:@"ramMB"] integerValue] * 1024 * 1024]
              forKey:DMFieldInfoMemoryTotal];
-    [event setValue:[NSNumber numberWithInt:0]
+
+    [event setValue:[NSNull null]
+             forKey:DMFieldInfoJavaVersion];
+    [event setValue:[NSNull null]
+             forKey:DMFieldInfoDotNetVersion];
+    [event setValue:[NSNull null]
+             forKey:DMFieldInfoDotNetServicePack];
+    [event setValue:[NSNull null]
+             forKey:DMFieldInfoScreenResolution];
+    [event setValue:[NSNull null]
+             forKey:DMFieldInfoProcessorBrand];
+    [event setValue:[NSNull null]
              forKey:DMFieldInfoMemoryFree];
-    [event setValue:[NSNumber numberWithInt:0]
+    [event setValue:[NSNull null]
              forKey:DMFieldInfoDiskTotal];
-    [event setValue:[NSNumber numberWithInt:0]
+    [event setValue:[NSNull null]
              forKey:DMFieldInfoDiskFree];
 
     return event;
@@ -394,7 +402,7 @@ static DMTracker* defaultInstance = nil;
 {
     [queue add:[self infoForEventWithCategory:theCategory
                                    name:theName
-                                      value:theValue]];    
+                                      value:theValue]];
 }
 
 - (void)trackEventInCategory:(NSString *)theCategory

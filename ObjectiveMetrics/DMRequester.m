@@ -71,7 +71,7 @@ static NSString * const DMStatusCodeKey = @"status_code";
     {
         [self setDelegate:theDelegate];
     }
-    
+
     return self;
 }
 
@@ -90,7 +90,7 @@ static NSString * const DMStatusCodeKey = @"status_code";
 
     [sentRequest setValue:[NSString stringWithFormat:@"%d", [json length]] forHTTPHeaderField:@"Content-Length"];
     [sentRequest setHTTPBody:json];
-    
+
     DLog(@"Sending data: %@", [data JSONRepresentation]);
 
     encounteredError = NO;
@@ -116,13 +116,13 @@ static NSString * const DMStatusCodeKey = @"status_code";
 {
     if ([response isKindOfClass:[NSHTTPURLResponse class]])
     {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         if ([httpResponse statusCode] < 200 || [httpResponse statusCode] > 299)
         {
             NSLog(@"Request fail: %ld", [httpResponse statusCode]);
             encounteredError = YES;
         }
-        
+
         DLog(@"Got DeskMetrics response, encoding: %@, status code: %ld",
              [httpResponse textEncodingName], [httpResponse statusCode]);
     }
@@ -131,7 +131,7 @@ static NSString * const DMStatusCodeKey = @"status_code";
         NSLog(@"Got DeskMetrics response, but not HTTP. Encoding: %@", [response textEncodingName]);
     }
 
-    
+
     encoding = NSUTF8StringEncoding;
     CFStringEncoding cfEncoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)[response textEncodingName]);
     if (cfEncoding != kCFStringEncodingInvalidId) {
@@ -161,7 +161,7 @@ static NSString * const DMStatusCodeKey = @"status_code";
                 encounteredError = YES;
             }
         }
-        else 
+        else
         {
             encounteredError = YES;
             NSLog(@"Got unknown JSON from DeskMetrics: %@ (%@)", responseBody, result);

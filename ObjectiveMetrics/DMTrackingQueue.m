@@ -13,6 +13,7 @@
 static NSString * const DMEventQueueKey = @"DMEventQueue";
 static NSString * const DMEventQueueMaxSizeKey = @"DMEventQueueMaxSize";
 static NSString * const DMEventQueueMaxDaysOldKey = @"DMEventQueueMaxDaysOld";
+static NSString * const DMNullPlaceholder = @"<[Aija8kua]NULL-VALUE[ep6gae3U]>";
 
 static int const DMEventQueueDefaultMaxSize = 100;
 static int const DMEventQueueDefaultMaxDaysOld = 7;
@@ -26,6 +27,8 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 - (void)sendRange:(NSRange)range;
 - (BOOL)flushIfExceedsBounds;
+- (void)save;
+- (void)load;
 
 @end
 
@@ -40,11 +43,8 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
         SUHost *host = [DMHosts sharedAppHost];
         [self setRequester:[[[DMRequester alloc] initWithDelegate:self] autorelease]];
 
-        [self setEvents:[host objectForUserDefaultsKey:DMEventQueueKey]];
-        if (!events)
-            [self setEvents:[NSMutableArray array]];
-
-        /*NSArray *supportDirectories = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+        /* TODO: Use NSApplicationSupportDirectory for the queue?
+        NSArray *supportDirectories = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
         NSLog(@"%@", supportDirectories);*/
 
         if ([host objectForKey:DMEventQueueMaxSizeKey] == nil)
@@ -59,6 +59,8 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
             maxDaysOld = [[host objectForKey:DMEventQueueMaxDaysOldKey] intValue];
 
         maxSecondsOld = maxDaysOld * kDMEventQueueSecondsInADay;
+
+        [self load];
     }
 
     return self;
@@ -84,10 +86,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 - (void)add:(NSDictionary *)event
 {
     [events addObject:event];
-    [[NSUserDefaults standardUserDefaults] setObject:events
-                                              forKey:DMEventQueueKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
+    [self save];
     [self flushIfExceedsBounds];
 }
 
@@ -146,15 +145,61 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
     return NO;
 }
 
+- (void)save
+{
+    NSMutableArray *outputEvents = [NSMutableArray array];
+    for (NSDictionary *immutableMessage in events)
+    {
+        NSMutableDictionary *message = [NSMutableDictionary dictionaryWithDictionary:immutableMessage];
+
+        for (NSString *key in [message allKeysForObject:[NSNull null]])
+        {
+            [message setObject:DMNullPlaceholder
+                        forKey:key];
+        }
+
+        [outputEvents addObject:message];
+    }
+
+    [[NSUserDefaults standardUserDefaults] setObject:outputEvents
+                                              forKey:DMEventQueueKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)load
+{
+    NSArray *loadedEvents = [[NSUserDefaults standardUserDefaults] objectForKey:DMEventQueueKey];
+    if (!loadedEvents)
+        loadedEvents = [NSArray array];
+
+    [self setEvents:[NSMutableArray array]];
+    for (NSDictionary *immutableMessage in loadedEvents)
+    {
+        if (![immutableMessage isKindOfClass:[NSDictionary class]])
+            continue;
+
+        NSMutableDictionary *message = [NSMutableDictionary dictionaryWithDictionary:immutableMessage];
+        for (NSString *key in [message allKeys])
+        {
+            id value = [message objectForKey:key];
+            if ([value isKindOfClass:[NSString class]] && [value isEqualToString:DMNullPlaceholder])
+            {
+                [message setObject:[NSNull null]
+                            forKey:key];
+            }
+        }
+
+        [events addObject:message];
+    }
+}
+
 - (void)requestSucceeded:(DMRequester *)requester
 {
     DLog(@"Request succeeded. Removing events [%ld, %ld)", pendingEvents.location, pendingEvents.location + pendingEvents.length);
     if (pendingEvents.length > 0)
     {
         [events removeObjectsInRange:pendingEvents];
-        [[NSUserDefaults standardUserDefaults] setObject:events
-                                                  forKey:DMEventQueueKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self save];
     }
 
     pendingEvents.location = pendingEvents.length = 0;
