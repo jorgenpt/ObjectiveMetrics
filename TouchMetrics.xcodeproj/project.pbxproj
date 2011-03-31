@@ -36,6 +36,8 @@
 		C508A2091344EE670061CF05 /* SUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A2051344EE670061CF05 /* SUHost.m */; };
 		C508A20A1344EE670061CF05 /* SUSystemProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A2061344EE670061CF05 /* SUSystemProfiler.h */; };
 		C508A20B1344EE670061CF05 /* SUSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A2071344EE670061CF05 /* SUSystemProfiler.m */; };
+		C508A2181344FB740061CF05 /* UIDevice-Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A2161344FB730061CF05 /* UIDevice-Hardware.h */; };
+		C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A2171344FB740061CF05 /* UIDevice-Hardware.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		C508A2051344EE670061CF05 /* SUHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUHost.m; sourceTree = "<group>"; };
 		C508A2061344EE670061CF05 /* SUSystemProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSystemProfiler.h; sourceTree = "<group>"; };
 		C508A2071344EE670061CF05 /* SUSystemProfiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSystemProfiler.m; sourceTree = "<group>"; };
+		C508A2161344FB730061CF05 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice-Hardware.h"; path = "TouchMetrics/UIDevice-Extension/UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		C508A2171344FB740061CF05 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice-Hardware.m"; path = "TouchMetrics/UIDevice-Extension/UIDevice-Hardware.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 		C508A1841344ECD60061CF05 = {
 			isa = PBXGroup;
 			children = (
+				C508A21B1344FB7B0061CF05 /* UIDevice-Extension */,
 				C508A1EA1344EE1D0061CF05 /* JSON */,
 				C508A1941344ECD60061CF05 /* TouchMetrics */,
 				C508A2021344EE670061CF05 /* Sparkle */,
@@ -194,6 +199,15 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		C508A21B1344FB7B0061CF05 /* UIDevice-Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C508A2161344FB730061CF05 /* UIDevice-Hardware.h */,
+				C508A2171344FB740061CF05 /* UIDevice-Hardware.m */,
+			);
+			name = "UIDevice-Extension";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -216,6 +230,7 @@
 				C508A2001344EE1D0061CF05 /* SBJsonWriter.h in Headers */,
 				C508A2081344EE670061CF05 /* SUHost.h in Headers */,
 				C508A20A1344EE670061CF05 /* SUSystemProfiler.h in Headers */,
+				C508A2181344FB740061CF05 /* UIDevice-Hardware.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +294,7 @@
 				C508A2011344EE1D0061CF05 /* SBJsonWriter.m in Sources */,
 				C508A2091344EE670061CF05 /* SUHost.m in Sources */,
 				C508A20B1344EE670061CF05 /* SUSystemProfiler.m in Sources */,
+				C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
