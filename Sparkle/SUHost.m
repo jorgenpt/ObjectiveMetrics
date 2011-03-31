@@ -10,6 +10,10 @@
 #import "SUSystemProfiler.h"
 #import <sys/mount.h> // For statfs for isRunningOnReadOnlyVolume
 
+#if defined(TARGET_OS_IPHONE)
+# import <UIKit/UIKit.h>
+#endif
+
 @implementation SUHost
 
 - (id)initWithBundle:(NSBundle *)aBundle
@@ -70,49 +74,11 @@
 		return [self version]; // Fall back on the normal version string.
 }
 
-- (NSImage *)icon
-{
-	// Cache the application icon.
-	NSString *iconPath = [bundle pathForResource:[bundle objectForInfoDictionaryKey:@"CFBundleIconFile"] ofType:@"icns"];
-	// According to the OS X docs, "CFBundleIconFile - This key identifies the file containing
-	// the icon for the bundle. The filename you specify does not need to include the .icns
-	// extension, although it may."
-	//
-	// However, if it *does* include the '.icns' the above method fails (tested on OS X 10.3.9) so we'll also try:
-	if (!iconPath)
-		iconPath = [bundle pathForResource:[bundle objectForInfoDictionaryKey:@"CFBundleIconFile"] ofType: nil];
-	NSImage *icon = [[[NSImage alloc] initWithContentsOfFile:iconPath] autorelease];
-	// Use a default icon if none is defined.
-	if (!icon) {
-		BOOL isMainBundle = (bundle == [NSBundle mainBundle]);
-		
-		// Starting with 10.6, iconForFileType: accepts a UTI.
-		NSString *fileType = nil;
-		if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_5)
-			fileType = isMainBundle ? NSFileTypeForHFSTypeCode(kGenericApplicationIcon) : @".bundle";
-		else
-			fileType = isMainBundle ? (NSString*)kUTTypeApplication : (NSString*)kUTTypeBundle;
-		icon = [[NSWorkspace sharedWorkspace] iconForFileType:fileType];
-	}
-	return icon;
-}
-
 - (BOOL)isRunningOnReadOnlyVolume
 {	
 	struct statfs statfs_info;
 	statfs([[bundle bundlePath] fileSystemRepresentation], &statfs_info);
 	return (statfs_info.f_flags & MNT_RDONLY);
-}
-
-- (BOOL)isBackgroundApplication
-{
-	ProcessSerialNumber PSN;
-	GetCurrentProcess(&PSN);
-	CFDictionaryRef processInfo = ProcessInformationCopyDictionary(&PSN, kProcessDictionaryIncludeAllInformationMask);
-	BOOL isElement = [[(NSDictionary *)processInfo objectForKey:@"LSUIElement"] boolValue];
-	if (processInfo)
-		CFRelease(processInfo);
-	return isElement;
 }
 
 - (NSArray *)systemProfile
@@ -197,11 +163,12 @@
 
 + (NSString *)systemVersionString
 {
+#if defined(MACOSX_DEPLOYMENT_TARGET) 
 	// This returns a version string of the form X.Y.Z
 	// There may be a better way to deal with the problem that gestaltSystemVersionMajor
 	//  et al. are not defined in 10.3, but this is probably good enough.
 	NSString* verStr = nil;
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_4
+# if MACOSX_DEPLOYMENT_TARGET  >= MAC_OS_X_VERSION_10_4
 	SInt32 major, minor, bugfix;
 	OSErr err1 = Gestalt(gestaltSystemVersionMajor, &major);
 	OSErr err2 = Gestalt(gestaltSystemVersionMinor, &minor);
@@ -211,12 +178,15 @@
 		verStr = [NSString stringWithFormat:@"%d.%d.%d", major, minor, bugfix];
 	}
 	else
-#endif
+# endif
 	{
 	 	NSString *versionPlistPath = @"/System/Library/CoreServices/SystemVersion.plist";
 		verStr = [[NSDictionary dictionaryWithContentsOfFile:versionPlistPath] objectForKey:@"ProductVersion"];
 	}
-	return verStr;
+    return verStr;
+#else
+    return [[UIDevice currentDevice] systemVersion];
+#endif
 }
 
 @end

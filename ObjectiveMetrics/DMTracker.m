@@ -8,6 +8,11 @@
 
 #import "DMTracker.h"
 
+#if defined(TARGET_OS_IPHONE)
+# import <UIKit/UIKit.h>
+#endif
+
+
 #import "DMTrackingQueue.h"
 #import "NSString+DMUUID.h"
 #import "NSNull+DMTranslate.h"
@@ -118,7 +123,7 @@ static DMTracker* defaultInstance = nil;
                      * Check that the last session had the time to queue a stopApp, otherwise fabricate our own.
                      */
                     NSDictionary *lastEvent = [queue eventAtIndex:[queue count] - 1];
-                    if ([[lastEvent objectForKey:DMFieldType] isNotEqualTo:DMTypeStopApp])
+                    if (![[lastEvent objectForKey:DMFieldType] isEqualToString:DMTypeStopApp])
                     {
                         /* Create a new stopApp, but set the session to the previous session. */
                         NSMutableDictionary *stopApp = [self infoStopApp];
@@ -161,7 +166,11 @@ static DMTracker* defaultInstance = nil;
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillTerminate:)
+#if defined(TARGET_OS_IPHONE)
+                                                     name:UIApplicationWillTerminateNotification
+#else
                                                      name:NSApplicationWillTerminateNotification
+#endif
                                                    object:nil];
     }
     else

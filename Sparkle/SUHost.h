@@ -5,7 +5,7 @@
 //  Copyright 2008 Andy Matuschak. All rights reserved.
 //
 
-#include <Cocoa/Cocoa.h>
+#include <Foundation/Foundation.h>
 
 @interface SUHost : NSObject
 {
@@ -21,9 +21,7 @@
 - (NSString *)name;
 - (NSString *)version;
 - (NSString *)displayVersion;
-- (NSImage *)icon;
 - (BOOL)isRunningOnReadOnlyVolume;
-- (BOOL)isBackgroundApplication;
 - (NSArray *)systemProfile;
 
 - (id)objectForInfoDictionaryKey:(NSString *)key;

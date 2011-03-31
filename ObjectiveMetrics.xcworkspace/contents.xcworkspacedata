@@ -7,4 +7,7 @@
    <FileRef
       location = "container:ObjectiveMetrics.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:TouchMetrics.xcodeproj">
+   </FileRef>
 </Workspace>

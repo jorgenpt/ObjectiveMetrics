@@ -124,6 +124,19 @@
 	
 	// Number of displays?
 	// CPU speed
+#if defined(TARGET_OS_IPHONE)
+    size_t size = sizeof(int);
+	int results;
+	int mib[2] = {CTL_HW, HW_CPU_FREQ};
+	int status = sysctl(mib, 2, &results, &size, NULL, 0);
+    if (status == 0)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuFreqMHz",@"CPU Speed (GHz)", [NSNumber numberWithInt:results], [NSNumber numberWithDouble:results/1000.0],nil] forKeys:profileDictKeys]];
+
+    mib[1] = HW_PHYSMEM;
+	status = sysctl(mib, 2, &results, &size, NULL, 0);
+    if (status == 0)
+		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:results], [NSNumber numberWithInt:results],nil] forKeys:profileDictKeys]];
+#else
 	SInt32 gestaltInfo;
 	OSErr err = Gestalt(gestaltProcClkSpeedMHz,&gestaltInfo);
 	if (err == noErr)
@@ -133,7 +146,8 @@
 	err = Gestalt(gestaltPhysicalRAMSizeInMegabytes,&gestaltInfo);
 	if (err == noErr)
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithInt:gestaltInfo],nil] forKeys:profileDictKeys]];
-	
+#endif
+
 	return profileArray;
 }
 
