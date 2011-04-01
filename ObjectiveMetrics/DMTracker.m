@@ -251,7 +251,11 @@ static DMTracker* defaultInstance = nil;
     NSArray *osVersion = [[systemProfile objectForKey:@"osVersion"] componentsSeparatedByString:@"."];
     if ([osVersion count] > 1)
     {
+#if defined(TARGET_OS_IPHONE)
+        [event setValue:[NSString stringWithFormat:@"iOS %@.%@",
+#else
         [event setValue:[NSString stringWithFormat:@"Mac OS X %@.%@",
+#endif
                          [osVersion objectAtIndex:0],
                          [osVersion objectAtIndex:1]]
                  forKey:DMFieldInfoOSVersion];
