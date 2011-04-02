@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0584A11346F3980045CCF4 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E05849D1346F3980045CCF4 /* GTMDefines.h */; };
+		8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E05849E1346F3980045CCF4 /* GTMStackTrace.h */; };
+		8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E05849F1346F3980045CCF4 /* GTMStackTrace.m */; };
+		8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */; };
 		8E22935F133CF4DB00183BA9 /* DMTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B01339006600609001 /* DMTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E229361133CF60700183BA9 /* ObjectiveMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E229360133CF60700183BA9 /* ObjectiveMetrics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E229363133CF63600183BA9 /* DMRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */; };
@@ -32,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E05849D1346F3980045CCF4 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		8E05849E1346F3980045CCF4 /* GTMStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStackTrace.h; sourceTree = "<group>"; };
+		8E05849F1346F3980045CCF4 /* GTMStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStackTrace.m; sourceTree = "<group>"; };
+		8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMObjC2Runtime.h; sourceTree = "<group>"; };
 		8E229360133CF60700183BA9 /* ObjectiveMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveMetrics.h; sourceTree = "<group>"; };
 		8E229366133CFEB500183BA9 /* DMHosts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHosts.h; sourceTree = "<group>"; };
 		8E229367133CFEB500183BA9 /* DMHosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHosts.m; sourceTree = "<group>"; };
@@ -82,6 +90,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E05849B1346F3980045CCF4 /* GTM */ = {
+			isa = PBXGroup;
+			children = (
+				8E05849D1346F3980045CCF4 /* GTMDefines.h */,
+				8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */,
+				8E05849E1346F3980045CCF4 /* GTMStackTrace.h */,
+				8E05849F1346F3980045CCF4 /* GTMStackTrace.m */,
+			);
+			path = GTM;
+			sourceTree = "<group>";
+		};
 		8E6BA5E4133984F60018E4A3 /* Sparkle */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +149,7 @@
 		8E8A0EA61337FBA500CA6E47 = {
 			isa = PBXGroup;
 			children = (
+				8E05849B1346F3980045CCF4 /* GTM */,
 				8E6D6A12133BF9F900E5F8A8 /* JSON */,
 				8E8A0EBB1337FBA500CA6E47 /* ObjectiveMetrics */,
 				8E6BA5E4133984F60018E4A3 /* Sparkle */,
@@ -210,6 +230,9 @@
 				8E229365133CF63600183BA9 /* NSString+DMUUID.h in Headers */,
 				8E229368133CFEB500183BA9 /* DMHosts.h in Headers */,
 				8E2C20EE1341895F00CCEAC3 /* NSNull+DMTranslate.h in Headers */,
+				8E0584A11346F3980045CCF4 /* GTMDefines.h in Headers */,
+				8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */,
+				8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +311,7 @@
 				8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */,
 				8E229369133CFEB500183BA9 /* DMHosts.m in Sources */,
 				8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */,
+				8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

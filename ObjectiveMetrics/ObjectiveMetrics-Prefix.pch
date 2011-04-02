@@ -2,6 +2,8 @@
 // Prefix header for all source files of the 'ObjectiveMetrics' target in the 'ObjectiveMetrics' project
 //
 
+#include <TargetConditionals.h>
+
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import "DMHosts.h"

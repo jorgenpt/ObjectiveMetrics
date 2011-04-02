@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0584AA1346F4140045CCF4 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584A71346F4140045CCF4 /* GTMDefines.h */; };
+		8E0584AB1346F4140045CCF4 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584A81346F4140045CCF4 /* GTMStackTrace.h */; };
+		8E0584AC1346F4140045CCF4 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0584A91346F4140045CCF4 /* GTMStackTrace.m */; };
+		8E0584AF1346F57D0045CCF4 /* GTMObjC2Runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */; };
 		C508A1931344ECD60061CF05 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C508A1921344ECD60061CF05 /* Foundation.framework */; };
 		C508A1DC1344EE170061CF05 /* DMHosts.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1CF1344EE170061CF05 /* DMHosts.h */; };
 		C508A1DD1344EE170061CF05 /* DMHosts.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1D01344EE170061CF05 /* DMHosts.m */; };
@@ -41,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E0584A71346F4140045CCF4 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		8E0584A81346F4140045CCF4 /* GTMStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStackTrace.h; sourceTree = "<group>"; };
+		8E0584A91346F4140045CCF4 /* GTMStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStackTrace.m; sourceTree = "<group>"; };
+		8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMObjC2Runtime.h; sourceTree = "<group>"; };
 		C508A18F1344ECD60061CF05 /* libTouchMetrics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTouchMetrics.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C508A1921344ECD60061CF05 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C508A1961344ECD60061CF05 /* TouchMetrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TouchMetrics-Prefix.pch"; sourceTree = "<group>"; };
@@ -88,9 +96,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E0584A51346F4140045CCF4 /* GTM */ = {
+			isa = PBXGroup;
+			children = (
+				8E0584A71346F4140045CCF4 /* GTMDefines.h */,
+				8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */,
+				8E0584A81346F4140045CCF4 /* GTMStackTrace.h */,
+				8E0584A91346F4140045CCF4 /* GTMStackTrace.m */,
+			);
+			path = GTM;
+			sourceTree = "<group>";
+		};
 		C508A1841344ECD60061CF05 = {
 			isa = PBXGroup;
 			children = (
+				8E0584A51346F4140045CCF4 /* GTM */,
 				C508A21B1344FB7B0061CF05 /* UIDevice-Extension */,
 				C508A1EA1344EE1D0061CF05 /* JSON */,
 				C508A1941344ECD60061CF05 /* TouchMetrics */,
@@ -231,6 +251,9 @@
 				C508A2081344EE670061CF05 /* SUHost.h in Headers */,
 				C508A20A1344EE670061CF05 /* SUSystemProfiler.h in Headers */,
 				C508A2181344FB740061CF05 /* UIDevice-Hardware.h in Headers */,
+				8E0584AA1346F4140045CCF4 /* GTMDefines.h in Headers */,
+				8E0584AB1346F4140045CCF4 /* GTMStackTrace.h in Headers */,
+				8E0584AF1346F57D0045CCF4 /* GTMObjC2Runtime.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +318,7 @@
 				C508A2091344EE670061CF05 /* SUHost.m in Sources */,
 				C508A20B1344EE670061CF05 /* SUSystemProfiler.m in Sources */,
 				C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */,
+				8E0584AC1346F4140045CCF4 /* GTMStackTrace.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

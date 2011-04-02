@@ -8,8 +8,12 @@
 
 #import "DMTracker.h"
 
-#if defined(TARGET_OS_IPHONE)
+#import "GTMStackTrace.h"
+
+#if TARGET_OS_IPHONE
 # import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
 #endif
 
 
@@ -394,14 +398,24 @@ static DMTracker* defaultInstance = nil;
 - (NSMutableDictionary *)infoForException:(NSException *)theException
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeException];
-    [event setValue:@"" // event.message
+
+    [event setValue:[theException reason]
              forKey:DMFieldExceptionMessage];
     [event setValue:[theException name]
              forKey:DMFieldExceptionSource];
-    [event setValue:@"" // [theException callStackSymbols]
+
+#if TARGET_OS_IPHONE
+    NSArray *callstack = [theException callStackSymbols];
+#else
+    NSArray *callstack = [GTMStackTraceFromException(theException) componentsSeparatedByString:@"\n"];
+#endif
+
+    NSArray *backtrace = [callstack subarrayWithRange:NSMakeRange(1, [backtrace count] - 1)];
+    [event setValue:[backtrace componentsJoinedByString:@"\n"]
              forKey:DMFieldExceptionStack];
-    [event setValue:@"" // Top of stack trace, location ("target site")
+    [event setValue:[callstack objectAtIndex:0]
              forKey:DMFieldExceptionTargetSite];
+
     return event;
 }
 
