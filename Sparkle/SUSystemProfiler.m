@@ -12,7 +12,7 @@
 #import "SUHost.h"
 #import <sys/sysctl.h>
 
-#if defined(TARGET_OS_IPHONE)
+#if TARGET_OS_IPHONE
 # import "UIDevice-Hardware.h"
 #endif
 
@@ -128,7 +128,7 @@
 
 	// Number of displays?
 	// CPU speed
-#if defined(TARGET_OS_IPHONE)
+#if TARGET_OS_IPHONE
     NSUInteger result = [[UIDevice currentDevice] cpuFrequency];
     if (result != 0)
         [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuFreqMHz",@"CPU Speed (GHz)", [NSNumber numberWithInteger:result], [NSNumber numberWithDouble:result/1000.0],nil] forKeys:profileDictKeys]];

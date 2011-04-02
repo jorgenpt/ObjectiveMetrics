@@ -170,7 +170,7 @@ static DMTracker* defaultInstance = nil;
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillTerminate:)
-#if defined(TARGET_OS_IPHONE)
+#if TARGET_OS_IPHONE
                                                      name:UIApplicationWillTerminateNotification
 #else
                                                      name:NSApplicationWillTerminateNotification
@@ -255,7 +255,7 @@ static DMTracker* defaultInstance = nil;
     NSArray *osVersion = [[systemProfile objectForKey:@"osVersion"] componentsSeparatedByString:@"."];
     if ([osVersion count] > 1)
     {
-#if defined(TARGET_OS_IPHONE)
+#if TARGET_OS_IPHONE
         [event setValue:[NSString stringWithFormat:@"iOS %@.%@",
 #else
         [event setValue:[NSString stringWithFormat:@"Mac OS X %@.%@",

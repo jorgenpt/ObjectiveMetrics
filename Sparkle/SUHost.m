@@ -10,7 +10,7 @@
 #import "SUSystemProfiler.h"
 #import <sys/mount.h> // For statfs for isRunningOnReadOnlyVolume
 
-#if defined(TARGET_OS_IPHONE)
+#if TARGET_OS_IPHONE
 # import <UIKit/UIKit.h>
 #endif
 
@@ -163,12 +163,14 @@
 
 + (NSString *)systemVersionString
 {
-#if defined(MACOSX_DEPLOYMENT_TARGET) 
+#if TARGET_OS_IPHONE
+    return [[UIDevice currentDevice] systemVersion];
+#else
 	// This returns a version string of the form X.Y.Z
 	// There may be a better way to deal with the problem that gestaltSystemVersionMajor
 	//  et al. are not defined in 10.3, but this is probably good enough.
 	NSString* verStr = nil;
-# if MACOSX_DEPLOYMENT_TARGET  >= MAC_OS_X_VERSION_10_4
+# if MACOSX_DEPLOYMENT_TARGET >= MAC_OS_X_VERSION_10_4
 	SInt32 major, minor, bugfix;
 	OSErr err1 = Gestalt(gestaltSystemVersionMajor, &major);
 	OSErr err2 = Gestalt(gestaltSystemVersionMinor, &minor);
@@ -184,8 +186,6 @@
 		verStr = [[NSDictionary dictionaryWithContentsOfFile:versionPlistPath] objectForKey:@"ProductVersion"];
 	}
     return verStr;
-#else
-    return [[UIDevice currentDevice] systemVersion];
 #endif
 }
 
