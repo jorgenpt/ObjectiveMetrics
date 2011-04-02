@@ -1,18 +1,18 @@
 //
-//  TouchTestAppDelegate.m
-//  TouchTest
+//  iOSExampleAppDelegate.m
+//  iOSExample
 //
 //  Created by Jorgen Tjerno on 4/1/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "TouchTestAppDelegate.h"
+#import "iOSExampleAppDelegate.h"
 
-#import "TouchTestViewController.h"
+#import "iOSExampleViewController.h"
 
 #import "DMTracker.h"
 
-@implementation TouchTestAppDelegate
+@implementation iOSExampleAppDelegate
 
 
 @synthesize window=_window;

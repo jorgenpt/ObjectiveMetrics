@@ -1,16 +1,16 @@
 //
-//  MetricsTestAppDelegate.m
-//  MetricsTest
+//  DesktopExampleAppDelegate.m
+//  DesktopExample
 //
 //  Created by J¿rgen P. Tjern¿ on 3/23/11.
 //  Copyright 2011 devSoft. All rights reserved.
 //
 
-#import "MetricsTestAppDelegate.h"
+#import "DesktopExampleAppDelegate.h"
 
 #import <ObjectiveMetrics/ObjectiveMetrics.h>
 
-@implementation MetricsTestAppDelegate
+@implementation DesktopExampleAppDelegate
 
 @synthesize window;
 

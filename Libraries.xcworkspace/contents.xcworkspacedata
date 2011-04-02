@@ -2,15 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:MetricsTest.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "container:ObjectiveMetrics.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:TouchMetrics.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:TouchTest.xcodeproj">
    </FileRef>
 </Workspace>

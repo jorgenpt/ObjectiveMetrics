@@ -104,7 +104,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>TouchTestViewController</string>
+					<string>iOSExampleViewController</string>
 					<string>UIResponder</string>
 					<string>{{239, 654}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -132,11 +132,11 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">TouchTestViewController</string>
+					<string key="className">iOSExampleViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">TouchTestViewController.h</string>
+						<string key="minorKey">iOSExampleViewController.h</string>
 					</object>
 				</object>
 			</object>
@@ -148,7 +148,7 @@
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">TouchTest.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">iOSExample.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">77</string>
 		<nil key="IBCocoaTouchSimulationTargetRuntimeIdentifier"/>
