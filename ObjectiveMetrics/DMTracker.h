@@ -34,11 +34,13 @@
   Finalize the current app session. Only valid a single time after a call to
   startApp.
   It is implicitly called when the app sends a
-  NSApplicationWillTerminateNotification.  Finalizing the app session will
+  NSApplicationWillTerminateNotification or
+  UIApplicationWillTerminateNotification.  Finalizing the app session will
   attempt to send all queued messages. If it fails, they will be attempted sent
   at the next app startup.
 
   @see NSApplicationWillTerminateNotification
+  @see UIApplicationWillTerminateNotification
  */
 - (void)stopApp;
 
