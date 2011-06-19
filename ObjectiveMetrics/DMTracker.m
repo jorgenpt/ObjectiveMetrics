@@ -446,9 +446,15 @@ static DMTracker* defaultInstance = nil;
                                   completed:wasCompleted]];
 }
 
-- (void)trackLog:(NSString *)message
+- (void)trackLog:(NSString *)format, ...
 {
+    va_list arguments;
+    va_start(arguments, format);
+    NSString *message = [[NSString alloc] initWithFormat:format arguments:arguments];
+    va_end(arguments);
+
     [queue add:[self infoForLogMessage:message]];
+    [message release];
 }
 
 - (void)trackCustomDataWithName:(NSString *)theName

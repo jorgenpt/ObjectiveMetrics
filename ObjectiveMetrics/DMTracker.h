@@ -86,9 +86,10 @@
   Track a log entry.
   This is a batched event that will be sent when the app exits.
 
-  @param theMessage The message you want to log.
+  @param format The message you want to log.
+  @param ... Format-specific arguments.
  */
-- (void)trackLog:(NSString *)theMessage;
+- (void)trackLog:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
 /**
   Track a custom data entry.
