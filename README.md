@@ -68,7 +68,7 @@ Or, under iOS (iPhone):
 Then, anywhere you want to track an event, retrieve the DMTracker singleton
 instance using:
 
-    [DMTracker defaultInstance]
+    [DMTracker defaultTracker]
 
 On this instance, you can call any number of tracking events. It is very
 important that you call the `startApp` method soon after your app starts. This
