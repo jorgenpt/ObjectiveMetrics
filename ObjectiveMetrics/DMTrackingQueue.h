@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DMTracker.h"
+
 @class DMRequester;
 
-@interface DMTrackingQueue : NSObject {
+@interface DMTrackingQueue : NSObject<DMTrackingQueueProtocol> {
 @private
     NSMutableArray *events;
     int maxSize;
@@ -18,14 +20,5 @@
     NSRange pendingEvents;
     DMRequester *requester;
 }
-
-- (NSUInteger)count;
-- (NSDictionary *)eventAtIndex:(NSUInteger)index;
-
-- (void)add:(NSDictionary *)event;
-- (void)send:(NSDictionary *)event;
-
-- (void)flush;
-- (BOOL)blockingFlush;
 
 @end

@@ -16,7 +16,7 @@
 # import <Cocoa/Cocoa.h>
 #endif
 
-
+#import "DMNullQueue.h"
 #import "DMTrackingQueue.h"
 #import "NSString+DMUUID.h"
 #import "NSNull+DMTranslate.h"
@@ -181,6 +181,11 @@ static DMTracker* defaultInstance = nil;
     {
         NSLog(@"Warning! -[DMTracker startApp] called more than once!");
     }
+}
+
+- (void)disable
+{
+    [self setQueue:[[[DMNullQueue alloc] init] autorelease]];
 }
 
 - (void)stopApp

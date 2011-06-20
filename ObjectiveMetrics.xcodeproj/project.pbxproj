@@ -11,6 +11,8 @@
 		8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E05849E1346F3980045CCF4 /* GTMStackTrace.h */; };
 		8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E05849F1346F3980045CCF4 /* GTMStackTrace.m */; };
 		8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */; };
+		8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E19EC0F13AEFEC4007CE280 /* DMNullQueue.h */; };
+		8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E19EC1013AEFEC4007CE280 /* DMNullQueue.m */; };
 		8E22935F133CF4DB00183BA9 /* DMTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B01339006600609001 /* DMTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E229361133CF60700183BA9 /* ObjectiveMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E229360133CF60700183BA9 /* ObjectiveMetrics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E229363133CF63600183BA9 /* DMRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */; };
@@ -40,6 +42,8 @@
 		8E05849E1346F3980045CCF4 /* GTMStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStackTrace.h; sourceTree = "<group>"; };
 		8E05849F1346F3980045CCF4 /* GTMStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStackTrace.m; sourceTree = "<group>"; };
 		8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMObjC2Runtime.h; sourceTree = "<group>"; };
+		8E19EC0F13AEFEC4007CE280 /* DMNullQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNullQueue.h; sourceTree = "<group>"; };
+		8E19EC1013AEFEC4007CE280 /* DMNullQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNullQueue.m; sourceTree = "<group>"; };
 		8E229360133CF60700183BA9 /* ObjectiveMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveMetrics.h; sourceTree = "<group>"; };
 		8E229366133CFEB500183BA9 /* DMHosts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHosts.h; sourceTree = "<group>"; };
 		8E229367133CFEB500183BA9 /* DMHosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHosts.m; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 				8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */,
 				8EF751B01339006600609001 /* DMTracker.h */,
 				8EF751B11339006600609001 /* DMTracker.m */,
+				8E19EC0F13AEFEC4007CE280 /* DMNullQueue.h */,
+				8E19EC1013AEFEC4007CE280 /* DMNullQueue.m */,
 				8EF751B5133900F700609001 /* DMTrackingQueue.h */,
 				8EF751B6133900F700609001 /* DMTrackingQueue.m */,
 				8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */,
@@ -233,6 +239,7 @@
 				8E0584A11346F3980045CCF4 /* GTMDefines.h in Headers */,
 				8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */,
 				8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */,
+				8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +319,7 @@
 				8E229369133CFEB500183BA9 /* DMHosts.m in Sources */,
 				8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */,
 				8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */,
+				8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
