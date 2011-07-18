@@ -233,12 +233,17 @@ static DMTracker* defaultInstance = nil;
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeStartApp];
 
-    SUHost *app = [DMHosts sharedAppHost];
+    SUHost *host = [DMHosts sharedFrameworkHost], *app = [DMHosts sharedAppHost];
 
     NSString *uuid = [app objectForUserDefaultsKey:DMUserIdKey];
     if (!uuid)
     {
-        uuid = [NSString uuid];
+        /* We try to retrieve the old value if the user used the old version of
+         * OM that saved the user id into the framework userdefauts.
+         */
+        uuid = [host objectForUserDefaultsKey:DMUserIdKey];
+        if (!uuid)
+            uuid = [NSString uuid];
         [app setObject:uuid forUserDefaultsKey:DMUserIdKey];
     }
 
