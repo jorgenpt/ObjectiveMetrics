@@ -79,7 +79,7 @@ static DMTracker* defaultInstance = nil;
 
 @interface DMTracker ()
 
-@property (retain) DMTrackingQueue *queue;
+@property (retain) id<DMTrackingQueueProtocol> queue;
 @property (retain) NSString *session;
 
 - (NSMutableDictionary *)infoStartApp;
@@ -151,7 +151,7 @@ static DMTracker* defaultInstance = nil;
 - (id) copyWithZone:(NSZone *)zone { return self; }
 - (id) retain { return self; }
 - (NSUInteger) retainCount { return UINT_MAX; }
-- (void) release {}
+- (oneway void) release {}
 - (id) autorelease { return self; }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
