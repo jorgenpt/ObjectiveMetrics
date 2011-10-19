@@ -133,9 +133,14 @@ static NSString * const DMStatusCodeKey = @"status_code";
 
 
     encoding = NSUTF8StringEncoding;
-    CFStringEncoding cfEncoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)[response textEncodingName]);
-    if (cfEncoding != kCFStringEncodingInvalidId) {
-        encoding = CFStringConvertEncodingToNSStringEncoding(cfEncoding);
+    NSString *encodingName = [response textEncodingName];
+    if (encodingName)
+    {
+        CFStringEncoding cfEncoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)encodingName);
+        if (cfEncoding != kCFStringEncodingInvalidId)
+        {
+            encoding = CFStringConvertEncodingToNSStringEncoding(cfEncoding);
+        }
     }
 }
 
