@@ -22,10 +22,10 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 @interface DMTrackingQueue () <DMRequesterDelegate>
 
-@property (retain) NSMutableArray *events;
+@property (retain) NSMutableArray *events, *pendingEvents;
 @property (retain) DMRequester *requester;
 
-- (void)sendRange:(NSRange)range;
+- (void)sendEvents:(NSArray *)theEvents;
 - (BOOL)flushIfExceedsBounds;
 - (void)save;
 - (void)load;
@@ -34,13 +34,14 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 @implementation DMTrackingQueue
 
-@synthesize events, requester;
+@synthesize events, pendingEvents, requester;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         SUHost *host = [DMHosts sharedAppHost];
+        [self setPendingEvents:[NSMutableArray array]];
         [self setRequester:[[[DMRequester alloc] initWithDelegate:self] autorelease]];
 
         /* TODO: Use NSApplicationSupportDirectory for the queue?
@@ -68,7 +69,9 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 - (void)dealloc
 {
+    [self setPendingEvents:nil];
     [self setEvents:nil];
+    [self setRequester:nil];
 
     [super dealloc];
 }
@@ -85,61 +88,77 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 
 - (void)add:(NSDictionary *)event
 {
-    [events addObject:event];
-    [self save];
-    [self flushIfExceedsBounds];
+    @synchronized (self)
+    {
+        [events addObject:event];
+        [self save];
+        [self flushIfExceedsBounds];
+    }
+}
+
+- (void)sendEvents:(NSArray *)sentEvents
+{
+    @synchronized (self)
+    {
+        [pendingEvents addObjectsFromArray:sentEvents];
+        [requester send:sentEvents];
+    }
 }
 
 - (void)send:(NSDictionary *)event
 {
-    if (pendingEvents.length > 0)
-        [requester wait];
-
-    [events addObject:event];
-    NSRange toSend = NSMakeRange([events count] - 1, 1);
-
-    [self sendRange:toSend];
-}
-
-- (void)sendRange:(NSRange)range;
-{
-    pendingEvents = range;
-    [requester send:[events subarrayWithRange:range]];
+    @synchronized (self)
+    {
+        [events insertObject:event
+                     atIndex:[pendingEvents count]];
+        [self sendEvents:[NSArray arrayWithObject:event]];
+    }
 }
 
 - (void)flush
 {
-    if (pendingEvents.length > 0)
-        [requester wait];
-
-    [self sendRange:NSMakeRange(0, [events count])];
+    @synchronized (self)
+    {
+        NSInteger pendingCount = [pendingEvents count];
+        NSRange range = NSMakeRange(pendingCount, [events count] - pendingCount);
+        if (range.length > 0)
+            [self sendEvents:[events subarrayWithRange:range]];
+    }
 }
 
 - (BOOL)blockingFlush
 {
-    [self flush];
-    [requester wait];
+    @synchronized (self)
+    {
+        [self flush];
 
-    return [events count] == 0;
+        // We lock around this code so that we won't make new requests.
+        [requester wait];
+
+        return [events count] == 0;
+    }
 }
 
 - (BOOL)flushIfExceedsBounds
 {
-    if ([events count] > 0)
+    @synchronized (self)
     {
-        NSDictionary *oldestEvent = [events objectAtIndex:0];
-        NSDate *oldestEventDate = [NSDate dateWithTimeIntervalSince1970:[[oldestEvent objectForKey:@"ts"] intValue]];
+        if ([events count] - [pendingEvents count] > 0)
+        {
+            NSDictionary *oldestEvent = [events objectAtIndex:[pendingEvents count]];
+            NSDate *oldestEventDate = [NSDate dateWithTimeIntervalSince1970:[[oldestEvent objectForKey:@"ts"] intValue]];
 
-        if (oldestEventDate == nil)
-            [self flush];
-        else if ([[NSDate date] timeIntervalSinceDate:oldestEventDate] >= maxSecondsOld)
-            [self flush];
-        else if ([events count] >= maxSize)
-            [self flush];
-        else
-            return NO;
+            if (oldestEventDate == nil)
+                [self flush];
+            else if ([[NSDate date] timeIntervalSinceDate:oldestEventDate] >= maxSecondsOld)
+                [self flush];
+            else if ([events count] >= maxSize)
+                [self flush];
+            else
+                return NO;
 
-        return YES;
+            return YES;
+        }
     }
 
     return NO;
@@ -148,17 +167,20 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 - (void)save
 {
     NSMutableArray *outputEvents = [NSMutableArray array];
-    for (NSDictionary *immutableMessage in events)
+    @synchronized (self)
     {
-        NSMutableDictionary *message = [NSMutableDictionary dictionaryWithDictionary:immutableMessage];
-
-        for (NSString *key in [message allKeysForObject:[NSNull null]])
+        for (NSDictionary *immutableMessage in events)
         {
-            [message setObject:DMNullPlaceholder
-                        forKey:key];
-        }
+            NSMutableDictionary *message = [NSMutableDictionary dictionaryWithDictionary:immutableMessage];
 
-        [outputEvents addObject:message];
+            for (NSString *key in [message allKeysForObject:[NSNull null]])
+            {
+                [message setObject:DMNullPlaceholder
+                            forKey:key];
+            }
+
+            [outputEvents addObject:message];
+        }
     }
 
     [[NSUserDefaults standardUserDefaults] setObject:outputEvents
@@ -172,7 +194,8 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
     if (!loadedEvents)
         loadedEvents = [NSArray array];
 
-    [self setEvents:[NSMutableArray array]];
+    NSMutableArray *newEvents = [NSMutableArray array];
+
     for (NSDictionary *immutableMessage in loadedEvents)
     {
         if (![immutableMessage isKindOfClass:[NSDictionary class]])
@@ -189,20 +212,35 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
             }
         }
 
-        [events addObject:message];
+        [newEvents addObject:message];
+    }
+
+    @synchronized (self)
+    {
+        /* Make sure no-one is fiddling with events before overwriting it, even if the write is atomic. */
+        [self setEvents:newEvents];
     }
 }
 
-- (void)requestSucceeded:(DMRequester *)requester
+- (void)requestSucceeded:(NSArray *)theEvents
 {
-    DLog(@"Request succeeded. Removing events [%ld, %ld)", pendingEvents.location, pendingEvents.location + pendingEvents.length);
-    if (pendingEvents.length > 0)
+    DLog(@"Request succeeded. Removing events: %@", theEvents);
+    @synchronized (self)
     {
-        [events removeObjectsInRange:pendingEvents];
+        [pendingEvents removeObjectsInArray:theEvents];
+        [events removeObjectsInArray:theEvents];
         [self save];
     }
-
-    pendingEvents.location = pendingEvents.length = 0;
 }
+
+- (void)requestFailed:(NSArray *)theEvents
+{
+    DLog(@"Request failed. Removing events from pending: %@", theEvents);
+    @synchronized (self)
+    {
+        [pendingEvents removeObjectsInArray:theEvents];
+    }
+}
+
 
 @end

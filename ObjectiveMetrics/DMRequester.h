@@ -12,23 +12,21 @@
 @interface DMRequester : NSObject {
 @private
     NSMutableURLRequest *request;
-    NSURLConnection *connection;
+    NSMutableArray *connections;
     id delegate;
-    BOOL encounteredError;
-    NSStringEncoding encoding;
 }
 
 @property (retain) id delegate;
 
 - (id)initWithDelegate:(id)theDelegate;
 
-- (void)send:(id)data;
+- (void)send:(NSArray *)data;
 - (void)wait;
 
 @end
 
 @protocol DMRequesterDelegate
 @optional
-- (void)requestFailed:(DMRequester *)requester;
-- (void)requestSucceeded:(DMRequester *)requester;
+- (void)requestFailed:(NSArray *)events;
+- (void)requestSucceeded:(NSArray *)events;
 @end

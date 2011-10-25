@@ -15,9 +15,9 @@
 @interface DMTrackingQueue : NSObject<DMTrackingQueueProtocol> {
 @private
     NSMutableArray *events;
+    NSMutableArray *pendingEvents;
     int maxSize;
     double maxSecondsOld;
-    NSRange pendingEvents;
     DMRequester *requester;
 }
 

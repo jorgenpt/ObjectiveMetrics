@@ -35,6 +35,8 @@
 		8E6D6A26133BF9F900E5F8A8 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A1B133BF9F900E5F8A8 /* SBJsonParser.m */; };
 		8E6D6A28133BF9F900E5F8A8 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */; };
 		8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */; };
+		8E82EDF1145660D700CEE85D /* DMURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E82EDEF145660D700CEE85D /* DMURLConnection.h */; };
+		8E82EDF2145660D700CEE85D /* DMURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82EDF0145660D700CEE85D /* DMURLConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMRequester.h; sourceTree = "<group>"; };
 		8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMRequester.m; sourceTree = "<group>"; };
+		8E82EDEF145660D700CEE85D /* DMURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMURLConnection.h; sourceTree = "<group>"; };
+		8E82EDF0145660D700CEE85D /* DMURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMURLConnection.m; sourceTree = "<group>"; };
 		8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8E8A0EB81337FBA500CA6E47 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8E8A0EB91337FBA500CA6E47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -218,6 +222,8 @@
 				8E229360133CF60700183BA9 /* ObjectiveMetrics.h */,
 				8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */,
 				8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */,
+				8E82EDEF145660D700CEE85D /* DMURLConnection.h */,
+				8E82EDF0145660D700CEE85D /* DMURLConnection.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -240,6 +246,7 @@
 				8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */,
 				8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */,
 				8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */,
+				8E82EDF1145660D700CEE85D /* DMURLConnection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +277,7 @@
 		8E8A0EA81337FBA500CA6E47 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = devSoft;
 			};
 			buildConfigurationList = 8E8A0EAB1337FBA500CA6E47 /* Build configuration list for PBXProject "ObjectiveMetrics" */;
@@ -320,6 +328,7 @@
 				8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */,
 				8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */,
 				8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */,
+				8E82EDF2145660D700CEE85D /* DMURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
