@@ -14,7 +14,7 @@
 
 static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
 static NSString * const DMAppIdKey = @"DMAppId";
-static NSString * const DMAnalyticsURLFormat = @"http://%@.api.deskmetrics.com/sendData";
+static NSString * const DMAnalyticsURLFormat = @"https://%@.api.deskmetrics.com/sendData";
 static NSString * const DMStatusCodeKey = @"status_code";
 
 @interface DMRequester ()
