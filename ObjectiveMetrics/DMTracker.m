@@ -216,11 +216,14 @@ static DMTracker* defaultInstance = nil;
     if (session)
     {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+#if TARGET_OS_IPHONE
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillEnterForeground:)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
-
+#endif
+        
         if (queue)
         {
             [queue add:[self infoStopApp]];
