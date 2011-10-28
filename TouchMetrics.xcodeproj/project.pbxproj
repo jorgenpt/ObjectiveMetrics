@@ -11,6 +11,10 @@
 		8E0584AB1346F4140045CCF4 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584A81346F4140045CCF4 /* GTMStackTrace.h */; };
 		8E0584AC1346F4140045CCF4 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0584A91346F4140045CCF4 /* GTMStackTrace.m */; };
 		8E0584AF1346F57D0045CCF4 /* GTMObjC2Runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */; };
+		8E7F527A145A77A000A50607 /* DMNullQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F5276145A77A000A50607 /* DMNullQueue.h */; };
+		8E7F527B145A77A000A50607 /* DMNullQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7F5277145A77A000A50607 /* DMNullQueue.m */; };
+		8E7F527C145A77A000A50607 /* DMURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F5278145A77A000A50607 /* DMURLConnection.h */; };
+		8E7F527D145A77A000A50607 /* DMURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7F5279145A77A000A50607 /* DMURLConnection.m */; };
 		C508A1931344ECD60061CF05 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C508A1921344ECD60061CF05 /* Foundation.framework */; };
 		C508A1DC1344EE170061CF05 /* DMHosts.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1CF1344EE170061CF05 /* DMHosts.h */; };
 		C508A1DD1344EE170061CF05 /* DMHosts.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1D01344EE170061CF05 /* DMHosts.m */; };
@@ -49,6 +53,10 @@
 		8E0584A81346F4140045CCF4 /* GTMStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStackTrace.h; sourceTree = "<group>"; };
 		8E0584A91346F4140045CCF4 /* GTMStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStackTrace.m; sourceTree = "<group>"; };
 		8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMObjC2Runtime.h; sourceTree = "<group>"; };
+		8E7F5276145A77A000A50607 /* DMNullQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNullQueue.h; sourceTree = "<group>"; };
+		8E7F5277145A77A000A50607 /* DMNullQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNullQueue.m; sourceTree = "<group>"; };
+		8E7F5278145A77A000A50607 /* DMURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMURLConnection.h; sourceTree = "<group>"; };
+		8E7F5279145A77A000A50607 /* DMURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMURLConnection.m; sourceTree = "<group>"; };
 		C508A18F1344ECD60061CF05 /* libTouchMetrics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTouchMetrics.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C508A1921344ECD60061CF05 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C508A1961344ECD60061CF05 /* TouchMetrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TouchMetrics-Prefix.pch"; sourceTree = "<group>"; };
@@ -158,12 +166,16 @@
 			children = (
 				C508A1CF1344EE170061CF05 /* DMHosts.h */,
 				C508A1D01344EE170061CF05 /* DMHosts.m */,
+				8E7F5276145A77A000A50607 /* DMNullQueue.h */,
+				8E7F5277145A77A000A50607 /* DMNullQueue.m */,
 				C508A1D11344EE170061CF05 /* DMRequester.h */,
 				C508A1D21344EE170061CF05 /* DMRequester.m */,
 				C508A1D31344EE170061CF05 /* DMTracker.h */,
 				C508A1D41344EE170061CF05 /* DMTracker.m */,
 				C508A1D51344EE170061CF05 /* DMTrackingQueue.h */,
 				C508A1D61344EE170061CF05 /* DMTrackingQueue.m */,
+				8E7F5278145A77A000A50607 /* DMURLConnection.h */,
+				8E7F5279145A77A000A50607 /* DMURLConnection.m */,
 				C508A1D71344EE170061CF05 /* NSString+DMUUID.h */,
 				C508A1D81344EE170061CF05 /* NSString+DMUUID.m */,
 				C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */,
@@ -254,6 +266,8 @@
 				8E0584AA1346F4140045CCF4 /* GTMDefines.h in Headers */,
 				8E0584AB1346F4140045CCF4 /* GTMStackTrace.h in Headers */,
 				8E0584AF1346F57D0045CCF4 /* GTMObjC2Runtime.h in Headers */,
+				8E7F527A145A77A000A50607 /* DMNullQueue.h in Headers */,
+				8E7F527C145A77A000A50607 /* DMURLConnection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +333,8 @@
 				C508A20B1344EE670061CF05 /* SUSystemProfiler.m in Sources */,
 				C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */,
 				8E0584AC1346F4140045CCF4 /* GTMStackTrace.m in Sources */,
+				8E7F527B145A77A000A50607 /* DMNullQueue.m in Sources */,
+				8E7F527D145A77A000A50607 /* DMURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

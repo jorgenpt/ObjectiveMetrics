@@ -152,6 +152,9 @@
 /* Begin PBXProject section */
 		C54803CB13462AC600DC22A8 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = C54803CE13462AC600DC22A8 /* Build configuration list for PBXProject "iOSExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -279,6 +282,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSExample/iOSExample-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOSExample/iOSExample-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -302,6 +306,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSExample/iOSExample-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOSExample/iOSExample-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
