@@ -154,9 +154,21 @@ static DMTracker* defaultInstance = nil;
 - (oneway void) release {}
 - (id) autorelease { return self; }
 
+// Used for iOS
+- (void)applicationWillEnterForeground:(NSNotification *)aNotification
+{
+    [self startApp];
+}
+
+// Also used for when an app backgrounds on iOS.
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     [self stopApp];
+}
+
+- (void)shouldFlush:(NSNotification *)aNotification
+{
+    [self flushQueue];
 }
 
 - (void)startApp
@@ -176,6 +188,17 @@ static DMTracker* defaultInstance = nil;
                                                      name:NSApplicationWillTerminateNotification
 #endif
                                                    object:nil];
+
+#if TARGET_OS_IPHONE
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(shouldFlush:)
+                                                     name:UIApplicationDidReceiveMemoryWarningNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillTerminate:)
+                                                     name:UIApplicationDidEnterBackgroundNotification
+                                                   object:nil];
+#endif
     }
     else
     {
@@ -192,13 +215,18 @@ static DMTracker* defaultInstance = nil;
 {
     if (session)
     {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillEnterForeground:)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+
         if (queue)
         {
             [queue add:[self infoStopApp]];
             [queue blockingFlush];
         }
 
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self setSession:nil];
     }
     else
