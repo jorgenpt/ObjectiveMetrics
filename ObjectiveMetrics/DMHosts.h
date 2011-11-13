@@ -6,11 +6,11 @@
 //  Copyright 2011 devSoft. All rights reserved.
 //
 
-#import "SUHost.h"
+#import "DMSUHost.h"
 
 @interface DMHosts : NSObject
 
-+ (SUHost *)sharedAppHost;
-+ (SUHost *)sharedFrameworkHost;
++ (DMSUHost *)sharedAppHost;
++ (DMSUHost *)sharedFrameworkHost;
 
 @end

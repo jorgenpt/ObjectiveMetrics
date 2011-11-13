@@ -1,5 +1,5 @@
 //
-//  SUSystemProfiler.m
+//  DMSUSystemProfiler.m
 //  Sparkle
 //
 //  Created by Andy Matuschak on 12/22/07.
@@ -7,19 +7,19 @@
 //  Adapted from Sparkle+, by Tom Harrington.
 //
 
-#import "SUSystemProfiler.h"
+#import "DMSUSystemProfiler.h"
 
-#import "SUHost.h"
+#import "DMSUHost.h"
 #import <sys/sysctl.h>
 
 #if TARGET_OS_IPHONE
 # import "UIDevice-Hardware.h"
 #endif
 
-@implementation SUSystemProfiler
-+ (SUSystemProfiler *)sharedSystemProfiler
+@implementation DMSUSystemProfiler
++ (DMSUSystemProfiler *)sharedSystemProfiler
 {
-	static SUSystemProfiler *sharedSystemProfiler = nil;
+	static DMSUSystemProfiler *sharedSystemProfiler = nil;
 	if (!sharedSystemProfiler)
 		sharedSystemProfiler = [[self alloc] init];
 	return sharedSystemProfiler;
@@ -31,7 +31,7 @@
 	return [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
 }
 
-- (NSMutableArray *)systemProfileArrayForHost:(SUHost *)host
+- (NSMutableArray *)systemProfileArrayForHost:(DMSUHost *)host
 {
 	NSDictionary *modelTranslation = [self modelTranslationTable];
 
@@ -43,7 +43,7 @@
 	size_t length = sizeof(value);
 
 	// OS version
-	NSString *currentSystemVersion = [SUHost systemVersionString];
+	NSString *currentSystemVersion = [DMSUHost systemVersionString];
 	if (currentSystemVersion != nil)
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"osVersion",@"OS Version",currentSystemVersion,currentSystemVersion,nil] forKeys:profileDictKeys]];
 

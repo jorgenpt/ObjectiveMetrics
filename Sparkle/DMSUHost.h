@@ -1,13 +1,14 @@
 //
-//  SUHost.h
+//  DMSUHost.h
 //  Sparkle
 //
 //  Copyright 2008 Andy Matuschak. All rights reserved.
 //
+// Renamed SUHost -> DMSUHost to prevent symbol conflicts with people who use this library.
 
 #include <Foundation/Foundation.h>
 
-@interface SUHost : NSObject
+@interface DMSUHost : NSObject
 {
 @private
 	NSBundle *bundle;

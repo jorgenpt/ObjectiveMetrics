@@ -1,20 +1,20 @@
 //
-//  SUHost.m
+//  DMSUHost.m
 //  Sparkle
 //
 //  Copyright 2008 Andy Matuschak. All rights reserved.
 //
 
-#import "SUHost.h"
+#import "DMSUHost.h"
 
-#import "SUSystemProfiler.h"
+#import "DMSUSystemProfiler.h"
 #import <sys/mount.h> // For statfs for isRunningOnReadOnlyVolume
 
 #if TARGET_OS_IPHONE
 # import <UIKit/UIKit.h>
 #endif
 
-@implementation SUHost
+@implementation DMSUHost
 
 - (id)initWithBundle:(NSBundle *)aBundle
 {
@@ -83,7 +83,7 @@
 
 - (NSArray *)systemProfile
 {
-	return [[SUSystemProfiler sharedSystemProfiler] systemProfileArrayForHost:self];
+	return [[DMSUSystemProfiler sharedSystemProfiler] systemProfileArrayForHost:self];
 }
 
 - (id)objectForInfoDictionaryKey:(NSString *)key

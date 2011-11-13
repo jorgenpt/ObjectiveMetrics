@@ -33,7 +33,7 @@ static NSString * const DMStatusCodeKey = @"status_code";
 {
     self = [super init];
     if (self) {
-        SUHost *host = [DMHosts sharedAppHost];
+        DMSUHost *host = [DMHosts sharedAppHost];
         NSString *URL = [host objectForInfoDictionaryKey:DMAnalyticsURLKey];
         if (!URL)
         {
@@ -49,7 +49,7 @@ static NSString * const DMStatusCodeKey = @"status_code";
         }
 
         DLog(@"URL: %@", URL);
-        SUHost *frameworkHost = [DMHosts sharedFrameworkHost];
+        DMSUHost *frameworkHost = [DMHosts sharedFrameworkHost];
         NSString *userAgent = [NSString stringWithFormat:@"%@ v%@",
                                [frameworkHost objectForInfoDictionaryKey:@"CFBundleName"],
                                [frameworkHost version]];

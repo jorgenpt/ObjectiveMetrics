@@ -22,8 +22,6 @@
 		8E229369133CFEB500183BA9 /* DMHosts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E229367133CFEB500183BA9 /* DMHosts.m */; };
 		8E279CDF133AC0EB00B4CB82 /* DMTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B11339006600609001 /* DMTracker.m */; };
 		8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B6133900F700609001 /* DMTrackingQueue.m */; };
-		8E279CE1133AC0EB00B4CB82 /* SUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BA5E6133984F60018E4A3 /* SUHost.m */; };
-		8E279CE2133AC0EB00B4CB82 /* SUSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BA5E8133984F60018E4A3 /* SUSystemProfiler.m */; };
 		8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */; };
 		8E279CE6133AC0EB00B4CB82 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */; };
 		8E279CEF133AC0EB00B4CB82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
@@ -37,6 +35,10 @@
 		8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */; };
 		8E82EDF1145660D700CEE85D /* DMURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E82EDEF145660D700CEE85D /* DMURLConnection.h */; };
 		8E82EDF2145660D700CEE85D /* DMURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82EDF0145660D700CEE85D /* DMURLConnection.m */; };
+		8EC75F531470872E00850047 /* DMSUHost.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F4F1470872E00850047 /* DMSUHost.h */; };
+		8EC75F541470872E00850047 /* DMSUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F501470872E00850047 /* DMSUHost.m */; };
+		8EC75F551470872E00850047 /* DMSUSystemProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F511470872E00850047 /* DMSUSystemProfiler.h */; };
+		8EC75F561470872E00850047 /* DMSUSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F521470872E00850047 /* DMSUSystemProfiler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,10 +56,6 @@
 		8E279CF3133AC0EB00B4CB82 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DMTranslate.h"; sourceTree = "<group>"; };
 		8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DMTranslate.m"; sourceTree = "<group>"; };
-		8E6BA5E5133984F60018E4A3 /* SUHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUHost.h; sourceTree = "<group>"; };
-		8E6BA5E6133984F60018E4A3 /* SUHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUHost.m; sourceTree = "<group>"; };
-		8E6BA5E7133984F60018E4A3 /* SUSystemProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSystemProfiler.h; sourceTree = "<group>"; };
-		8E6BA5E8133984F60018E4A3 /* SUSystemProfiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSystemProfiler.m; sourceTree = "<group>"; };
 		8E6D6A13133BF9F900E5F8A8 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		8E6D6A14133BF9F900E5F8A8 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		8E6D6A15133BF9F900E5F8A8 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -80,6 +78,10 @@
 		8E8A0EBD1337FBA500CA6E47 /* ObjectiveMetrics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveMetrics-Info.plist"; sourceTree = "<group>"; };
 		8E8A0EBF1337FBA500CA6E47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8E8A0EC11337FBA500CA6E47 /* ObjectiveMetrics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveMetrics-Prefix.pch"; sourceTree = "<group>"; };
+		8EC75F4F1470872E00850047 /* DMSUHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSUHost.h; sourceTree = "<group>"; };
+		8EC75F501470872E00850047 /* DMSUHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSUHost.m; sourceTree = "<group>"; };
+		8EC75F511470872E00850047 /* DMSUSystemProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSUSystemProfiler.h; sourceTree = "<group>"; };
+		8EC75F521470872E00850047 /* DMSUSystemProfiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSUSystemProfiler.m; sourceTree = "<group>"; };
 		8EF751B01339006600609001 /* DMTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTracker.h; sourceTree = "<group>"; };
 		8EF751B11339006600609001 /* DMTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTracker.m; sourceTree = "<group>"; };
 		8EF751B5133900F700609001 /* DMTrackingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTrackingQueue.h; sourceTree = "<group>"; };
@@ -120,10 +122,10 @@
 		8E6BA5EF1339850D0018E4A3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8E6BA5E5133984F60018E4A3 /* SUHost.h */,
-				8E6BA5E6133984F60018E4A3 /* SUHost.m */,
-				8E6BA5E7133984F60018E4A3 /* SUSystemProfiler.h */,
-				8E6BA5E8133984F60018E4A3 /* SUSystemProfiler.m */,
+				8EC75F4F1470872E00850047 /* DMSUHost.h */,
+				8EC75F501470872E00850047 /* DMSUHost.m */,
+				8EC75F511470872E00850047 /* DMSUSystemProfiler.h */,
+				8EC75F521470872E00850047 /* DMSUSystemProfiler.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -247,6 +249,8 @@
 				8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */,
 				8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */,
 				8E82EDF1145660D700CEE85D /* DMURLConnection.h in Headers */,
+				8EC75F531470872E00850047 /* DMSUHost.h in Headers */,
+				8EC75F551470872E00850047 /* DMSUSystemProfiler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,8 +319,6 @@
 			files = (
 				8E279CDF133AC0EB00B4CB82 /* DMTracker.m in Sources */,
 				8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */,
-				8E279CE1133AC0EB00B4CB82 /* SUHost.m in Sources */,
-				8E279CE2133AC0EB00B4CB82 /* SUSystemProfiler.m in Sources */,
 				8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */,
 				8E6D6A20133BF9F900E5F8A8 /* NSObject+SBJSON.m in Sources */,
 				8E6D6A22133BF9F900E5F8A8 /* NSString+SBJSON.m in Sources */,
@@ -329,6 +331,8 @@
 				8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */,
 				8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */,
 				8E82EDF2145660D700CEE85D /* DMURLConnection.m in Sources */,
+				8EC75F541470872E00850047 /* DMSUHost.m in Sources */,
+				8EC75F561470872E00850047 /* DMSUSystemProfiler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

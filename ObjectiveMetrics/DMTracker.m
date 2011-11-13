@@ -269,7 +269,7 @@ static DMTracker* defaultInstance = nil;
 {
     NSMutableDictionary *event = [self infoWithType:DMTypeStartApp];
 
-    SUHost *host = [DMHosts sharedFrameworkHost], *app = [DMHosts sharedAppHost];
+    DMSUHost *host = [DMHosts sharedFrameworkHost], *app = [DMHosts sharedAppHost];
 
     NSString *uuid = [app objectForUserDefaultsKey:DMUserIdKey];
     if (!uuid)

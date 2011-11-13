@@ -8,22 +8,22 @@
 
 #import "NSString+DMUUID.h"
 
-static SUHost *sharedAppHost = nil;
-static SUHost *sharedFrameworkHost = nil;
+static DMSUHost *sharedAppHost = nil;
+static DMSUHost *sharedFrameworkHost = nil;
 
 @implementation DMHosts
 
-+ (SUHost *)sharedAppHost
++ (DMSUHost *)sharedAppHost
 {
     if (!sharedAppHost)
-        sharedAppHost  = [[SUHost alloc] initWithBundle:[NSBundle mainBundle]];
+        sharedAppHost  = [[DMSUHost alloc] initWithBundle:[NSBundle mainBundle]];
     return [[sharedAppHost retain] autorelease];
 }
 
-+ (SUHost *)sharedFrameworkHost
++ (DMSUHost *)sharedFrameworkHost
 {
     if (!sharedFrameworkHost)
-        sharedFrameworkHost = [[SUHost alloc] initWithBundle:[NSBundle bundleWithIdentifier:@"no.devsoft.ObjectiveMetrics"]];
+        sharedFrameworkHost = [[DMSUHost alloc] initWithBundle:[NSBundle bundleWithIdentifier:@"no.devsoft.ObjectiveMetrics"]];
     return [[sharedFrameworkHost retain] autorelease];
 }
 

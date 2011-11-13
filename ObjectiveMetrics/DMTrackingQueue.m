@@ -40,7 +40,7 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
 {
     self = [super init];
     if (self) {
-        SUHost *host = [DMHosts sharedAppHost];
+        DMSUHost *host = [DMHosts sharedAppHost];
         [self setPendingEvents:[NSMutableArray array]];
         [self setRequester:[[[DMRequester alloc] initWithDelegate:self] autorelease]];
 
