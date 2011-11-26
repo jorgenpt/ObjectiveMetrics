@@ -143,6 +143,8 @@ static NSString * const DMStatusCodeKey = @"status_code";
                                                            completeBlock:[complete autorelease]
                                                               errorBlock:[error autorelease]];
     [connections addObject:connection];
+    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop]
+                          forMode:NSDefaultRunLoopMode];
     [connection start];
 }
 
