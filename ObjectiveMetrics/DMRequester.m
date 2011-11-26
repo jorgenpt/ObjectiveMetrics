@@ -10,7 +10,7 @@
 
 #import "DMURLConnection.h"
 
-#import "JSON.h"
+#import <SBJson/SBJson.h>
 
 static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
 static NSString * const DMAppIdKey = @"DMAppId";

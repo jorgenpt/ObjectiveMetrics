@@ -27,11 +27,6 @@
 		8E279CEF133AC0EB00B4CB82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
 		8E2C20EE1341895F00CCEAC3 /* NSNull+DMTranslate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */; };
 		8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */; };
-		8E6D6A20133BF9F900E5F8A8 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A15133BF9F900E5F8A8 /* NSObject+SBJSON.m */; };
-		8E6D6A22133BF9F900E5F8A8 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A17133BF9F900E5F8A8 /* NSString+SBJSON.m */; };
-		8E6D6A24133BF9F900E5F8A8 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A19133BF9F900E5F8A8 /* SBJsonBase.m */; };
-		8E6D6A26133BF9F900E5F8A8 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A1B133BF9F900E5F8A8 /* SBJsonParser.m */; };
-		8E6D6A28133BF9F900E5F8A8 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */; };
 		8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */; };
 		8E82EDF1145660D700CEE85D /* DMURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E82EDEF145660D700CEE85D /* DMURLConnection.h */; };
 		8E82EDF2145660D700CEE85D /* DMURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82EDF0145660D700CEE85D /* DMURLConnection.m */; };
@@ -39,6 +34,7 @@
 		8EC75F541470872E00850047 /* DMSUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F501470872E00850047 /* DMSUHost.m */; };
 		8EC75F551470872E00850047 /* DMSUSystemProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F511470872E00850047 /* DMSUSystemProfiler.h */; };
 		8EC75F561470872E00850047 /* DMSUSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F521470872E00850047 /* DMSUSystemProfiler.m */; };
+		C53A92101481A160007A5DD9 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53A920F1481A160007A5DD9 /* SBJson.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,17 +52,6 @@
 		8E279CF3133AC0EB00B4CB82 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DMTranslate.h"; sourceTree = "<group>"; };
 		8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DMTranslate.m"; sourceTree = "<group>"; };
-		8E6D6A13133BF9F900E5F8A8 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		8E6D6A14133BF9F900E5F8A8 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		8E6D6A15133BF9F900E5F8A8 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
-		8E6D6A16133BF9F900E5F8A8 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		8E6D6A17133BF9F900E5F8A8 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-		8E6D6A18133BF9F900E5F8A8 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		8E6D6A19133BF9F900E5F8A8 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
-		8E6D6A1A133BF9F900E5F8A8 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		8E6D6A1B133BF9F900E5F8A8 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		8E6D6A1C133BF9F900E5F8A8 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMRequester.h; sourceTree = "<group>"; };
 		8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMRequester.m; sourceTree = "<group>"; };
 		8E82EDEF145660D700CEE85D /* DMURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMURLConnection.h; sourceTree = "<group>"; };
@@ -86,6 +71,7 @@
 		8EF751B11339006600609001 /* DMTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTracker.m; sourceTree = "<group>"; };
 		8EF751B5133900F700609001 /* DMTrackingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTrackingQueue.h; sourceTree = "<group>"; };
 		8EF751B6133900F700609001 /* DMTrackingQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTrackingQueue.m; sourceTree = "<group>"; };
+		C53A920F1481A160007A5DD9 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SBJson.framework; path = Frameworks/SBJson.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C53A92101481A160007A5DD9 /* SBJson.framework in Frameworks */,
 				8E279CE6133AC0EB00B4CB82 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,37 +117,10 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		8E6D6A12133BF9F900E5F8A8 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				8E6D6A2A133BFA0400E5F8A8 /* Classes */,
-			);
-			path = JSON;
-			sourceTree = "<group>";
-		};
-		8E6D6A2A133BFA0400E5F8A8 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				8E6D6A13133BF9F900E5F8A8 /* JSON.h */,
-				8E6D6A14133BF9F900E5F8A8 /* NSObject+SBJSON.h */,
-				8E6D6A15133BF9F900E5F8A8 /* NSObject+SBJSON.m */,
-				8E6D6A16133BF9F900E5F8A8 /* NSString+SBJSON.h */,
-				8E6D6A17133BF9F900E5F8A8 /* NSString+SBJSON.m */,
-				8E6D6A18133BF9F900E5F8A8 /* SBJsonBase.h */,
-				8E6D6A19133BF9F900E5F8A8 /* SBJsonBase.m */,
-				8E6D6A1A133BF9F900E5F8A8 /* SBJsonParser.h */,
-				8E6D6A1B133BF9F900E5F8A8 /* SBJsonParser.m */,
-				8E6D6A1C133BF9F900E5F8A8 /* SBJsonWriter.h */,
-				8E6D6A1D133BF9F900E5F8A8 /* SBJsonWriter.m */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
 		8E8A0EA61337FBA500CA6E47 = {
 			isa = PBXGroup;
 			children = (
 				8E05849B1346F3980045CCF4 /* GTM */,
-				8E6D6A12133BF9F900E5F8A8 /* JSON */,
 				8E8A0EBB1337FBA500CA6E47 /* ObjectiveMetrics */,
 				8E6BA5E4133984F60018E4A3 /* Sparkle */,
 				8E8A0EB41337FBA500CA6E47 /* Frameworks */,
@@ -172,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */,
+				C53A920F1481A160007A5DD9 /* SBJson.framework */,
 				8E8A0EB71337FBA500CA6E47 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -320,11 +281,6 @@
 				8E279CDF133AC0EB00B4CB82 /* DMTracker.m in Sources */,
 				8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */,
 				8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */,
-				8E6D6A20133BF9F900E5F8A8 /* NSObject+SBJSON.m in Sources */,
-				8E6D6A22133BF9F900E5F8A8 /* NSString+SBJSON.m in Sources */,
-				8E6D6A24133BF9F900E5F8A8 /* SBJsonBase.m in Sources */,
-				8E6D6A26133BF9F900E5F8A8 /* SBJsonParser.m in Sources */,
-				8E6D6A28133BF9F900E5F8A8 /* SBJsonWriter.m in Sources */,
 				8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */,
 				8E229369133CFEB500183BA9 /* DMHosts.m in Sources */,
 				8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */,
@@ -357,9 +313,12 @@
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ObjectiveMetrics/ObjectiveMetrics-Prefix.pch";
 				INFOPLIST_FILE = "ObjectiveMetrics/ObjectiveMetrics-Info.plist";
@@ -376,8 +335,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ObjectiveMetrics/ObjectiveMetrics-Prefix.pch";
 				INFOPLIST_FILE = "ObjectiveMetrics/ObjectiveMetrics-Info.plist";
@@ -398,7 +360,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INSTALL_PATH = "@loader_path/../Frameworks";
+				INSTALL_PATH = "@rpath";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -414,7 +376,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INSTALL_PATH = "@loader_path/../Frameworks";
+				INSTALL_PATH = "@rpath";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = macosx;
 			};
