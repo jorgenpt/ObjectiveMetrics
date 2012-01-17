@@ -90,6 +90,8 @@ static DMTracker* defaultInstance = nil;
 
 @implementation DMTracker
 
+@synthesize autoflush;
+
 @synthesize queue;
 @synthesize session;
 
@@ -121,6 +123,12 @@ static DMTracker* defaultInstance = nil;
             self = [super init];
             if (self) {
                 [self setQueue:[[[DMTrackingQueue alloc] init] autorelease]];
+
+                /* This is enabled by default for compatability reasons.
+                 * In retrospect, it's probably better to not do this.
+                 */
+                [self setAutoflush:YES];
+
                 if ([queue count] > 0)
                 {
                     /* If the queue isn't empty, that means we were unable to send some items last session.
@@ -227,7 +235,8 @@ static DMTracker* defaultInstance = nil;
         if (queue)
         {
             [queue add:[self infoStopApp]];
-            [queue blockingFlush];
+            if (autoflush)
+                [queue blockingFlush];
         }
 
         [self setSession:nil];
