@@ -14,7 +14,20 @@
 
 #if TARGET_OS_IPHONE
 # import "UIDevice-Hardware.h"
+#else
+# import <AppKit/AppKit.h>
 #endif
+
+@interface NSString (CGSize)
++ (id) stringWithSize:(CGSize)size;
+@end
+
+@implementation NSString (CGSize)
++ (id) stringWithSize:(CGSize)size
+{
+    return [self stringWithFormat:@"%0.fx%0.f", size.width, size.height];
+}
+@end
 
 @implementation DMSUSystemProfiler
 + (DMSUSystemProfiler *)sharedSystemProfiler
@@ -126,7 +139,25 @@
 	if (appVersion)
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"appVersion",@"Application Version", appVersion, appVersion,nil] forKeys:profileDictKeys]];
 
-	// Number of displays?
+    // Main screen (for OS X this means the one with the menubar)
+    NSString *resolution = nil;
+
+#if TARGET_OS_IPHONE
+    UIScreenMode *currentMode = [[UIScreen mainScreen] currentMode];
+    if (currentMode)
+        resolution = [NSString stringWithSize:[currentMode size]];
+#else
+    /* Note that [NSScreen mainScreen] is just the current screen, whereas the first object
+     * in the screens array is the the one that has the menubar.
+     */
+    NSArray *screenArray = [NSScreen screens];
+    if ([screenArray count] > 0)
+        resolution = [NSString stringWithSize:[[screenArray objectAtIndex:0] frame].size];
+#endif
+
+    if (resolution)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"mainScreenResolution", @"Main Screen Resolution", resolution, resolution, nil] forKeys:profileDictKeys]];
+
 	// CPU speed
 #if TARGET_OS_IPHONE
     NSUInteger result = [[UIDevice currentDevice] cpuFrequency];
