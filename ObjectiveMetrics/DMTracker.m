@@ -315,11 +315,8 @@ static DMTracker* defaultInstance = nil;
     NSArray *osVersion = [[systemProfile objectForKey:@"osVersion"] componentsSeparatedByString:@"."];
     if ([osVersion count] > 1)
     {
-#if TARGET_OS_IPHONE
-        [event setValue:[NSString stringWithFormat:@"iOS %@.%@",
-#else
-        [event setValue:[NSString stringWithFormat:@"Mac OS X %@.%@",
-#endif
+        [event setValue:[NSString stringWithFormat:@"%@ %@.%@",
+                         (TARGET_OS_IPHONE ? @"iOS" : @"Mac OS X"),
                          [osVersion objectAtIndex:0],
                          [osVersion objectAtIndex:1]]
                  forKey:DMFieldInfoOSVersion];
@@ -341,14 +338,18 @@ static DMTracker* defaultInstance = nil;
                  forKey:DMFieldInfoOSServicePack];
     }
 
+    [event setValue:[NSNull translate:[systemProfile objectForKey:@"lang"]]
+             forKey:DMFieldInfoOSLanguage];
+
     // TODO: Ths is the CPU arch and not the OS arch.
     [event setValue:[NSNumber numberWithInteger:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
              forKey:DMFieldInfoOSArchitecture];
-    [event setValue:[NSNull translate:[systemProfile objectForKey:@"lang"]]
-             forKey:DMFieldInfoOSLanguage];
+    [event setValue:[NSNull translate:[systemProfile objectForKey:@"cpuVendor"]]
+             forKey:DMFieldInfoProcessorBrand];
+    // TODO: This is the machine model, like MacBookPro6,2, and not the actual CPU model.
+    // We could switch this to use "cpuBrand" for the actual CPU model info (like Intel(R) Core(TM) i5 CPU       M 540  @ 2.53GHz)
     [event setValue:[NSNull translate:[systemProfile objectForKey:@"model"]]
              forKey:DMFieldInfoProcessorName];
-
     [event setValue:[NSNull translate:[systemProfile objectForKey:@"cpuFreqMHz"]]
              forKey:DMFieldInfoProcessorFrequency];
     [event setValue:[NSNull translate:[systemProfile objectForKey:@"ncpu"]]
@@ -368,8 +369,6 @@ static DMTracker* defaultInstance = nil;
              forKey:DMFieldInfoDotNetVersion];
     [event setValue:[NSNull null]
              forKey:DMFieldInfoDotNetServicePack];
-    [event setValue:[NSNull null]
-             forKey:DMFieldInfoProcessorBrand];
     [event setValue:[NSNull null]
              forKey:DMFieldInfoDiskTotal];
     [event setValue:[NSNull null]

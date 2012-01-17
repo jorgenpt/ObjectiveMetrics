@@ -39,16 +39,16 @@
 @implementation DMSUSystemProfiler
 + (DMSUSystemProfiler *)sharedSystemProfiler
 {
-	static DMSUSystemProfiler *sharedSystemProfiler = nil;
-	if (!sharedSystemProfiler)
-		sharedSystemProfiler = [[self alloc] init];
-	return sharedSystemProfiler;
+    static DMSUSystemProfiler *sharedSystemProfiler = nil;
+    if (!sharedSystemProfiler)
+        sharedSystemProfiler = [[self alloc] init];
+    return sharedSystemProfiler;
 }
 
 - (NSDictionary *)modelTranslationTable
 {
-	NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"SUModelTranslation" ofType:@"plist"];
-	return [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"SUModelTranslation" ofType:@"plist"];
+    return [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
 }
 
 - (NSArray *)freeMemoryArray
@@ -74,98 +74,127 @@
 
 - (NSMutableArray *)systemProfileArrayForHost:(DMSUHost *)host
 {
-	NSDictionary *modelTranslation = [self modelTranslationTable];
+    NSDictionary *modelTranslation = [self modelTranslationTable];
 
-	// Gather profile information and append it to the URL.
-	NSMutableArray *profileArray = [NSMutableArray array];
-	NSArray *profileDictKeys = [NSArray arrayWithObjects:@"key", @"displayKey", @"value", @"displayValue", nil];
-	int error = 0;
-	int value = 0;
-	size_t length = sizeof(value);
+    // Gather profile information and append it to the URL.
+    NSMutableArray *profileArray = [NSMutableArray array];
+    NSArray *profileDictKeys = [NSArray arrayWithObjects:@"key", @"displayKey", @"value", @"displayValue", nil];
+    int error = 0;
+    int value = 0;
+    size_t length = sizeof(value);
 
-	// OS version
-	NSString *currentSystemVersion = [DMSUHost systemVersionString];
-	if (currentSystemVersion != nil)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"osVersion",@"OS Version",currentSystemVersion,currentSystemVersion,nil] forKeys:profileDictKeys]];
+    // OS version
+    NSString *currentSystemVersion = [DMSUHost systemVersionString];
+    if (currentSystemVersion != nil)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"osVersion",@"OS Version",currentSystemVersion,currentSystemVersion,nil] forKeys:profileDictKeys]];
 
-	// CPU type (decoder info for values found here is in mach/machine.h)
-	error = sysctlbyname("hw.cputype", &value, &length, NULL, 0);
-	int cpuType = -1;
-	if (error == 0) {
-		cpuType = value;
-		NSString *visibleCPUType;
-		switch(value) {
-			case 7:		visibleCPUType=@"Intel";	break;
-			case 18:	visibleCPUType=@"PowerPC";	break;
-			default:	visibleCPUType=@"Unknown";	break;
-		}
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cputype",@"CPU Type", [NSNumber numberWithInt:value], visibleCPUType,nil] forKeys:profileDictKeys]];
-	}
-	error = sysctlbyname("hw.cpu64bit_capable", &value, &length, NULL, 0);
-	if(error != 0)
-		error = sysctlbyname("hw.optional.x86_64", &value, &length, NULL, 0); //x86 specific
-	if(error != 0)
-		error = sysctlbyname("hw.optional.64bitops", &value, &length, NULL, 0); //PPC specific
+    // CPU type (decoder info for values found here is in mach/machine.h)
+    error = sysctlbyname("hw.cputype", &value, &length, NULL, 0);
+    int cpuType = -1;
+    if (error == 0) {
+        cpuType = value;
+        NSString *visibleCPUType;
+        switch(value) {
+            case 7:     visibleCPUType=@"Intel";      break;
+            case 18:    visibleCPUType=@"PowerPC";    break;
+            default:    visibleCPUType=@"Unknown";    break;
+        }
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cputype",@"CPU Type", [NSNumber numberWithInt:value], visibleCPUType,nil] forKeys:profileDictKeys]];
+    }
+    error = sysctlbyname("hw.cpu64bit_capable", &value, &length, NULL, 0);
+    if(error != 0)
+        error = sysctlbyname("hw.optional.x86_64", &value, &length, NULL, 0); //x86 specific
+    if(error != 0)
+        error = sysctlbyname("hw.optional.64bitops", &value, &length, NULL, 0); //PPC specific
 
-	BOOL is64bit = NO;
+    BOOL is64bit = NO;
 
-	if (error == 0) {
-		is64bit = value == 1;
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpu64bit", @"CPU is 64-Bit?", [NSNumber numberWithBool:is64bit], is64bit ? @"Yes" : @"No", nil] forKeys:profileDictKeys]];
-	}
-	error = sysctlbyname("hw.cpusubtype", &value, &length, NULL, 0);
-	if (error == 0) {
-		NSString *visibleCPUSubType;
-		if (cpuType == 7) {
-			// Intel
-			visibleCPUSubType = is64bit ? @"Intel Core 2" : @"Intel Core";	// If anyone knows how to tell a Core Duo from a Core Solo, please email tph@atomicbird.com
-		} else if (cpuType == 18) {
-			// PowerPC
-			switch(value) {
-				case 9:					visibleCPUSubType=@"G3";	break;
-				case 10:	case 11:	visibleCPUSubType=@"G4";	break;
-				case 100:				visibleCPUSubType=@"G5";	break;
-				default:				visibleCPUSubType=@"Other";	break;
-			}
-		} else {
-			visibleCPUSubType = @"Other";
-		}
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpusubtype",@"CPU Subtype", [NSNumber numberWithInt:value], visibleCPUSubType,nil] forKeys:profileDictKeys]];
-	}
-	error = sysctlbyname("hw.model", NULL, &length, NULL, 0);
-	if (error == 0) {
-		char *cpuModel = (char *)malloc(sizeof(char) * length);
-		if (cpuModel != NULL) {
-			error = sysctlbyname("hw.model", cpuModel, &length, NULL, 0);
-			if (error == 0) {
-				NSString *rawModelName = [NSString stringWithUTF8String:cpuModel];
-				NSString *visibleModelName = [modelTranslation objectForKey:rawModelName];
-				if (visibleModelName == nil)
-					visibleModelName = rawModelName;
-				[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"model",@"Mac Model", rawModelName, visibleModelName, nil] forKeys:profileDictKeys]];
-			}
-			free(cpuModel);
-		}
-	}
+    if (error == 0) {
+        is64bit = value == 1;
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpu64bit", @"CPU is 64-Bit?", [NSNumber numberWithBool:is64bit], is64bit ? @"Yes" : @"No", nil] forKeys:profileDictKeys]];
+    }
+    error = sysctlbyname("hw.cpusubtype", &value, &length, NULL, 0);
+    if (error == 0) {
+        NSString *visibleCPUSubType;
+        if (cpuType == 7) {
+            // Intel
+            visibleCPUSubType = is64bit ? @"Intel Core 2" : @"Intel Core";    // If anyone knows how to tell a Core Duo from a Core Solo, please email tph@atomicbird.com
+        } else if (cpuType == 18) {
+            // PowerPC
+            switch(value) {
+                case 9:               visibleCPUSubType=@"G3";    break;
+                case 10:  case 11:    visibleCPUSubType=@"G4";    break;
+                case 100:             visibleCPUSubType=@"G5";    break;
+                default:              visibleCPUSubType=@"Other"; break;
+            }
+        } else {
+            visibleCPUSubType = @"Other";
+        }
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpusubtype",@"CPU Subtype", [NSNumber numberWithInt:value], visibleCPUSubType,nil] forKeys:profileDictKeys]];
+    }
 
-	// Number of CPUs
-	error = sysctlbyname("hw.ncpu", &value, &length, NULL, 0);
-	if (error == 0)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ncpu",@"Number of CPUs", [NSNumber numberWithInt:value], [NSNumber numberWithInt:value],nil] forKeys:profileDictKeys]];
+    error = sysctlbyname("hw.model", NULL, &length, NULL, 0);
+    if (error == 0) {
+        char *cpuModel = (char *)malloc(sizeof(char) * length);
+        if (cpuModel != NULL) {
+            error = sysctlbyname("hw.model", cpuModel, &length, NULL, 0);
+            if (error == 0) {
+                NSString *rawModelName = [NSString stringWithUTF8String:cpuModel];
+                NSString *visibleModelName = [modelTranslation objectForKey:rawModelName];
+                if (visibleModelName == nil)
+                    visibleModelName = rawModelName;
+                [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"model",@"Mac Model", rawModelName, visibleModelName, nil] forKeys:profileDictKeys]];
+            }
+            free(cpuModel);
+        }
+    }
 
-	// User preferred language
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-	NSArray *languages = [defs objectForKey:@"AppleLanguages"];
-	if ([languages count] > 0)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"lang",@"Preferred Language", [languages objectAtIndex:0], [languages objectAtIndex:0],nil] forKeys:profileDictKeys]];
+    // Number of CPUs
+    error = sysctlbyname("hw.ncpu", &value, &length, NULL, 0);
+    if (error == 0)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ncpu",@"Number of CPUs", [NSNumber numberWithInt:value], [NSNumber numberWithInt:value],nil] forKeys:profileDictKeys]];
 
-	// Application sending the request
-	NSString *appName = [host name];
-	if (appName)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"appName",@"Application Name", appName, appName,nil] forKeys:profileDictKeys]];
-	NSString *appVersion = [host version];
-	if (appVersion)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"appVersion",@"Application Version", appVersion, appVersion,nil] forKeys:profileDictKeys]];
+    // CPU vendor
+    error = sysctlbyname("machdep.cpu.vendor", NULL, &length, NULL, 0);
+    if (error == 0) {
+        char *cpuVendor = (char *)malloc(sizeof(char) * length);
+        if (cpuVendor != NULL) {
+            error = sysctlbyname("machdep.cpu.vendor", cpuVendor, &length, NULL, 0);
+            if (error == 0) {
+                NSString *vendorName = [NSString stringWithUTF8String:cpuVendor];
+                [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuVendor", @"CPU Vendor", vendorName, vendorName, nil] forKeys:profileDictKeys]];
+            }
+            free(cpuVendor);
+        }
+    }
+
+    // CPU brand string (description)
+    error = sysctlbyname("machdep.cpu.brand_string", NULL, &length, NULL, 0);
+    if (error == 0) {
+        char *cpuBrand = (char *)malloc(sizeof(char) * length);
+        if (cpuBrand != NULL) {
+            error = sysctlbyname("machdep.cpu.brand_string", cpuBrand, &length, NULL, 0);
+            if (error == 0) {
+                NSString *vendorName = [NSString stringWithUTF8String:cpuBrand];
+                [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuBrand", @"CPU Model", vendorName, vendorName, nil] forKeys:profileDictKeys]];
+            }
+            free(cpuBrand);
+        }
+    }
+
+    // User preferred language
+    NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+    NSArray *languages = [defs objectForKey:@"AppleLanguages"];
+    if ([languages count] > 0)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"lang",@"Preferred Language", [languages objectAtIndex:0], [languages objectAtIndex:0],nil] forKeys:profileDictKeys]];
+
+    // Application sending the request
+    NSString *appName = [host name];
+    if (appName)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"appName",@"Application Name", appName, appName,nil] forKeys:profileDictKeys]];
+    NSString *appVersion = [host version];
+    if (appVersion)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"appVersion",@"Application Version", appVersion, appVersion,nil] forKeys:profileDictKeys]];
 
     // Main screen (for OS X this means the one with the menubar)
     NSString *resolution = nil;
@@ -195,18 +224,18 @@
     // Total amount of physical RAM
     result = [[UIDevice currentDevice] totalMemory];
     if (result != 0)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:result], [NSNumber numberWithInt:result],nil] forKeys:profileDictKeys]];
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:result], [NSNumber numberWithInt:result],nil] forKeys:profileDictKeys]];
 #else
     // CPU speed
-	SInt32 gestaltInfo;
-	OSErr err = Gestalt(gestaltProcClkSpeedMHz,&gestaltInfo);
-	if (err == noErr)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuFreqMHz",@"CPU Speed (GHz)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithDouble:gestaltInfo/1000.0],nil] forKeys:profileDictKeys]];
+    SInt32 gestaltInfo;
+    OSErr err = Gestalt(gestaltProcClkSpeedMHz,&gestaltInfo);
+    if (err == noErr)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuFreqMHz",@"CPU Speed (GHz)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithDouble:gestaltInfo/1000.0],nil] forKeys:profileDictKeys]];
 
     // Total amount of physical RAM
-	err = Gestalt(gestaltPhysicalRAMSizeInMegabytes,&gestaltInfo);
-	if (err == noErr)
-		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithInt:gestaltInfo],nil] forKeys:profileDictKeys]];
+    err = Gestalt(gestaltPhysicalRAMSizeInMegabytes,&gestaltInfo);
+    if (err == noErr)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithInt:gestaltInfo],nil] forKeys:profileDictKeys]];
 #endif
 
     // Amount of free RAM
@@ -214,7 +243,7 @@
     if (freeMemoryArray)
         [profileArray addObject:[NSDictionary dictionaryWithObjects:freeMemoryArray forKeys:profileDictKeys]];
 
-	return profileArray;
+    return profileArray;
 }
 
 @end
