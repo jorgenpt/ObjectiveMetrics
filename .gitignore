@@ -2,3 +2,5 @@ xcuserdata/
 .DS_Store
 build/
 Releases/
+*.mode1v3
+*.pbxuser
