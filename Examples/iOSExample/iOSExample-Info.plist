@@ -25,7 +25,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>DMAppId</key>
-	<string>4d8e8dedd9340b7b6f000000</string>
+	<string>YOUR_APP_ID_HERE</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>

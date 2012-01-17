@@ -10,7 +10,11 @@
 
 #import "DMURLConnection.h"
 
-#import <SBJson/SBJson.h>
+#if TARGET_OS_IPHONE
+# import "SBJson.h"
+#else
+# import <SBJson/SBJson.h>
+#endif
 
 static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
 static NSString * const DMAppIdKey = @"DMAppId";

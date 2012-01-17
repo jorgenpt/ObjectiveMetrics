@@ -43,16 +43,19 @@ Getting started for iOS
 -----------------------
 
 When using ObjectiveMetrics on iOS, you need to link against the static library
-(libTouchMetrics.a) and import DMTracker.h.
+(libTouchMetrics.a), it's JSON dependency (libsbjson-ios.a) and import
+DMTracker.h.
 
 1. Build the library using the enclosed Xcode project or download a prebuilt
    version.
 2. Link your project with `libTouchMetrics.a` and copy `DMTracker.h`.
-3. Find your **application id** on the DeskMetrics dashboard page, and put this
+3. Link your project with `libsbjson-ios.a`, found in the Frameworks
+   subdirectory (or build your own from https://github.com/stig/json-framework)
+4. Find your **application id** on the DeskMetrics dashboard page, and put this
    in your applications `Info.plist` as a string with key `DMAppId`.
-4. Make sure you send the `DMTracker` a `startApp` message as soon as your app
+5. Make sure you send the `DMTracker` a `startApp` message as soon as your app
    is starting up, to initialize your session.
-5. Add tracking to any file you want. See below for syntax.
+6. Add tracking to any file you want. See below for syntax.
 
 Tracking events
 ---------------
@@ -110,6 +113,22 @@ a list that's guaranteed updated)
                                        value:@"09123aef42"];
 
     [tracker trackException:someException];
+
+Troubleshooting
+---------------
+
+### -[__NSArrayI JSONRepresentation]: unrecognized selector
+
+If you get an error like this:
+
+    -[__NSArrayI JSONRepresentation]: unrecognized selector sent to instance ...
+
+Then it most likely means you forgot to add libsbjson-ios.a to your iOS Xcode
+project. You can find this file in the Frameworks directory, or you can build it
+from the source, available here: https://github.com/stig/json-framework
+
+The code has only been tested with v3.0.4 of SBJson.
+
 
 License
 -------
