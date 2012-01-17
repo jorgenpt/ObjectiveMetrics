@@ -18,6 +18,13 @@
 # import <AppKit/AppKit.h>
 #endif
 
+// For freeMemoryArray
+#import <sys/sysctl.h>
+#import <mach/host_info.h>
+#import <mach/mach_host.h>
+#import <mach/task_info.h>
+#import <mach/task.h>
+
 @interface NSString (CGSize)
 + (id) stringWithSize:(CGSize)size;
 @end
@@ -42,6 +49,27 @@
 {
 	NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"SUModelTranslation" ofType:@"plist"];
 	return [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
+}
+
+- (NSArray *)freeMemoryArray
+{
+    int mib[2] = { CTL_HW, HW_PAGESIZE };
+    int pagesize;
+    size_t length = sizeof (pagesize);
+    if (sysctl(mib, 2, &pagesize, &length, NULL, 0) < 0)
+        return nil;
+
+    mach_msg_type_number_t count = HOST_VM_INFO_COUNT;
+    vm_statistics_data_t vmstat;
+    if (host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t) &vmstat, &count) != KERN_SUCCESS)
+        return nil;
+
+    task_basic_info_64_data_t info;
+    unsigned size = sizeof (info);
+    task_info(mach_task_self(), TASK_BASIC_INFO_64, (task_info_t)&info, &size);
+
+    const double bytesPerMB = 1024 * 1024;
+    return [NSArray arrayWithObjects:@"ramFreeB", @"Free Memory (MB)", [NSNumber numberWithDouble:vmstat.free_count * pagesize], [NSNumber numberWithDouble:vmstat.free_count * pagesize / bytesPerMB], nil];
 }
 
 - (NSMutableArray *)systemProfileArrayForHost:(DMSUHost *)host
@@ -158,26 +186,33 @@
     if (resolution)
         [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"mainScreenResolution", @"Main Screen Resolution", resolution, resolution, nil] forKeys:profileDictKeys]];
 
-	// CPU speed
 #if TARGET_OS_IPHONE
+    // CPU speed
     NSUInteger result = [[UIDevice currentDevice] cpuFrequency];
     if (result != 0)
         [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuFreqMHz",@"CPU Speed (GHz)", [NSNumber numberWithInteger:result], [NSNumber numberWithDouble:result/1000.0],nil] forKeys:profileDictKeys]];
 
+    // Total amount of physical RAM
     result = [[UIDevice currentDevice] totalMemory];
     if (result != 0)
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:result], [NSNumber numberWithInt:result],nil] forKeys:profileDictKeys]];
 #else
+    // CPU speed
 	SInt32 gestaltInfo;
 	OSErr err = Gestalt(gestaltProcClkSpeedMHz,&gestaltInfo);
 	if (err == noErr)
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuFreqMHz",@"CPU Speed (GHz)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithDouble:gestaltInfo/1000.0],nil] forKeys:profileDictKeys]];
 
-	// amount of RAM
+    // Total amount of physical RAM
 	err = Gestalt(gestaltPhysicalRAMSizeInMegabytes,&gestaltInfo);
 	if (err == noErr)
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithInt:gestaltInfo],nil] forKeys:profileDictKeys]];
 #endif
+
+    // Amount of free RAM
+    NSArray *freeMemoryArray = [self freeMemoryArray];
+    if (freeMemoryArray)
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:freeMemoryArray forKeys:profileDictKeys]];
 
 	return profileArray;
 }
