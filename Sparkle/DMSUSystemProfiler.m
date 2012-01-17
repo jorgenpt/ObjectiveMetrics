@@ -25,12 +25,20 @@
 #import <mach/task_info.h>
 #import <mach/task.h>
 
-@interface NSString (CGSize)
+@interface NSString (Size)
+#if TARGET_OS_IPHONE
 + (id) stringWithSize:(CGSize)size;
+#else
++ (id) stringWithSize:(NSSize)size;
+#endif
 @end
 
-@implementation NSString (CGSize)
-+ (id) stringWithSize:(CGSize)size
+@implementation NSString (Size)
+#if TARGET_OS_IPHONE
++ (id) stringWithSize:(CGSize)size;
+#else
++ (id) stringWithSize:(NSSize)size;
+#endif
 {
     return [self stringWithFormat:@"%0.fx%0.f", size.width, size.height];
 }
