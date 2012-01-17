@@ -73,7 +73,7 @@ typedef enum {
 
 - (NSUInteger) cpuFrequency;
 - (NSUInteger) busFrequency;
-- (NSUInteger) totalMemory;
+- (long long) totalMemory;
 - (NSUInteger) userMemory;
 
 - (NSNumber *) totalDiskSpace;

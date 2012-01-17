@@ -68,8 +68,9 @@
     unsigned size = sizeof (info);
     task_info(mach_task_self(), TASK_BASIC_INFO_64, (task_info_t)&info, &size);
 
+    long long freeBytes = (vmstat.free_count + vmstat.inactive_count) * pagesize;
     const double bytesPerMB = 1024 * 1024;
-    return [NSArray arrayWithObjects:@"ramFreeB", @"Free Memory (MB)", [NSNumber numberWithDouble:vmstat.free_count * pagesize], [NSNumber numberWithDouble:vmstat.free_count * pagesize / bytesPerMB], nil];
+    return [NSArray arrayWithObjects:@"ramFreeB", @"Free Memory (MB)", [NSNumber numberWithDouble:freeBytes], [NSNumber numberWithDouble:freeBytes / bytesPerMB], nil];
 }
 
 - (NSMutableArray *)systemProfileArrayForHost:(DMSUHost *)host
@@ -222,9 +223,13 @@
         [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cpuFreqMHz",@"CPU Speed (GHz)", [NSNumber numberWithInteger:result], [NSNumber numberWithDouble:result/1000.0],nil] forKeys:profileDictKeys]];
 
     // Total amount of physical RAM
-    result = [[UIDevice currentDevice] totalMemory];
-    if (result != 0)
-        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:result], [NSNumber numberWithInt:result],nil] forKeys:profileDictKeys]];
+    long long result64 = [[UIDevice currentDevice] totalMemory];
+    if (result64 > 0)
+    {
+        // Turn bytes into megabytes.
+        result64 = result64 / (1024 * 1024);
+        [profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB", @"Memory (MB)", [NSNumber numberWithLongLong:result64], [NSNumber numberWithLongLong:result64], nil] forKeys:profileDictKeys]];
+    }
 #else
     // CPU speed
     SInt32 gestaltInfo;

@@ -79,6 +79,15 @@
 	return (NSUInteger) results;
 }
 
+- (long long) getSysInfo64: (uint) typeSpecifier
+{
+    size_t size = sizeof(long long);
+    long long results;
+    int mib[2] = {CTL_HW, typeSpecifier};
+    sysctl(mib, 2, &results, &size, NULL, 0);
+    return results;
+}
+
 - (NSUInteger) cpuFrequency
 {
 	return [self getSysInfo:HW_CPU_FREQ];
@@ -89,9 +98,9 @@
 	return [self getSysInfo:HW_BUS_FREQ];
 }
 
-- (NSUInteger) totalMemory
+- (long long) totalMemory
 {
-	return [self getSysInfo:HW_PHYSMEM];
+	return [self getSysInfo64:HW_MEMSIZE];
 }
 
 - (NSUInteger) userMemory
