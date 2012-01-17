@@ -14,6 +14,8 @@
 		8E279CCA133AC06D00B4CB82 /* DesktopExampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E279CC9133AC06D00B4CB82 /* DesktopExampleAppDelegate.m */; };
 		8E279CCD133AC06D00B4CB82 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E279CCB133AC06D00B4CB82 /* MainMenu.xib */; };
 		8E68D6D41347BEEE009A9A6B /* ObjectiveMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E68D6D31347BEEE009A9A6B /* ObjectiveMetrics.framework */; };
+		C52D45DA14C53E480084B298 /* ObjectiveMetrics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E68D6D31347BEEE009A9A6B /* ObjectiveMetrics.framework */; };
+		C52D45DD14C53E540084B298 /* SBJson.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C52D45DB14C53E520084B298 /* SBJson.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C52D45DA14C53E480084B298 /* ObjectiveMetrics.framework in CopyFiles */,
+				C52D45DD14C53E540084B298 /* SBJson.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +58,7 @@
 		8E279CCC133AC06D00B4CB82 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8E68D6C61347BEA6009A9A6B /* ObjectiveMetrics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveMetrics.xcodeproj; path = ../ObjectiveMetrics.xcodeproj; sourceTree = "<group>"; };
 		8E68D6D31347BEEE009A9A6B /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjectiveMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C52D45DB14C53E520084B298 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SBJson.framework; path = ../Frameworks/SBJson.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +95,7 @@
 		8E279CB5133AC06D00B4CB82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C52D45DB14C53E520084B298 /* SBJson.framework */,
 				8E68D6D31347BEEE009A9A6B /* ObjectiveMetrics.framework */,
 				8E279CB6133AC06D00B4CB82 /* Cocoa.framework */,
 				8E279CB8133AC06D00B4CB82 /* Other Frameworks */,
@@ -302,12 +308,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DesktopExample/DesktopExample-Prefix.pch";
 				INFOPLIST_FILE = "DesktopExample/DesktopExample-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -322,11 +330,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../Frameworks\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DesktopExample/DesktopExample-Prefix.pch";
 				INFOPLIST_FILE = "DesktopExample/DesktopExample-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

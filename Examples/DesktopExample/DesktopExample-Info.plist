@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>DMAppId</key>
-	<string>YOUR_APP_ID_HERE!</string>
+	<string>YOUR_APP_ID_HERE</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSMainNibFile</key>

@@ -33,11 +33,18 @@ it from source or get a [prebuilt binary][download] from GitHub.
    to copy the framework into its bundle. To do this, you need a `Copy Files`
    build phase which copies `ObjectiveMetrics.framework` to the `Framework`
    path.
-3. Find your **application id** on the DeskMetrics dashboard page, and put this
+3. Set your project up to copy the prebuilt `SBJson.framework` binary (or build
+   your own from https://github.com/stig/json-framework) into its bundle.  You
+   can use the same `Copy Files` build phase as above.
+4. Set up your project's Runtime Search Paths to contain
+   `@loader_path/../Frameworks` - you can find this under Build Settings for
+   Xcode 4.x, or see http://www.dribin.org/dave/blog/archives/2009/11/15/rpath/
+   for Xcode 3.x
+5. Find your **application id** on the DeskMetrics dashboard page, and put this
    in your applications `Info.plist` as a string with key `DMAppId`.
-4. Make sure you send the `DMTracker` a `startApp` message as soon as your app
+6. Make sure you send the `DMTracker` a `startApp` message as soon as your app
    is starting up, to initialize your session.
-5. Add tracking to any file you want. See below for syntax.
+7. Add tracking to any file you want. See below for syntax.
 
 Getting started for iOS
 -----------------------
@@ -49,8 +56,8 @@ DMTracker.h.
 1. Build the library using the enclosed Xcode project or download a prebuilt
    version.
 2. Link your project with `libTouchMetrics.a` and copy `DMTracker.h`.
-3. Link your project with `libsbjson-ios.a`, found in the Frameworks
-   subdirectory (or build your own from https://github.com/stig/json-framework)
+3. Link your project with the prebuilt `libsbjson-ios.a` (or build your own from
+   https://github.com/stig/json-framework)
 4. Find your **application id** on the DeskMetrics dashboard page, and put this
    in your applications `Info.plist` as a string with key `DMAppId`.
 5. Make sure you send the `DMTracker` a `startApp` message as soon as your app
@@ -116,6 +123,32 @@ a list that's guaranteed updated)
 
 Troubleshooting
 ---------------
+
+### dyld: Library not loaded: ObjectiveMetrics. Reason: image not found
+
+If you get an error like this:
+
+    dyld: Library not loaded: @rpath/ObjectiveMetrics.framework/Versions/A/ObjectiveMetrics
+      Referenced from: /path/to/your/project/MyApp.app/Contents/MacOS/MyApp
+      Reason: image not found
+
+Then you probably need to set up your *Runtime Search Paths*. You can do this
+under "Build Settings" for your target (Xcode 4.x) or via these instructions:
+http://www.dribin.org/dave/blog/archives/2009/11/15/rpath/ (Xcode 3.x)
+
+### dyld: Library not loaded: SBJson. Reason: image not found
+
+If you get an error like this:
+
+    dyld: Library not loaded: @rpath/SBJson.framework/Versions/A/SBJson
+      Referenced from: /some/long/path//ObjectiveMetrics.framework/Versions/A/ObjectiveMetrics
+      Reason: image not found
+
+Then you probably need to make your project copy the prebuilt `SBJson.framework`
+(or build your own from https://github.com/stig/json-framework) into its bundle.
+
+You can re-use the `Copy Files` build phase which copies
+`ObjectiveMetrics.framework` to also copy `SBJson.framework`.
 
 ### -[__NSArrayI JSONRepresentation]: unrecognized selector
 
