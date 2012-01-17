@@ -139,6 +139,14 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
     }
 }
 
+- (void)discard
+{
+    @synchronized (self)
+    {
+        [events removeAllObjects];
+    }
+}
+
 - (BOOL)flushIfExceedsBounds
 {
     @synchronized (self)

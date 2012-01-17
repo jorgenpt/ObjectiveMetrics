@@ -252,6 +252,11 @@ static DMTracker* defaultInstance = nil;
     [queue flush];
 }
 
+- (void)discardQueue
+{
+    [queue discard];
+}
+
 - (NSMutableDictionary *)infoWithType:(NSString *)type
 {
     // TODO: Verify that this gives us time in GMT+0.

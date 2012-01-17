@@ -18,6 +18,7 @@
 
 - (void)flush;
 - (BOOL)blockingFlush;
+- (void)discard;
 
 @end
 
@@ -75,6 +76,15 @@
   Info.plist (default values for them are 100 and 7, respectively).
  */
 - (void)flushQueue;
+
+/**
+  Throw away every event currently in the queue. They will not be
+  received by the server, and this method should be used sparingly.
+
+  Useful for debugging or error recovery when you have bad data.
+ */
+- (void)discardQueue;
+
 
 #pragma mark -
 

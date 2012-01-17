@@ -19,5 +19,6 @@
 
 - (void)flush { return; }
 - (BOOL)blockingFlush { return YES; }
+- (void)discard { return; }
 
 @end
