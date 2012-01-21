@@ -25,17 +25,17 @@ Getting started for OS X
 ------------------------
 
 Using ObjectiveMetrics is hopefully very straightforward. You can either build
-it from source or get a [prebuilt binary][download] from GitHub.
+it from source or get a [prebuilt binary][download-osx] from GitHub.
 
-1. Build the framework using the enclosed Xcode project or download a prebuilt
-   version.
+1. Build the framework using the enclosed Xcode project or download a [prebuilt
+   version][download-osx].
 2. Link your project with `ObjectiveMetrics.framework` - and set your project up
    to copy the framework into its bundle. To do this, you need a `Copy Files`
    build phase which copies `ObjectiveMetrics.framework` to the `Framework`
    path.
-3. Set your project up to copy the prebuilt `SBJson.framework` binary (or build
-   your own from https://github.com/stig/json-framework) into its bundle.  You
-   can use the same `Copy Files` build phase as above.
+3. Set your project up to copy [the prebuilt][sbjson-osx] `SBJson.framework`
+   binary (or build your own from https://github.com/stig/json-framework) into
+   its bundle.  You can use the same `Copy Files` build phase as above.
 4. Set up your project's Runtime Search Paths to contain
    `@loader_path/../Frameworks` - you can find this under Build Settings for
    Xcode 4.x, or see http://www.dribin.org/dave/blog/archives/2009/11/15/rpath/
@@ -50,14 +50,14 @@ Getting started for iOS
 -----------------------
 
 When using ObjectiveMetrics on iOS, you need to link against the static library
-(libTouchMetrics.a), it's JSON dependency (libsbjson-ios.a) and import
-DMTracker.h.
+([libTouchMetrics.a][download-ios]), its JSON dependency
+([libsbjson-ios.a][sbjson-ios]) and import DMTracker.h.
 
-1. Build the library using the enclosed Xcode project or download a prebuilt
-   version.
+1. Build the library using the enclosed Xcode project or download a [prebuilt
+   version][download-ios].
 2. Link your project with `libTouchMetrics.a` and copy `DMTracker.h`.
-3. Link your project with the prebuilt `libsbjson-ios.a` (or build your own from
-   https://github.com/stig/json-framework)
+3. Link your project with [the prebuilt][sbjson-ios] `libsbjson-ios.a` (or build
+   your own from https://github.com/stig/json-framework)
 4. Find your **application id** on the DeskMetrics dashboard page, and put this
    in your applications `Info.plist` as a string with key `DMAppId`.
 5. Make sure you send the `DMTracker` a `startApp` message as soon as your app
@@ -144,8 +144,9 @@ If you get an error like this:
       Referenced from: /some/long/path//ObjectiveMetrics.framework/Versions/A/ObjectiveMetrics
       Reason: image not found
 
-Then you probably need to make your project copy the prebuilt `SBJson.framework`
-(or build your own from https://github.com/stig/json-framework) into its bundle.
+Then you probably need to make your project copy [the prebuilt][sbjson-osx]
+`SBJson.framework` (or build your own from
+https://github.com/stig/json-framework) into its bundle.
 
 You can re-use the `Copy Files` build phase which copies
 `ObjectiveMetrics.framework` to also copy `SBJson.framework`.
@@ -156,9 +157,10 @@ If you get an error like this:
 
     -[__NSArrayI JSONRepresentation]: unrecognized selector sent to instance ...
 
-Then it most likely means you forgot to add libsbjson-ios.a to your iOS Xcode
-project. You can find this file in the Frameworks directory, or you can build it
-from the source, available here: https://github.com/stig/json-framework
+Then it most likely means you forgot to add `libsbjson-ios.a` to your iOS Xcode
+project. You can find a prebuilt copy of the library [in our downloads
+section][sbjson-ios], or you can build it from the source, available here:
+https://github.com/stig/json-framework
 
 The code has only been tested with v3.0.4 of SBJson.
 
@@ -177,7 +179,10 @@ licenses:
 
 [dm]: http://www.deskmetrics.com
 [header]: DMTracker.h
-[download]: /downloads/jorgenpt/ObjectiveMetrics/ObjectiveMetrics%201.0.zip
+[download-osx]: /downloads/jorgenpt/ObjectiveMetrics/ObjectiveMetrics%20v1.1.zip
+[download-ios]: /downloads/jorgenpt/ObjectiveMetrics/TouchMetrics%20v1.1.zip
+[sbjson-ios]: /downloads/jorgenpt/ObjectiveMetrics/libsbjson-ios.a
+[sbjson-osx]: /downloads/jorgenpt/ObjectiveMetrics/SBJson%20v3.0.4.zip
 [sparkle]: http://sparkle.andymatuschak.org/
 [gtm]: http://code.google.com/p/google-toolbox-for-mac/
 [uide]: https://github.com/erica/uidevice-extension
