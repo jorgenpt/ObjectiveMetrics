@@ -15,11 +15,11 @@ Added
 Changed
 -------
 
-* -[DMTracker trackLog:] now takes a format like NSLog.
+* `-[DMTracker trackLog:]` now takes a format like NSLog.
 * You can now disable automatic sending of events on app-exit, as some people
   (especially on iOS) have reported that this can be annoying. A simple
-  -[DMTracker setAutoflush:NO] will use this new behavior, and the queued events
-  will be sent the next time your app is started.
+  `-[DMTracker setAutoflush:NO]` will use this new behavior, and the queued
+  events will be sent the next time your app is started.
 * Cache is now stored in the app's NSUserDefaults rather than our own - this is
   required for Mac App Store submittal. Migration from old format should happen
   automatically.
