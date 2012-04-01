@@ -1,3 +1,13 @@
+v1.2 (unreleased)
+=================
+
+Fixed
+-----
+
+* Fixed issue where local cache missing a 'stopApp' would cause corrupt data to
+  be generated.
+
+
 v1.1 (released 2012-01-21)
 ==========================
 

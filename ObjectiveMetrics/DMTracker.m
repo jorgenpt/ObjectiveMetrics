@@ -138,13 +138,19 @@ static DMTracker* defaultInstance = nil;
                     if (![[lastEvent objectForKey:DMFieldType] isEqualToString:DMTypeStopApp])
                     {
                         /* Create a new stopApp, but set the session to the previous session. */
-                        NSMutableDictionary *stopApp = [self infoStopApp];
-                        [stopApp setValue:[lastEvent objectForKey:DMFieldSession]
-                                   forKey:DMFieldSession];
-                        NSInteger timestampEstimate = [[lastEvent objectForKey:DMFieldTimestamp] integerValue] + 1;
-                        [stopApp setValue:[NSNumber numberWithInteger:timestampEstimate]
-                                   forKey:DMFieldTimestamp];
-                        [queue add:stopApp];
+                        NSString *lastSession = [lastEvent objectForKey:DMFieldSession];
+                        if (lastSession)
+                        {
+                            [self setSession:lastSession];
+
+                            NSMutableDictionary *stopApp = [self infoStopApp];
+                            NSInteger timestampEstimate = [[lastEvent objectForKey:DMFieldTimestamp] integerValue] + 1;
+                            [stopApp setValue:[NSNumber numberWithInteger:timestampEstimate]
+                                       forKey:DMFieldTimestamp];
+                            [queue add:stopApp];
+
+                            [self setSession:nil];
+                        }
                     }
                     [queue flush];
                 }
@@ -185,7 +191,6 @@ static DMTracker* defaultInstance = nil;
     {
         flow = 1;
 
-        [self setSession:[NSString uuid]];
         [queue send:[self infoStartApp]];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -259,10 +264,18 @@ static DMTracker* defaultInstance = nil;
 
 - (NSMutableDictionary *)infoWithType:(NSString *)type
 {
-    // TODO: Verify that this gives us time in GMT+0.
+    // Ensure that the session is initialized.
+    if (![self session])
+    {
+        [self setSession:[NSString uuid]];
+        if (![type isEqualToString:DMTypeStartApp])
+            NSLog(@"Warning! -[DMTracker infoWithType:] had no session for type: %@", type);
+    }
+
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
             [self session], DMFieldSession,
             type, DMFieldType,
+            // TODO: Verify that this gives us time in GMT+0.
             [NSNumber numberWithInt:(int)[[NSDate date] timeIntervalSince1970]], DMFieldTimestamp,
             nil];
 }
