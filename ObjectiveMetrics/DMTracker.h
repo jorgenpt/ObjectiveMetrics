@@ -44,6 +44,11 @@
 + (id) defaultTracker;
 
 /**
+ Validate that a message is not corrupted.
+ */
++ (BOOL)isValid:(NSDictionary *)message;
+
+/**
   Initialize the tracker for a new session with your app.
  */
 - (void)startApp;

@@ -6,6 +6,7 @@ Fixed
 
 * Fixed issue where local cache missing a 'stopApp' would cause corrupt data to
   be generated.
+* Added basic sanity checks to loading data from disk.
 
 
 v1.1 (released 2012-01-21)

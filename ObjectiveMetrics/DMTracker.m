@@ -115,6 +115,18 @@ static DMTracker* defaultInstance = nil;
     return defaultInstance;
 }
 
++ (BOOL)isValid:(NSDictionary *)message
+{
+    if ([message objectForKey:DMFieldSession] == nil)
+        return NO;
+    if ([message objectForKey:DMFieldType] == nil)
+        return NO;
+    if ([message objectForKey:DMFieldTimestamp] == nil)
+        return NO;
+
+    return YES;
+}
+
 - (id)init
 {
     Class myClass = [self class];

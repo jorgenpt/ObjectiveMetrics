@@ -220,7 +220,8 @@ static double kDMEventQueueSecondsInADay = 60.0*60.0*24.0;
             }
         }
 
-        [newEvents addObject:message];
+        if ([DMTracker isValid:message])
+            [newEvents addObject:message];
     }
 
     @synchronized (self)
