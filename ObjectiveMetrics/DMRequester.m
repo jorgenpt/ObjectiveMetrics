@@ -3,12 +3,10 @@
 //  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 3/24/11.
-//  Copyright 2011 devSoft. All rights reserved.
+//  Copyright 2011 bitSpatter. All rights reserved.
 //
 
 #import "DMRequester.h"
-
-#import "DMURLConnection.h"
 
 #if TARGET_OS_IPHONE
 # import "SBJson.h"
@@ -16,66 +14,30 @@
 # import <SBJson/SBJson.h>
 #endif
 
-static NSString * const DMAnalyticsURLKey = @"DMAnalyticsURL";
-static NSString * const DMAppIdKey = @"DMAppId";
-static NSString * const DMAnalyticsURLFormat = @"https://%@.api.deskmetrics.com/sendData";
-static NSString * const DMStatusCodeKey = @"status_code";
+static NSString * const kDMAnalyticsURLFormat = @"http://%@.apiv2.deskmetrics.com/data";
 
 @interface DMRequester ()
-
-@property (retain) NSMutableArray *connections;
 @property (retain) NSMutableURLRequest *request;
 
+- (NSURL *)urlWithApplicationId:(NSString *)appId;
+- (NSString *)userAgent;
 @end
 
 
 @implementation DMRequester
 
-@synthesize delegate, request, connections;
-
-- (id)init
+- (id)initWithApplicationId:(NSString *)appId
 {
     self = [super init];
     if (self) {
-        DMSUHost *host = [DMHosts sharedAppHost];
-        NSString *URL = [host objectForInfoDictionaryKey:DMAnalyticsURLKey];
-        if (!URL)
-        {
-            NSString *appId = [host objectForInfoDictionaryKey:DMAppIdKey];
-            if (!appId)
-            {
-                NSLog(@"Could not find neither %@ nor %@ in Info.plist!", DMAnalyticsURLKey, DMAppIdKey);
-                [self release];
-                return nil;
-            }
-
-            URL = [NSString stringWithFormat:DMAnalyticsURLFormat, appId];
-        }
-
-        DLog(@"URL: %@", URL);
-        DMSUHost *frameworkHost = [DMHosts sharedFrameworkHost];
-        NSString *userAgent = [NSString stringWithFormat:@"%@ v%@",
-                               [frameworkHost objectForInfoDictionaryKey:@"CFBundleName"],
-                               [frameworkHost version]];
-
-        [self setRequest:[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL]]];
-        [request setHTTPMethod:@"POST"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-
-        [self setConnections:[NSMutableArray array]];
-    }
-
-    return self;
-}
-
-- (id)initWithDelegate:(id)theDelegate
-{
-    self = [self init];
-    if (self)
-    {
-        [self setDelegate:theDelegate];
+        self.request = [NSMutableURLRequest requestWithURL:[self urlWithApplicationId:appId]];
+        [self.request setHTTPMethod:@"POST"];
+        [self.request setValue:@"application/json"
+            forHTTPHeaderField:@"Accept"];
+        [self.request setValue:@"application/x-www-form-urlencoded"
+            forHTTPHeaderField:@"Content-Type"];
+        [self.request setValue:[self userAgent]
+            forHTTPHeaderField:@"User-Agent"];
     }
 
     return self;
@@ -83,79 +45,77 @@ static NSString * const DMStatusCodeKey = @"status_code";
 
 - (void)dealloc
 {
-    [self setDelegate:nil];
     [self setRequest:nil];
-    [self setConnections:nil];
 
     [super dealloc];
 }
 
-- (void)send:(NSArray *)events
+
+- (NSURL *)urlWithApplicationId:(NSString *)appId
+{
+    NSString *urlString = [NSString stringWithFormat:kDMAnalyticsURLFormat, appId];
+    DLog(@"URL: %@", urlString);
+    return [NSURL URLWithString:urlString];
+}
+
+- (NSString *)userAgent
+{
+    DMSUHost *frameworkHost = [DMHosts sharedFrameworkHost];
+    return [NSString stringWithFormat:@"%@ v%@",
+            [frameworkHost objectForInfoDictionaryKey:@"CFBundleName"],
+            [frameworkHost version]];
+}
+
+- (BOOL)send:(NSArray *)events
 {
     NSData *json = [[events JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableURLRequest *sentRequest = [request copy];
+    NSMutableURLRequest *sentRequest = [self.request copy];
 
     [sentRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[json length]] forHTTPHeaderField:@"Content-Length"];
     [sentRequest setHTTPBody:json];
 
     DLog(@"Sending data: %@", [events JSONRepresentation]);
 
-    DMURLConnectionCompleteBlock complete = ^(DMURLConnection *connection, NSString *responseBody) {
-        BOOL error = NO;
-        id result = [responseBody JSONValue];
-        DLog(@"Completed with data: %@", result);
-        if ([result isKindOfClass:[NSDictionary class]])
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:sentRequest
+                                                 returningResponse:&response
+                                                             error:&error];
+    [sentRequest release];
+
+    if (!responseData) {
+        NSLog(@"Could not submit data to DeskMetrics: %@", error);
+        return NO;
+    }
+
+    if (![response isMemberOfClass:[NSHTTPURLResponse class]]) {
+        NSLog(@"Got invalid response object: %@", response);
+        return NO;
+    }
+
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    NSInteger statusCode = [httpResponse statusCode];
+    if (statusCode < 200 || statusCode > 299) {
+        NSLog(@"Got strange response code: %li", (long)statusCode);
+        return NO;
+    }
+
+    NSStringEncoding encoding = NSUTF8StringEncoding;
+    NSString *encodingName = [response textEncodingName];
+    if (encodingName)
+    {
+        CFStringEncoding cfEncoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)encodingName);
+        if (cfEncoding != kCFStringEncodingInvalidId)
         {
-            id status = [result objectForKey:DMStatusCodeKey];
-            NSInteger statuscode = [status integerValue];
-            if (statuscode == 0 || statuscode == 1)
-            {
-                if ([delegate respondsToSelector:@selector(requestSucceeded:)])
-                    [delegate requestSucceeded:events];
-            }
-            else
-            {
-                if (statuscode < 0)
-                    NSLog(@"Got error code from DeskMetrics: %ld", statuscode);
-                else
-                    NSLog(@"Got unexpected positive code from DeskMetrics: %ld", statuscode);
-                error = YES;
-            }
+            encoding = CFStringConvertEncodingToNSStringEncoding(cfEncoding);
         }
-        else
-        {
-            error = YES;
-            NSLog(@"Got unknown JSON from DeskMetrics: %@ (%@)", responseBody, result);
-        }
+    }
 
-        if (error && [delegate respondsToSelector:@selector(requestFailed:)])
-            [delegate requestFailed:events];
+    NSString *responseBody = [[[NSString alloc] initWithData:responseData
+                                                    encoding:encoding] autorelease];
+    DLog(@"Completed with data: %@", responseBody);
 
-        [connections removeObject:connection];
-    };
-
-    DMURLConnectionErrorBlock error = ^(DMURLConnection *connection, NSError *error) {
-        NSLog(@"DeskMetrics connection failed: %@", error);
-
-        if (error && [delegate respondsToSelector:@selector(requestFailed:)])
-            [delegate requestFailed:events];
-
-        [connections removeObject:connection];
-    };
-
-    DMURLConnection *connection = [DMURLConnection connectionWithRequest:[sentRequest autorelease]
-                                                           completeBlock:[complete autorelease]
-                                                              errorBlock:[error autorelease]];
-    [connections addObject:connection];
-    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop]
-                          forMode:NSDefaultRunLoopMode];
-    [connection start];
-}
-
-- (void)wait
-{
-    NSRunLoop *loop = [NSRunLoop currentRunLoop];
-    while ([connections count] > 0 && [loop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+    return YES;
 }
 
 @end

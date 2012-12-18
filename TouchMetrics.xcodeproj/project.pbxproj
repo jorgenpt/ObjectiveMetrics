@@ -28,8 +28,6 @@
 		C508A1E11344EE170061CF05 /* DMTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1D41344EE170061CF05 /* DMTracker.m */; };
 		C508A1E21344EE170061CF05 /* DMTrackingQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1D51344EE170061CF05 /* DMTrackingQueue.h */; };
 		C508A1E31344EE170061CF05 /* DMTrackingQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1D61344EE170061CF05 /* DMTrackingQueue.m */; };
-		C508A1E41344EE170061CF05 /* NSString+DMUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1D71344EE170061CF05 /* NSString+DMUUID.h */; };
-		C508A1E51344EE170061CF05 /* NSString+DMUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1D81344EE170061CF05 /* NSString+DMUUID.m */; };
 		C508A1E61344EE170061CF05 /* ObjectiveMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */; };
 		C508A1E71344EE170061CF05 /* NSNull+DMTranslate.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1DA1344EE170061CF05 /* NSNull+DMTranslate.h */; };
 		C508A1E81344EE170061CF05 /* NSNull+DMTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1DB1344EE170061CF05 /* NSNull+DMTranslate.m */; };
@@ -44,6 +42,8 @@
 		C52D455314C536C80084B298 /* SBJsonStreamParserAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C52D454D14C536C80084B298 /* SBJsonStreamParserAdapter.h */; };
 		C52D455414C536C80084B298 /* SBJsonStreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C52D454E14C536C80084B298 /* SBJsonStreamWriter.h */; };
 		C52D455514C536C80084B298 /* SBJsonStreamWriterAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = C52D454F14C536C80084B298 /* SBJsonStreamWriterAccumulator.h */; };
+		C5BDC25A168036B800A37A01 /* NSString+Random.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BDC258168036B800A37A01 /* NSString+Random.h */; };
+		C5BDC25B168036B800A37A01 /* NSString+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BDC259168036B800A37A01 /* NSString+Random.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,8 +70,6 @@
 		C508A1D41344EE170061CF05 /* DMTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTracker.m; sourceTree = "<group>"; };
 		C508A1D51344EE170061CF05 /* DMTrackingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTrackingQueue.h; sourceTree = "<group>"; };
 		C508A1D61344EE170061CF05 /* DMTrackingQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTrackingQueue.m; sourceTree = "<group>"; };
-		C508A1D71344EE170061CF05 /* NSString+DMUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DMUUID.h"; sourceTree = "<group>"; };
-		C508A1D81344EE170061CF05 /* NSString+DMUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DMUUID.m"; sourceTree = "<group>"; };
 		C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveMetrics.h; sourceTree = "<group>"; };
 		C508A1DA1344EE170061CF05 /* NSNull+DMTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DMTranslate.h"; sourceTree = "<group>"; };
 		C508A1DB1344EE170061CF05 /* NSNull+DMTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DMTranslate.m"; sourceTree = "<group>"; };
@@ -86,6 +84,8 @@
 		C52D454D14C536C80084B298 /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonStreamParserAdapter.h; path = Frameworks/SBJson.framework/Versions/A/Headers/SBJsonStreamParserAdapter.h; sourceTree = SOURCE_ROOT; };
 		C52D454E14C536C80084B298 /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonStreamWriter.h; path = Frameworks/SBJson.framework/Versions/A/Headers/SBJsonStreamWriter.h; sourceTree = SOURCE_ROOT; };
 		C52D454F14C536C80084B298 /* SBJsonStreamWriterAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonStreamWriterAccumulator.h; path = Frameworks/SBJson.framework/Versions/A/Headers/SBJsonStreamWriterAccumulator.h; sourceTree = SOURCE_ROOT; };
+		C5BDC258168036B800A37A01 /* NSString+Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Random.h"; sourceTree = "<group>"; };
+		C5BDC259168036B800A37A01 /* NSString+Random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Random.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,11 +172,11 @@
 				C508A1D61344EE170061CF05 /* DMTrackingQueue.m */,
 				8E7F5278145A77A000A50607 /* DMURLConnection.h */,
 				8E7F5279145A77A000A50607 /* DMURLConnection.m */,
-				C508A1D71344EE170061CF05 /* NSString+DMUUID.h */,
-				C508A1D81344EE170061CF05 /* NSString+DMUUID.m */,
-				C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */,
 				C508A1DA1344EE170061CF05 /* NSNull+DMTranslate.h */,
 				C508A1DB1344EE170061CF05 /* NSNull+DMTranslate.m */,
+				C5BDC258168036B800A37A01 /* NSString+Random.h */,
+				C5BDC259168036B800A37A01 /* NSString+Random.m */,
+				C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */,
 			);
 			name = Classes;
 			path = ../ObjectiveMetrics;
@@ -245,7 +245,6 @@
 				C508A1DE1344EE170061CF05 /* DMRequester.h in Headers */,
 				C508A1E01344EE170061CF05 /* DMTracker.h in Headers */,
 				C508A1E21344EE170061CF05 /* DMTrackingQueue.h in Headers */,
-				C508A1E41344EE170061CF05 /* NSString+DMUUID.h in Headers */,
 				C508A1E61344EE170061CF05 /* ObjectiveMetrics.h in Headers */,
 				C508A1E71344EE170061CF05 /* NSNull+DMTranslate.h in Headers */,
 				C508A1F81344EE1D0061CF05 /* NSObject+SBJSON.h in Headers */,
@@ -265,6 +264,7 @@
 				C52D455314C536C80084B298 /* SBJsonStreamParserAdapter.h in Headers */,
 				C52D455414C536C80084B298 /* SBJsonStreamWriter.h in Headers */,
 				C52D455514C536C80084B298 /* SBJsonStreamWriterAccumulator.h in Headers */,
+				C5BDC25A168036B800A37A01 /* NSString+Random.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +322,6 @@
 				C508A1DF1344EE170061CF05 /* DMRequester.m in Sources */,
 				C508A1E11344EE170061CF05 /* DMTracker.m in Sources */,
 				C508A1E31344EE170061CF05 /* DMTrackingQueue.m in Sources */,
-				C508A1E51344EE170061CF05 /* NSString+DMUUID.m in Sources */,
 				C508A1E81344EE170061CF05 /* NSNull+DMTranslate.m in Sources */,
 				C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */,
 				8E0584AC1346F4140045CCF4 /* GTMStackTrace.m in Sources */,
@@ -330,6 +329,7 @@
 				8E7F527D145A77A000A50607 /* DMURLConnection.m in Sources */,
 				8EC75F481470871700850047 /* DMSUHost.m in Sources */,
 				8EC75F4A1470871700850047 /* DMSUSystemProfiler.m in Sources */,
+				C5BDC25B168036B800A37A01 /* NSString+Random.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

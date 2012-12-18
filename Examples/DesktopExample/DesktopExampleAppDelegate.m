@@ -17,10 +17,14 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     DMTracker *tracker = [DMTracker defaultTracker];
-    [tracker startApp];
+    [tracker start];
 
-    [tracker trackEventInCategory:@"General" withName:@"Startup"];
+    [tracker trackEvent:@"Startup"];
+    [tracker trackEvent:@"Startup"
+         withProperties:@{@"Test": @"Hello!"}];
     [tracker trackLog:@"Hello world!"];
+
+    [tracker stop];
 }
 
 @end

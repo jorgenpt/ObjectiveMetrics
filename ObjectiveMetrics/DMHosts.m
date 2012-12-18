@@ -3,10 +3,10 @@
 //  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 3/22/11.
-//  Copyright 2011 devSoft. All rights reserved.
+//  Copyright 2011 bitSpatter. All rights reserved.
 //
 
-#import "NSString+DMUUID.h"
+#import "DMHosts.h"
 
 static DMSUHost *sharedAppHost = nil;
 static DMSUHost *sharedFrameworkHost = nil;

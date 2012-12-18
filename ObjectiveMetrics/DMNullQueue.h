@@ -3,7 +3,7 @@
 //  ObjectiveMetrics
 //
 //  Created by Jørgen P. Tjernø on 6/19/11.
-//  Copyright 2011 devSoft. All rights reserved.
+//  Copyright 2011 bitSpatter. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

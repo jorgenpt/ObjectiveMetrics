@@ -17,24 +17,30 @@
 		8E229361133CF60700183BA9 /* ObjectiveMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E229360133CF60700183BA9 /* ObjectiveMetrics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E229363133CF63600183BA9 /* DMRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */; };
 		8E229364133CF63600183BA9 /* DMTrackingQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B5133900F700609001 /* DMTrackingQueue.h */; };
-		8E229365133CF63600183BA9 /* NSString+DMUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */; };
 		8E229368133CFEB500183BA9 /* DMHosts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E229366133CFEB500183BA9 /* DMHosts.h */; };
 		8E229369133CFEB500183BA9 /* DMHosts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E229367133CFEB500183BA9 /* DMHosts.m */; };
 		8E279CDF133AC0EB00B4CB82 /* DMTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B11339006600609001 /* DMTracker.m */; };
 		8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B6133900F700609001 /* DMTrackingQueue.m */; };
-		8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */; };
 		8E279CE6133AC0EB00B4CB82 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */; };
 		8E279CEF133AC0EB00B4CB82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
 		8E2C20EE1341895F00CCEAC3 /* NSNull+DMTranslate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */; };
 		8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */; };
 		8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */; };
-		8E82EDF1145660D700CEE85D /* DMURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E82EDEF145660D700CEE85D /* DMURLConnection.h */; };
-		8E82EDF2145660D700CEE85D /* DMURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82EDF0145660D700CEE85D /* DMURLConnection.m */; };
 		8EC75F531470872E00850047 /* DMSUHost.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F4F1470872E00850047 /* DMSUHost.h */; };
 		8EC75F541470872E00850047 /* DMSUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F501470872E00850047 /* DMSUHost.m */; };
 		8EC75F551470872E00850047 /* DMSUSystemProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F511470872E00850047 /* DMSUSystemProfiler.h */; };
 		8EC75F561470872E00850047 /* DMSUSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F521470872E00850047 /* DMSUSystemProfiler.m */; };
 		C53A92101481A160007A5DD9 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53A920F1481A160007A5DD9 /* SBJson.framework */; };
+		C5BDC255168036AD00A37A01 /* NSString+Random.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BDC253168036AD00A37A01 /* NSString+Random.h */; };
+		C5BDC256168036AD00A37A01 /* NSString+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BDC254168036AD00A37A01 /* NSString+Random.m */; };
+		C5D40C02168EBDBF00BAD826 /* DMSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D40C00168EBDBF00BAD826 /* DMSession.h */; };
+		C5D40C03168EBDBF00BAD826 /* DMSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D40C01168EBDBF00BAD826 /* DMSession.m */; };
+		C5D40C06168EC23C00BAD826 /* NSDictionary+TypedRetrieval.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D40C04168EC23C00BAD826 /* NSDictionary+TypedRetrieval.h */; };
+		C5D40C07168EC23C00BAD826 /* NSDictionary+TypedRetrieval.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D40C05168EC23C00BAD826 /* NSDictionary+TypedRetrieval.m */; };
+		C5D40C0A168ED33400BAD826 /* NSArray+Map.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D40C08168ED33400BAD826 /* NSArray+Map.h */; };
+		C5D40C0B168ED33400BAD826 /* NSArray+Map.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D40C09168ED33400BAD826 /* NSArray+Map.m */; };
+		C5D40C0E168ED68500BAD826 /* DMEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = C5D40C0C168ED68500BAD826 /* DMEvent.h */; };
+		C5D40C0F168ED68500BAD826 /* DMEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D40C0D168ED68500BAD826 /* DMEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,15 +53,11 @@
 		8E229360133CF60700183BA9 /* ObjectiveMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveMetrics.h; sourceTree = "<group>"; };
 		8E229366133CFEB500183BA9 /* DMHosts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHosts.h; sourceTree = "<group>"; };
 		8E229367133CFEB500183BA9 /* DMHosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHosts.m; sourceTree = "<group>"; };
-		8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DMUUID.h"; sourceTree = "<group>"; };
-		8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DMUUID.m"; sourceTree = "<group>"; };
 		8E279CF3133AC0EB00B4CB82 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DMTranslate.h"; sourceTree = "<group>"; };
 		8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DMTranslate.m"; sourceTree = "<group>"; };
 		8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMRequester.h; sourceTree = "<group>"; };
 		8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMRequester.m; sourceTree = "<group>"; };
-		8E82EDEF145660D700CEE85D /* DMURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMURLConnection.h; sourceTree = "<group>"; };
-		8E82EDF0145660D700CEE85D /* DMURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMURLConnection.m; sourceTree = "<group>"; };
 		8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8E8A0EB81337FBA500CA6E47 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8E8A0EB91337FBA500CA6E47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -72,6 +74,16 @@
 		8EF751B5133900F700609001 /* DMTrackingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTrackingQueue.h; sourceTree = "<group>"; };
 		8EF751B6133900F700609001 /* DMTrackingQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTrackingQueue.m; sourceTree = "<group>"; };
 		C53A920F1481A160007A5DD9 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SBJson.framework; path = Frameworks/SBJson.framework; sourceTree = "<group>"; };
+		C5BDC253168036AD00A37A01 /* NSString+Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Random.h"; sourceTree = "<group>"; };
+		C5BDC254168036AD00A37A01 /* NSString+Random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Random.m"; sourceTree = "<group>"; };
+		C5D40C00168EBDBF00BAD826 /* DMSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSession.h; sourceTree = "<group>"; };
+		C5D40C01168EBDBF00BAD826 /* DMSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSession.m; sourceTree = "<group>"; };
+		C5D40C04168EC23C00BAD826 /* NSDictionary+TypedRetrieval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+TypedRetrieval.h"; sourceTree = "<group>"; };
+		C5D40C05168EC23C00BAD826 /* NSDictionary+TypedRetrieval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+TypedRetrieval.m"; sourceTree = "<group>"; };
+		C5D40C08168ED33400BAD826 /* NSArray+Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Map.h"; sourceTree = "<group>"; };
+		C5D40C09168ED33400BAD826 /* NSArray+Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Map.m"; sourceTree = "<group>"; };
+		C5D40C0C168ED68500BAD826 /* DMEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMEvent.h; sourceTree = "<group>"; };
+		C5D40C0D168ED68500BAD826 /* DMEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,23 +182,29 @@
 		8E8A0EC71337FC7600CA6E47 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C5D40C0C168ED68500BAD826 /* DMEvent.h */,
+				C5D40C0D168ED68500BAD826 /* DMEvent.m */,
 				8E229366133CFEB500183BA9 /* DMHosts.h */,
 				8E229367133CFEB500183BA9 /* DMHosts.m */,
-				8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */,
-				8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */,
-				8EF751B01339006600609001 /* DMTracker.h */,
-				8EF751B11339006600609001 /* DMTracker.m */,
 				8E19EC0F13AEFEC4007CE280 /* DMNullQueue.h */,
 				8E19EC1013AEFEC4007CE280 /* DMNullQueue.m */,
+				8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */,
+				8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */,
+				C5D40C00168EBDBF00BAD826 /* DMSession.h */,
+				C5D40C01168EBDBF00BAD826 /* DMSession.m */,
+				8EF751B01339006600609001 /* DMTracker.h */,
+				8EF751B11339006600609001 /* DMTracker.m */,
 				8EF751B5133900F700609001 /* DMTrackingQueue.h */,
 				8EF751B6133900F700609001 /* DMTrackingQueue.m */,
-				8E279C2A133AA9A200B4CB82 /* NSString+DMUUID.h */,
-				8E279C2B133AA9A200B4CB82 /* NSString+DMUUID.m */,
-				8E229360133CF60700183BA9 /* ObjectiveMetrics.h */,
+				C5D40C08168ED33400BAD826 /* NSArray+Map.h */,
+				C5D40C09168ED33400BAD826 /* NSArray+Map.m */,
+				C5D40C04168EC23C00BAD826 /* NSDictionary+TypedRetrieval.h */,
+				C5D40C05168EC23C00BAD826 /* NSDictionary+TypedRetrieval.m */,
 				8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */,
 				8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */,
-				8E82EDEF145660D700CEE85D /* DMURLConnection.h */,
-				8E82EDF0145660D700CEE85D /* DMURLConnection.m */,
+				C5BDC253168036AD00A37A01 /* NSString+Random.h */,
+				C5BDC254168036AD00A37A01 /* NSString+Random.m */,
+				8E229360133CF60700183BA9 /* ObjectiveMetrics.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -202,16 +220,19 @@
 				8E229361133CF60700183BA9 /* ObjectiveMetrics.h in Headers */,
 				8E229363133CF63600183BA9 /* DMRequester.h in Headers */,
 				8E229364133CF63600183BA9 /* DMTrackingQueue.h in Headers */,
-				8E229365133CF63600183BA9 /* NSString+DMUUID.h in Headers */,
 				8E229368133CFEB500183BA9 /* DMHosts.h in Headers */,
 				8E2C20EE1341895F00CCEAC3 /* NSNull+DMTranslate.h in Headers */,
 				8E0584A11346F3980045CCF4 /* GTMDefines.h in Headers */,
 				8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */,
 				8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */,
 				8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */,
-				8E82EDF1145660D700CEE85D /* DMURLConnection.h in Headers */,
 				8EC75F531470872E00850047 /* DMSUHost.h in Headers */,
 				8EC75F551470872E00850047 /* DMSUSystemProfiler.h in Headers */,
+				C5BDC255168036AD00A37A01 /* NSString+Random.h in Headers */,
+				C5D40C02168EBDBF00BAD826 /* DMSession.h in Headers */,
+				C5D40C06168EC23C00BAD826 /* NSDictionary+TypedRetrieval.h in Headers */,
+				C5D40C0A168ED33400BAD826 /* NSArray+Map.h in Headers */,
+				C5D40C0E168ED68500BAD826 /* DMEvent.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,15 +301,18 @@
 			files = (
 				8E279CDF133AC0EB00B4CB82 /* DMTracker.m in Sources */,
 				8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */,
-				8E279CE4133AC0EB00B4CB82 /* NSString+DMUUID.m in Sources */,
 				8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */,
 				8E229369133CFEB500183BA9 /* DMHosts.m in Sources */,
 				8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */,
 				8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */,
 				8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */,
-				8E82EDF2145660D700CEE85D /* DMURLConnection.m in Sources */,
 				8EC75F541470872E00850047 /* DMSUHost.m in Sources */,
 				8EC75F561470872E00850047 /* DMSUSystemProfiler.m in Sources */,
+				C5BDC256168036AD00A37A01 /* NSString+Random.m in Sources */,
+				C5D40C03168EBDBF00BAD826 /* DMSession.m in Sources */,
+				C5D40C07168EC23C00BAD826 /* NSDictionary+TypedRetrieval.m in Sources */,
+				C5D40C0B168ED33400BAD826 /* NSArray+Map.m in Sources */,
+				C5D40C0F168ED68500BAD826 /* DMEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,7 +387,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "@rpath";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -379,7 +403,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "@rpath";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;
