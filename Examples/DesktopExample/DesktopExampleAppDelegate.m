@@ -12,19 +12,43 @@
 
 @implementation DesktopExampleAppDelegate
 
-@synthesize window;
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return YES;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     DMTracker *tracker = [DMTracker defaultTracker];
-    [tracker start];
+    
+    // Delete the #error line and update APP_ID_HERE to make this test application work.
+    // You can find your application id on app.deskmetrics.com, under "Settings" (bottom left corner) for your app.
+#error You need to specify app id in DesktopExample to run it.
+    [tracker startWithApplicationId:@"APP_ID_HERE"];
+}
 
-    [tracker trackEvent:@"Startup"];
-    [tracker trackEvent:@"Startup"
-         withProperties:@{@"Test": @"Hello!"}];
-    [tracker trackLog:@"Hello world!"];
+- (IBAction) simpleButtonPressed:(id)sender
+{
+    [[DMTracker defaultTracker] trackEvent:@"Simple Button"];
+}
 
-    [tracker stop];
+- (IBAction) nameButtonPressed:(id)sender
+{
+    NSString *name = self.nameField.stringValue;
+    if ([name length] > 0) {
+        [[DMTracker defaultTracker] trackEvent:@"Name Button"
+                                withProperties:@{@"Name": name}];
+    }
+}
+
+- (IBAction) logTime:(id)sender
+{
+    [[DMTracker defaultTracker] trackLog:@"Time is now %@", [NSDate date]];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    [[DMTracker defaultTracker] stop];
 }
 
 @end

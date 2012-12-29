@@ -8,11 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DesktopExampleAppDelegate : NSObject <NSApplicationDelegate> {
-@private
-    NSWindow *window;
-}
+@interface DesktopExampleAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSTextField *nameField;
+
+- (IBAction) simpleButtonPressed:(id)sender;
+- (IBAction) nameButtonPressed:(id)sender;
+- (IBAction) logTime:(id)sender;
 
 @end
+
