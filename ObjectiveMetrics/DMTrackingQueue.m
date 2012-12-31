@@ -119,7 +119,7 @@ static int const kDMUserIdLength = 32;
     [sessionsToSend release];
 
     if (messagesDelivered) {
-        DLog(@"Messages delivered. Removing %lu events from current sessions.", currentSessionEvents);
+        DLog(@"Messages delivered. Removing %lu events from current sessions.", (unsigned long)currentSessionEvents);
         @synchronized(self)
         {
             if (self.currentSession && currentSessionEvents > 0) {

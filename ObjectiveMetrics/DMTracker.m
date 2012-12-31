@@ -10,7 +10,12 @@
 #import "DMEvent.h"
 #import "DMNullQueue.h"
 #import "DMTrackingQueue.h"
+
 #import "NSString+Random.h"
+
+#if TARGET_OS_IPHONE
+# import <UIKit/UIKit.h>
+#endif
 
 static DMTracker* defaultInstance = nil;
 

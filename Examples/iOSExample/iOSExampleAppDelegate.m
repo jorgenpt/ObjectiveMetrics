@@ -26,42 +26,45 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-    [[DMTracker defaultTracker] startApp];
-    
+    // Delete the #error line and update APP_ID_HERE to make this test application work.
+    // You can find your application id on app.deskmetrics.com, under "Settings" (bottom left corner) for your app.
+#error You need to specify app id in DesktopExample to run it.
+    [[DMTracker defaultTracker] startWithApplicationId:@"APP_ID_HERE"];
+
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    [[DMTracker defaultTracker] trackEventInCategory:@"Focus"
-                                            withName:@"ResignActive"];
+    [[DMTracker defaultTracker] trackEvent:@"FocusTransition"
+                            withProperties:@{@"Transition": @"ResignActive"}];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [[DMTracker defaultTracker] trackEventInCategory:@"Focus"
-                                            withName:@"EnterBackground"];
+    [[DMTracker defaultTracker] trackEvent:@"FocusTransition"
+                            withProperties:@{@"Transition": @"EnterBackground"}];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [[DMTracker defaultTracker] trackEventInCategory:@"Focus"
-                                            withName:@"EnterForeground"];
+    [[DMTracker defaultTracker] trackEvent:@"FocusTransition"
+                            withProperties:@{@"Transition": @"EnterForeground"}];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [[DMTracker defaultTracker] trackEventInCategory:@"Focus"
-                                            withName:@"BecomeActive"];
+    [[DMTracker defaultTracker] trackEvent:@"FocusTransition"
+                            withProperties:@{@"Transition": @"BecomeActive"}];
 }
 
+// Note: This does not get called if the user terminates the application using the task switcher.
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    // XXX: You should NOT use synchronous stop this in your released application.
+    // This will "hang" the application until events have been sent, which can be a really bad user experience,
+    // if they're on a slow or spotty connection. Just use "YES" when testing, send "NO" in real user scenarios.
+    [[DMTracker defaultTracker] stopAndFlushSynchronously:YES];
 }
 
 - (void)dealloc

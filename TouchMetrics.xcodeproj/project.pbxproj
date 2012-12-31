@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		8E7F527A145A77A000A50607 /* DMNullQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F5276145A77A000A50607 /* DMNullQueue.h */; };
 		8E7F527B145A77A000A50607 /* DMNullQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7F5277145A77A000A50607 /* DMNullQueue.m */; };
-		8E7F527C145A77A000A50607 /* DMURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F5278145A77A000A50607 /* DMURLConnection.h */; };
-		8E7F527D145A77A000A50607 /* DMURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7F5279145A77A000A50607 /* DMURLConnection.m */; };
 		8EC75F471470871700850047 /* DMSUHost.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F431470871700850047 /* DMSUHost.h */; };
 		8EC75F481470871700850047 /* DMSUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F441470871700850047 /* DMSUHost.m */; };
 		8EC75F491470871700850047 /* DMSUSystemProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F451470871700850047 /* DMSUSystemProfiler.h */; };
@@ -25,13 +23,19 @@
 		C508A1E21344EE170061CF05 /* DMTrackingQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1D51344EE170061CF05 /* DMTrackingQueue.h */; };
 		C508A1E31344EE170061CF05 /* DMTrackingQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1D61344EE170061CF05 /* DMTrackingQueue.m */; };
 		C508A1E61344EE170061CF05 /* ObjectiveMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */; };
-		C508A1E71344EE170061CF05 /* NSNull+DMTranslate.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1DA1344EE170061CF05 /* NSNull+DMTranslate.h */; };
-		C508A1E81344EE170061CF05 /* NSNull+DMTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A1DB1344EE170061CF05 /* NSNull+DMTranslate.m */; };
 		C508A1F81344EE1D0061CF05 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1ED1344EE1D0061CF05 /* NSObject+SBJSON.h */; };
 		C508A1FE1344EE1D0061CF05 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1F31344EE1D0061CF05 /* SBJsonParser.h */; };
 		C508A2001344EE1D0061CF05 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A1F51344EE1D0061CF05 /* SBJsonWriter.h */; };
 		C508A2181344FB740061CF05 /* UIDevice-Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = C508A2161344FB730061CF05 /* UIDevice-Hardware.h */; };
 		C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = C508A2171344FB740061CF05 /* UIDevice-Hardware.m */; };
+		C52C318116925550000F529F /* DMEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = C52C317916925550000F529F /* DMEvent.h */; };
+		C52C318216925550000F529F /* DMEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C52C317A16925550000F529F /* DMEvent.m */; };
+		C52C318316925550000F529F /* DMSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C52C317B16925550000F529F /* DMSession.h */; };
+		C52C318416925550000F529F /* DMSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C52C317C16925550000F529F /* DMSession.m */; };
+		C52C318516925550000F529F /* NSArray+Map.h in Headers */ = {isa = PBXBuildFile; fileRef = C52C317D16925550000F529F /* NSArray+Map.h */; };
+		C52C318616925550000F529F /* NSArray+Map.m in Sources */ = {isa = PBXBuildFile; fileRef = C52C317E16925550000F529F /* NSArray+Map.m */; };
+		C52C318716925550000F529F /* NSDictionary+TypedRetrieval.h in Headers */ = {isa = PBXBuildFile; fileRef = C52C317F16925550000F529F /* NSDictionary+TypedRetrieval.h */; };
+		C52C318816925550000F529F /* NSDictionary+TypedRetrieval.m in Sources */ = {isa = PBXBuildFile; fileRef = C52C318016925550000F529F /* NSDictionary+TypedRetrieval.m */; };
 		C52D455014C536C80084B298 /* SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = C52D454A14C536C80084B298 /* SBJson.h */; };
 		C52D455114C536C80084B298 /* SBJsonStreamParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C52D454B14C536C80084B298 /* SBJsonStreamParser.h */; };
 		C52D455214C536C80084B298 /* SBJsonStreamParserAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = C52D454C14C536C80084B298 /* SBJsonStreamParserAccumulator.h */; };
@@ -45,8 +49,6 @@
 /* Begin PBXFileReference section */
 		8E7F5276145A77A000A50607 /* DMNullQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNullQueue.h; sourceTree = "<group>"; };
 		8E7F5277145A77A000A50607 /* DMNullQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNullQueue.m; sourceTree = "<group>"; };
-		8E7F5278145A77A000A50607 /* DMURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMURLConnection.h; sourceTree = "<group>"; };
-		8E7F5279145A77A000A50607 /* DMURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMURLConnection.m; sourceTree = "<group>"; };
 		8EC75F431470871700850047 /* DMSUHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSUHost.h; sourceTree = "<group>"; };
 		8EC75F441470871700850047 /* DMSUHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSUHost.m; sourceTree = "<group>"; };
 		8EC75F451470871700850047 /* DMSUSystemProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSUSystemProfiler.h; sourceTree = "<group>"; };
@@ -63,13 +65,19 @@
 		C508A1D51344EE170061CF05 /* DMTrackingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMTrackingQueue.h; sourceTree = "<group>"; };
 		C508A1D61344EE170061CF05 /* DMTrackingQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTrackingQueue.m; sourceTree = "<group>"; };
 		C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveMetrics.h; sourceTree = "<group>"; };
-		C508A1DA1344EE170061CF05 /* NSNull+DMTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DMTranslate.h"; sourceTree = "<group>"; };
-		C508A1DB1344EE170061CF05 /* NSNull+DMTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DMTranslate.m"; sourceTree = "<group>"; };
 		C508A1ED1344EE1D0061CF05 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		C508A1F31344EE1D0061CF05 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		C508A1F51344EE1D0061CF05 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		C508A2161344FB730061CF05 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice-Hardware.h"; path = "TouchMetrics/UIDevice-Extension/UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		C508A2171344FB740061CF05 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice-Hardware.m"; path = "TouchMetrics/UIDevice-Extension/UIDevice-Hardware.m"; sourceTree = "<group>"; };
+		C52C317916925550000F529F /* DMEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMEvent.h; sourceTree = "<group>"; };
+		C52C317A16925550000F529F /* DMEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMEvent.m; sourceTree = "<group>"; };
+		C52C317B16925550000F529F /* DMSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSession.h; sourceTree = "<group>"; };
+		C52C317C16925550000F529F /* DMSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSession.m; sourceTree = "<group>"; };
+		C52C317D16925550000F529F /* NSArray+Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Map.h"; sourceTree = "<group>"; };
+		C52C317E16925550000F529F /* NSArray+Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Map.m"; sourceTree = "<group>"; };
+		C52C317F16925550000F529F /* NSDictionary+TypedRetrieval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+TypedRetrieval.h"; sourceTree = "<group>"; };
+		C52C318016925550000F529F /* NSDictionary+TypedRetrieval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+TypedRetrieval.m"; sourceTree = "<group>"; };
 		C52D454A14C536C80084B298 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJson.h; path = Frameworks/SBJson.framework/Versions/A/Headers/SBJson.h; sourceTree = SOURCE_ROOT; };
 		C52D454B14C536C80084B298 /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonStreamParser.h; path = Frameworks/SBJson.framework/Versions/A/Headers/SBJsonStreamParser.h; sourceTree = SOURCE_ROOT; };
 		C52D454C14C536C80084B298 /* SBJsonStreamParserAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonStreamParserAccumulator.h; path = Frameworks/SBJson.framework/Versions/A/Headers/SBJsonStreamParserAccumulator.h; sourceTree = SOURCE_ROOT; };
@@ -140,20 +148,24 @@
 		C508A1CE1344EE170061CF05 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C52C317916925550000F529F /* DMEvent.h */,
+				C52C317A16925550000F529F /* DMEvent.m */,
 				C508A1CF1344EE170061CF05 /* DMHosts.h */,
 				C508A1D01344EE170061CF05 /* DMHosts.m */,
 				8E7F5276145A77A000A50607 /* DMNullQueue.h */,
 				8E7F5277145A77A000A50607 /* DMNullQueue.m */,
 				C508A1D11344EE170061CF05 /* DMRequester.h */,
 				C508A1D21344EE170061CF05 /* DMRequester.m */,
+				C52C317B16925550000F529F /* DMSession.h */,
+				C52C317C16925550000F529F /* DMSession.m */,
 				C508A1D31344EE170061CF05 /* DMTracker.h */,
 				C508A1D41344EE170061CF05 /* DMTracker.m */,
 				C508A1D51344EE170061CF05 /* DMTrackingQueue.h */,
 				C508A1D61344EE170061CF05 /* DMTrackingQueue.m */,
-				8E7F5278145A77A000A50607 /* DMURLConnection.h */,
-				8E7F5279145A77A000A50607 /* DMURLConnection.m */,
-				C508A1DA1344EE170061CF05 /* NSNull+DMTranslate.h */,
-				C508A1DB1344EE170061CF05 /* NSNull+DMTranslate.m */,
+				C52C317D16925550000F529F /* NSArray+Map.h */,
+				C52C317E16925550000F529F /* NSArray+Map.m */,
+				C52C317F16925550000F529F /* NSDictionary+TypedRetrieval.h */,
+				C52C318016925550000F529F /* NSDictionary+TypedRetrieval.m */,
 				C5BDC258168036B800A37A01 /* NSString+Random.h */,
 				C5BDC259168036B800A37A01 /* NSString+Random.m */,
 				C508A1D91344EE170061CF05 /* ObjectiveMetrics.h */,
@@ -226,7 +238,6 @@
 				C508A1E01344EE170061CF05 /* DMTracker.h in Headers */,
 				C508A1E21344EE170061CF05 /* DMTrackingQueue.h in Headers */,
 				C508A1E61344EE170061CF05 /* ObjectiveMetrics.h in Headers */,
-				C508A1E71344EE170061CF05 /* NSNull+DMTranslate.h in Headers */,
 				C508A1F81344EE1D0061CF05 /* NSObject+SBJSON.h in Headers */,
 				C508A1FE1344EE1D0061CF05 /* SBJsonParser.h in Headers */,
 				C508A2001344EE1D0061CF05 /* SBJsonWriter.h in Headers */,
@@ -241,6 +252,10 @@
 				C52D455414C536C80084B298 /* SBJsonStreamWriter.h in Headers */,
 				C52D455514C536C80084B298 /* SBJsonStreamWriterAccumulator.h in Headers */,
 				C5BDC25A168036B800A37A01 /* NSString+Random.h in Headers */,
+				C52C318116925550000F529F /* DMEvent.h in Headers */,
+				C52C318316925550000F529F /* DMSession.h in Headers */,
+				C52C318516925550000F529F /* NSArray+Map.h in Headers */,
+				C52C318716925550000F529F /* NSDictionary+TypedRetrieval.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,13 +313,15 @@
 				C508A1DF1344EE170061CF05 /* DMRequester.m in Sources */,
 				C508A1E11344EE170061CF05 /* DMTracker.m in Sources */,
 				C508A1E31344EE170061CF05 /* DMTrackingQueue.m in Sources */,
-				C508A1E81344EE170061CF05 /* NSNull+DMTranslate.m in Sources */,
 				C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */,
 				8E7F527B145A77A000A50607 /* DMNullQueue.m in Sources */,
-				8E7F527D145A77A000A50607 /* DMURLConnection.m in Sources */,
 				8EC75F481470871700850047 /* DMSUHost.m in Sources */,
 				8EC75F4A1470871700850047 /* DMSUSystemProfiler.m in Sources */,
 				C5BDC25B168036B800A37A01 /* NSString+Random.m in Sources */,
+				C52C318216925550000F529F /* DMEvent.m in Sources */,
+				C52C318416925550000F529F /* DMSession.m in Sources */,
+				C52C318616925550000F529F /* NSArray+Map.m in Sources */,
+				C52C318816925550000F529F /* NSDictionary+TypedRetrieval.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +336,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -332,7 +348,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -346,7 +361,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchMetrics/TouchMetrics-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,7 +372,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchMetrics/TouchMetrics-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
