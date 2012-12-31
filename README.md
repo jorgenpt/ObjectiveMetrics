@@ -154,7 +154,6 @@ licenses:
 * Original code is licensed under the [simplified BSD license][bsd-license].
 * [UIDevice-Extension][uide] is licensed under the [BSD license][bsd-license].
 * [Sparkle][sparkle] is licensed under the [MIT license][mit-license].
-* [GTM][gtm] is licensed under the [Apache 2.0 license][apache2-license].
 
 
 [dm]: http://www.deskmetrics.com
@@ -162,7 +161,6 @@ licenses:
 [sbjson-ios]: /downloads/jorgenpt/ObjectiveMetrics/libsbjson-ios.a
 [sbjson-osx]: /downloads/jorgenpt/ObjectiveMetrics/SBJson%20v3.0.4.zip
 [sparkle]: http://sparkle.andymatuschak.org/
-[gtm]: http://code.google.com/p/google-toolbox-for-mac/
 [uide]: https://github.com/erica/uidevice-extension
 [bsd-license]: http://www.opensource.org/licenses/bsd-license.php
 [mit-license]: http://www.opensource.org/licenses/mit-license.php

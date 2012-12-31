@@ -7,9 +7,6 @@
 //
 
 #import "DMTracker.h"
-
-#import "GTMStackTrace.h"
-
 #import "DMEvent.h"
 #import "DMNullQueue.h"
 #import "DMTrackingQueue.h"

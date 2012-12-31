@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E0584A11346F3980045CCF4 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E05849D1346F3980045CCF4 /* GTMDefines.h */; };
-		8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E05849E1346F3980045CCF4 /* GTMStackTrace.h */; };
-		8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E05849F1346F3980045CCF4 /* GTMStackTrace.m */; };
-		8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */; };
 		8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E19EC0F13AEFEC4007CE280 /* DMNullQueue.h */; };
 		8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E19EC1013AEFEC4007CE280 /* DMNullQueue.m */; };
 		8E22935F133CF4DB00183BA9 /* DMTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF751B01339006600609001 /* DMTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,10 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8E05849D1346F3980045CCF4 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		8E05849E1346F3980045CCF4 /* GTMStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStackTrace.h; sourceTree = "<group>"; };
-		8E05849F1346F3980045CCF4 /* GTMStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStackTrace.m; sourceTree = "<group>"; };
-		8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMObjC2Runtime.h; sourceTree = "<group>"; };
 		8E19EC0F13AEFEC4007CE280 /* DMNullQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNullQueue.h; sourceTree = "<group>"; };
 		8E19EC1013AEFEC4007CE280 /* DMNullQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNullQueue.m; sourceTree = "<group>"; };
 		8E229360133CF60700183BA9 /* ObjectiveMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveMetrics.h; sourceTree = "<group>"; };
@@ -99,17 +91,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E05849B1346F3980045CCF4 /* GTM */ = {
-			isa = PBXGroup;
-			children = (
-				8E05849D1346F3980045CCF4 /* GTMDefines.h */,
-				8E0584B01346F5840045CCF4 /* GTMObjC2Runtime.h */,
-				8E05849E1346F3980045CCF4 /* GTMStackTrace.h */,
-				8E05849F1346F3980045CCF4 /* GTMStackTrace.m */,
-			);
-			path = GTM;
-			sourceTree = "<group>";
-		};
 		8E6BA5E4133984F60018E4A3 /* Sparkle */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,7 +113,6 @@
 		8E8A0EA61337FBA500CA6E47 = {
 			isa = PBXGroup;
 			children = (
-				8E05849B1346F3980045CCF4 /* GTM */,
 				8E8A0EBB1337FBA500CA6E47 /* ObjectiveMetrics */,
 				8E6BA5E4133984F60018E4A3 /* Sparkle */,
 				8E8A0EB41337FBA500CA6E47 /* Frameworks */,
@@ -222,9 +202,6 @@
 				8E229364133CF63600183BA9 /* DMTrackingQueue.h in Headers */,
 				8E229368133CFEB500183BA9 /* DMHosts.h in Headers */,
 				8E2C20EE1341895F00CCEAC3 /* NSNull+DMTranslate.h in Headers */,
-				8E0584A11346F3980045CCF4 /* GTMDefines.h in Headers */,
-				8E0584A21346F3980045CCF4 /* GTMStackTrace.h in Headers */,
-				8E0584B11346F5840045CCF4 /* GTMObjC2Runtime.h in Headers */,
 				8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */,
 				8EC75F531470872E00850047 /* DMSUHost.h in Headers */,
 				8EC75F551470872E00850047 /* DMSUSystemProfiler.h in Headers */,
@@ -304,7 +281,6 @@
 				8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */,
 				8E229369133CFEB500183BA9 /* DMHosts.m in Sources */,
 				8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */,
-				8E0584A31346F3980045CCF4 /* GTMStackTrace.m in Sources */,
 				8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */,
 				8EC75F541470872E00850047 /* DMSUHost.m in Sources */,
 				8EC75F561470872E00850047 /* DMSUSystemProfiler.m in Sources */,

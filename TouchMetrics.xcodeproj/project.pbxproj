@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E0584AA1346F4140045CCF4 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584A71346F4140045CCF4 /* GTMDefines.h */; };
-		8E0584AB1346F4140045CCF4 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584A81346F4140045CCF4 /* GTMStackTrace.h */; };
-		8E0584AC1346F4140045CCF4 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0584A91346F4140045CCF4 /* GTMStackTrace.m */; };
-		8E0584AF1346F57D0045CCF4 /* GTMObjC2Runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */; };
 		8E7F527A145A77A000A50607 /* DMNullQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F5276145A77A000A50607 /* DMNullQueue.h */; };
 		8E7F527B145A77A000A50607 /* DMNullQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7F5277145A77A000A50607 /* DMNullQueue.m */; };
 		8E7F527C145A77A000A50607 /* DMURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F5278145A77A000A50607 /* DMURLConnection.h */; };
@@ -47,10 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8E0584A71346F4140045CCF4 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		8E0584A81346F4140045CCF4 /* GTMStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStackTrace.h; sourceTree = "<group>"; };
-		8E0584A91346F4140045CCF4 /* GTMStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStackTrace.m; sourceTree = "<group>"; };
-		8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMObjC2Runtime.h; sourceTree = "<group>"; };
 		8E7F5276145A77A000A50607 /* DMNullQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNullQueue.h; sourceTree = "<group>"; };
 		8E7F5277145A77A000A50607 /* DMNullQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMNullQueue.m; sourceTree = "<group>"; };
 		8E7F5278145A77A000A50607 /* DMURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMURLConnection.h; sourceTree = "<group>"; };
@@ -100,21 +92,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E0584A51346F4140045CCF4 /* GTM */ = {
-			isa = PBXGroup;
-			children = (
-				8E0584A71346F4140045CCF4 /* GTMDefines.h */,
-				8E0584AE1346F57D0045CCF4 /* GTMObjC2Runtime.h */,
-				8E0584A81346F4140045CCF4 /* GTMStackTrace.h */,
-				8E0584A91346F4140045CCF4 /* GTMStackTrace.m */,
-			);
-			path = GTM;
-			sourceTree = "<group>";
-		};
 		C508A1841344ECD60061CF05 = {
 			isa = PBXGroup;
 			children = (
-				8E0584A51346F4140045CCF4 /* GTM */,
 				C508A21B1344FB7B0061CF05 /* UIDevice-Extension */,
 				C508A1EA1344EE1D0061CF05 /* JSON */,
 				C508A1941344ECD60061CF05 /* TouchMetrics */,
@@ -251,11 +231,7 @@
 				C508A1FE1344EE1D0061CF05 /* SBJsonParser.h in Headers */,
 				C508A2001344EE1D0061CF05 /* SBJsonWriter.h in Headers */,
 				C508A2181344FB740061CF05 /* UIDevice-Hardware.h in Headers */,
-				8E0584AA1346F4140045CCF4 /* GTMDefines.h in Headers */,
-				8E0584AB1346F4140045CCF4 /* GTMStackTrace.h in Headers */,
-				8E0584AF1346F57D0045CCF4 /* GTMObjC2Runtime.h in Headers */,
 				8E7F527A145A77A000A50607 /* DMNullQueue.h in Headers */,
-				8E7F527C145A77A000A50607 /* DMURLConnection.h in Headers */,
 				8EC75F471470871700850047 /* DMSUHost.h in Headers */,
 				8EC75F491470871700850047 /* DMSUSystemProfiler.h in Headers */,
 				C52D455014C536C80084B298 /* SBJson.h in Headers */,
@@ -324,7 +300,6 @@
 				C508A1E31344EE170061CF05 /* DMTrackingQueue.m in Sources */,
 				C508A1E81344EE170061CF05 /* NSNull+DMTranslate.m in Sources */,
 				C508A2191344FB740061CF05 /* UIDevice-Hardware.m in Sources */,
-				8E0584AC1346F4140045CCF4 /* GTMStackTrace.m in Sources */,
 				8E7F527B145A77A000A50607 /* DMNullQueue.m in Sources */,
 				8E7F527D145A77A000A50607 /* DMURLConnection.m in Sources */,
 				8EC75F481470871700850047 /* DMSUHost.m in Sources */,
