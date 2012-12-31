@@ -78,9 +78,9 @@ static NSString * const kDMHeaderFieldJSONVersion = @"jsn";
                 self.appVersion = appVersion;
         }
 
-        NSDictionary *bodyDictionary = [aDictionary dictionaryForKey:kDMBodyField];
-        if ([bodyDictionary count] > 0) {
-            self.events = [[bodyDictionary mutableCopy] autorelease];
+        NSArray *bodyArray = [aDictionary arrayForKey:kDMBodyField];
+        if ([bodyArray count] > 0) {
+            self.events = [[bodyArray mutableCopy] autorelease];
         }
     }
 

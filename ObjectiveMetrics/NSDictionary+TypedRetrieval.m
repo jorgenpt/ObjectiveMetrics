@@ -15,7 +15,7 @@
 {
     id obj = [self objectForKey:aKey];
 
-    if ([obj isMemberOfClass:aType])
+    if ([obj isKindOfClass:aType])
         return obj;
 
     return nil;

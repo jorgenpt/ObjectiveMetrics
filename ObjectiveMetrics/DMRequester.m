@@ -89,7 +89,7 @@ static NSString * const kDMAnalyticsURLFormat = @"http://%@.apiv2.deskmetrics.co
         return NO;
     }
 
-    if (![response isMemberOfClass:[NSHTTPURLResponse class]]) {
+    if (![response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSLog(@"Got invalid response object: %@", response);
         return NO;
     }
