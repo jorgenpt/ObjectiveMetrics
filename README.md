@@ -1,34 +1,28 @@
 ObjectiveMetrics
 ================
 
-ObjectiveMetrics is a Objective-C API (or *component*, as DeskMetrics calls
-them) for the desktop application analytics service [DeskMetrics][dm]. You link
-against ObjectiveMetrics and specify what events you want to track via an
-intuitive API, and we take care of having them delivered to DeskMetrics, so that
-they'll show up on your dashboard.
+ObjectiveMetrics is a Objective-C implementation of the desktop application
+analytics service [DeskMetrics][dm]. You link against ObjectiveMetrics and
+specify what events you want to track via an intuitive API, and we take care of
+having them delivered to DeskMetrics, so that they'll show up on your dashboard.
 
 Requirements
 ------------
 
-* iOS v4.0 or above. This means it will run on iPhones, iPads, and iPod Touches.
-* Mac OS X 10.5 or above.
-* Xcode 4.
+* iOS v4.3 or above. This means it will run on iPhones, iPads, and iPod Touches.
+* Mac OS X 10.6 or above.
+* Xcode 4.4 or above.
 
 There's no known reason it wouldn't work on earlier iOS versions, but it has not
-been tested. It's only thoroughly tested on iOS 4.3 - please let me know if you
-have luck running it on older versions.
-
-Similarly, there's no reason it won't build under Xcode 3, but it has not been
-tested. I'd love to hear from you if you've built it under Xcode 3. :)
+been tested.
 
 Getting started for OS X
 ------------------------
 
-Using ObjectiveMetrics is hopefully very straightforward. You can either build
-it from source or get a [prebuilt binary][download-osx] from GitHub.
+Using ObjectiveMetrics is hopefully very straightforward. You can build
+it from source from GitHub.
 
-1. Build the framework using the enclosed Xcode project or download a [prebuilt
-   version][download-osx].
+1. Build the framework using the enclosed Xcode project.
 2. Link your project with `ObjectiveMetrics.framework` - and set your project up
    to copy the framework into its bundle. To do this, you need a `Copy Files`
    build phase which copies `ObjectiveMetrics.framework` to the `Framework`
@@ -40,11 +34,13 @@ it from source or get a [prebuilt binary][download-osx] from GitHub.
    `@loader_path/../Frameworks` - you can find this under Build Settings for
    Xcode 4.x, or see http://www.dribin.org/dave/blog/archives/2009/11/15/rpath/
    for Xcode 3.x
-5. Find your **application id** on the DeskMetrics dashboard page, and put this
-   in your applications `Info.plist` as a string with key `DMAppId`.
-6. Make sure you send the `DMTracker` a `startApp` message as soon as your app
-   is starting up, to initialize your session.
-7. Add tracking to any file you want. See below for syntax.
+5. Find your **application id** on the DeskMetrics application settings page.
+6. Make sure you send the `DMTracker` a `startWithApplicationId:` message with
+   your application id as soon as your app is starting up, to initialize your
+   session, e.g. in `applicationDidFinishLaunching:`.
+7. Make sure you send the `DMTracker` a `stop` message when your application is
+   shutting down, e.g. in `applicationWillTerminate:`.
+8. Add tracking to any file you want. See below for syntax.
 
 Getting started for iOS
 -----------------------
@@ -53,16 +49,18 @@ When using ObjectiveMetrics on iOS, you need to link against the static library
 ([libTouchMetrics.a][download-ios]), its JSON dependency
 ([libsbjson-ios.a][sbjson-ios]) and import DMTracker.h.
 
-1. Build the library using the enclosed Xcode project or download a [prebuilt
-   version][download-ios].
+1. Build the library using the enclosed Xcode project.
 2. Link your project with `libTouchMetrics.a` and copy `DMTracker.h`.
 3. Link your project with [the prebuilt][sbjson-ios] `libsbjson-ios.a` (or build
    your own from https://github.com/stig/json-framework)
 4. Find your **application id** on the DeskMetrics dashboard page, and put this
    in your applications `Info.plist` as a string with key `DMAppId`.
-5. Make sure you send the `DMTracker` a `startApp` message as soon as your app
-   is starting up, to initialize your session.
-6. Add tracking to any file you want. See below for syntax.
+5. Make sure you send the `DMTracker` a `startWithApplicationId:` message with
+   your application id as soon as your app is starting up, to initialize your
+   session, e.g. in `applicationDidFinishLaunching:`.
+6. Make sure you send the `DMTracker` a `stop` message when your application is
+   shutting down, e.g. in `applicationWillTerminate:`.
+7. Add tracking to any file you want. See below for syntax.
 
 Tracking events
 ---------------
@@ -81,45 +79,27 @@ instance using:
     [DMTracker defaultTracker]
 
 On this instance, you can call any number of tracking events. It is very
-important that you call the `startApp` method soon after your app starts. This
-is because it initializes the session and prepares the DMTracker for more
-tracking events:
+important that you call the `startWithApplicationId:` method soon after your app
+starts. This is because it initializes the session and prepares the DMTracker
+for more tracking events:
 
-    [[DMTracker defaultInstance] startApp];
+    [[DMTracker defaultInstance] startWithApplicationId:@"MY APP ID HERE"];
 
-While there is a matching `stopApp`, you should never need to call it. It is
-called automatically for you when your NSApplication terminates. If the app is
-stopped abruptly and it cannot send stopApp, then it'll queue the events and
-send `stopApp` along with the events the next time the app is started.
+You should then call `stop` when your application is shutting down, to track an
+"app exiting" event and attempt to send the events to the server. If they can't
+be sent, they'll be sent the next time the application starts.
 
 Here are the different methods you can call: (See [DMTracker.h][header] for
 a list that's guaranteed updated)
 
     DMTracker *tracker = [DMTracker defaultInstance];
 
-    [tracker trackEventInCategory:@"Features"
-                         withName:@"ManualUpdate"];
+    [tracker trackEvent:@"Event"];
 
-    [tracker trackEventInCategory:@"Features"
-                         withName:@"URLShortener"
-                            value:@"bit.ly"];
+    [tracker trackEvent:@"Event with properties"
+         withProperties:@{@"Name": @"Joe Smith"}];
 
-    [tracker trackEventInCategory:@"Operations"
-                         withName:@"Scanning"
-                     secondsSpent:37
-                        completed:YES];
-
-    [tracker trackLog:@"Error when getting new definitions"];
-
-    [tracker trackCustomDataWithName:@"ApiKey"
-                               value:@"09123aef42"];
-
-    // Here Realtime means that it's sent when you call this, instead of when
-    // the app shuts down / enough data has been aggregated.
-    [tracker trackCustomDataRealtimeWithName:@"ApiKey"
-                                       value:@"09123aef42"];
-
-    [tracker trackException:someException];
+    [tracker trackLog:@"Time is now %@", [NSDate date]];
 
 Troubleshooting
 ---------------
@@ -179,8 +159,6 @@ licenses:
 
 [dm]: http://www.deskmetrics.com
 [header]: DMTracker.h
-[download-osx]: /downloads/jorgenpt/ObjectiveMetrics/ObjectiveMetrics%20v1.1.zip
-[download-ios]: /downloads/jorgenpt/ObjectiveMetrics/TouchMetrics%20v1.1.zip
 [sbjson-ios]: /downloads/jorgenpt/ObjectiveMetrics/libsbjson-ios.a
 [sbjson-osx]: /downloads/jorgenpt/ObjectiveMetrics/SBJson%20v3.0.4.zip
 [sparkle]: http://sparkle.andymatuschak.org/
