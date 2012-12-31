@@ -1,12 +1,8 @@
-v1.2 (unreleased)
-=================
+v2.0 (released 2012-12-31)
+==========================
 
-Fixed
------
-
-* Fixed issue where local cache missing a 'stopApp' would cause corrupt data to
-  be generated.
-* Added basic sanity checks to loading data from disk.
+* Updated to DeskMetrics v2.0 API.
+* Improved example apps.
 
 
 v1.1 (released 2012-01-21)
