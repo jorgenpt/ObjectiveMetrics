@@ -19,7 +19,6 @@ static char const * const kDMQueueName = "com.bitSpatter.objectivemetrics.reques
 static NSString * const kDMSessionsKey = @"DMSessions";
 static NSString * const kDMUserIdKey = @"DM2UserId";
 static int const kDMUserIdLength = 32;
-static NSString * const kDMNullPlaceholder = @"<[Aija8kua]NULL-VALUE[ep6gae3U]>";
 
 @interface DMTrackingQueue ()
 

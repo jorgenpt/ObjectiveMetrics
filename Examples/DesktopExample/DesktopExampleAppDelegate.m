@@ -48,7 +48,10 @@
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-    [[DMTracker defaultTracker] stop];
+    // XXX: You should NOT use synchronous stop this in your released application.
+    // This will "hang" the application until events have been sent, which can be a really bad user experience,
+    // if they're on a slow or spotty connection. Just use "YES" when testing, send "NO" in real user scenarios.
+    [[DMTracker defaultTracker] stopAndFlushSynchronously:YES];
 }
 
 @end

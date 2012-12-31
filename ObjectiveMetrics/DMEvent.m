@@ -8,8 +8,6 @@
 
 #import "DMEvent.h"
 
-#import "NSNull+DMTranslate.h"
-
 #if TARGET_OS_IPHONE
 # import <UIKit/UIKit.h>
 #else
@@ -85,13 +83,7 @@ static NSString * const DMTypeStop = @"sto";
     }
     DLog(@"System profile: %@", systemProfile);
 
-    //    static NSString * const DMFieldStartUserCustomId = @"cid";
-    //    static NSString * const DMFieldStartUserEmail = @"uem";
-    //    static NSString * const DMFieldStartOSFontDPI = @"fd";
-
     NSArray *osVersion = [[systemProfile objectForKey:@"osVersion"] componentsSeparatedByString:@"."];
-    [event setValue:[NSNull null]
-             forKey:DMFieldStartOSName];
     if ([osVersion count] > 1)
     {
         [event setValue:[NSString stringWithFormat:@"%@ %@.%@",
@@ -101,21 +93,20 @@ static NSString * const DMTypeStop = @"sto";
                  forKey:DMFieldStartOSName];
     }
 
-    [event setValue:[NSNull null]
-             forKey:DMFieldStartOSServicePack];
+    [event setValue:nil forKey:DMFieldStartOSServicePack];
     if ([osVersion count] > 2)
     {
         [event setValue:[osVersion objectAtIndex:2]
                  forKey:DMFieldStartOSServicePack];
     }
 
-    [event setValue:[NSNull translate:[systemProfile objectForKey:@"lang"]]
+    [event setValue:[systemProfile objectForKey:@"lang"]
              forKey:DMFieldStartOSLanguage];
 
     // TODO: This is the CPU arch and not the OS arch.
     [event setValue:[NSNumber numberWithInteger:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
              forKey:DMFieldStartOSArchitecture];
-    [event setValue:[NSNull translate:[systemProfile objectForKey:@"cpuBrand"]]
+    [event setValue:[systemProfile objectForKey:@"cpuBrand"]
              forKey:DMFieldStartProcessorInfo];
     [event setValue:[NSNumber numberWithInteger:([[systemProfile objectForKey:@"cpu64bit"] boolValue] ? 64 : 32)]
              forKey:DMFieldStartProcessorArchitecture];
@@ -130,15 +121,16 @@ static NSString * const DMTypeStop = @"sto";
              forKey:DMFieldStartScreenCount];
 #endif
 
-    [event setValue:[NSNull translate:[systemProfile objectForKey:@"mainScreenResolution"]]
+    [event setValue:[systemProfile objectForKey:@"mainScreenResolution"]
              forKey:DMFieldStartScreenResolution];
 
     // TODO: Retrieve Java version somehow?
-    //    [event setValue:[NSNull null]
-    //             forKey:DMFieldStartJavaVersion];
-
-    //    [event setValue:[NSNull null]
-    //             forKey:DMFieldStartDotNetVersion];
+    // Missing values:
+    //  - DMFieldStartJavaVersion
+    //  - DMFieldStartDotNetVersion
+    //  - DMFieldStartUserCustomId
+    //  - DMFieldStartUserEmail
+    //  - DMFieldStartOSFontDPI
 
     return event;
 }

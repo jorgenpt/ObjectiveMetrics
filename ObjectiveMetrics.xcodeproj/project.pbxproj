@@ -19,8 +19,6 @@
 		8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF751B6133900F700609001 /* DMTrackingQueue.m */; };
 		8E279CE6133AC0EB00B4CB82 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */; };
 		8E279CEF133AC0EB00B4CB82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E8A0EBE1337FBA500CA6E47 /* InfoPlist.strings */; };
-		8E2C20EE1341895F00CCEAC3 /* NSNull+DMTranslate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */; };
-		8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */; };
 		8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */; };
 		8EC75F531470872E00850047 /* DMSUHost.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC75F4F1470872E00850047 /* DMSUHost.h */; };
 		8EC75F541470872E00850047 /* DMSUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC75F501470872E00850047 /* DMSUHost.m */; };
@@ -46,8 +44,6 @@
 		8E229366133CFEB500183BA9 /* DMHosts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHosts.h; sourceTree = "<group>"; };
 		8E229367133CFEB500183BA9 /* DMHosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHosts.m; sourceTree = "<group>"; };
 		8E279CF3133AC0EB00B4CB82 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveMetrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+DMTranslate.h"; sourceTree = "<group>"; };
-		8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+DMTranslate.m"; sourceTree = "<group>"; };
 		8E6D6A2B133BFC5700E5F8A8 /* DMRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMRequester.h; sourceTree = "<group>"; };
 		8E6D6A2C133BFC5700E5F8A8 /* DMRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMRequester.m; sourceTree = "<group>"; };
 		8E8A0EB51337FBA500CA6E47 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -180,8 +176,6 @@
 				C5D40C09168ED33400BAD826 /* NSArray+Map.m */,
 				C5D40C04168EC23C00BAD826 /* NSDictionary+TypedRetrieval.h */,
 				C5D40C05168EC23C00BAD826 /* NSDictionary+TypedRetrieval.m */,
-				8E2C20EC1341895F00CCEAC3 /* NSNull+DMTranslate.h */,
-				8E2C20ED1341895F00CCEAC3 /* NSNull+DMTranslate.m */,
 				C5BDC253168036AD00A37A01 /* NSString+Random.h */,
 				C5BDC254168036AD00A37A01 /* NSString+Random.m */,
 				8E229360133CF60700183BA9 /* ObjectiveMetrics.h */,
@@ -201,7 +195,6 @@
 				8E229363133CF63600183BA9 /* DMRequester.h in Headers */,
 				8E229364133CF63600183BA9 /* DMTrackingQueue.h in Headers */,
 				8E229368133CFEB500183BA9 /* DMHosts.h in Headers */,
-				8E2C20EE1341895F00CCEAC3 /* NSNull+DMTranslate.h in Headers */,
 				8E19EC1113AEFEC4007CE280 /* DMNullQueue.h in Headers */,
 				8EC75F531470872E00850047 /* DMSUHost.h in Headers */,
 				8EC75F551470872E00850047 /* DMSUSystemProfiler.h in Headers */,
@@ -280,7 +273,6 @@
 				8E279CE0133AC0EB00B4CB82 /* DMTrackingQueue.m in Sources */,
 				8E6D6A2E133BFC5700E5F8A8 /* DMRequester.m in Sources */,
 				8E229369133CFEB500183BA9 /* DMHosts.m in Sources */,
-				8E2C20EF1341895F00CCEAC3 /* NSNull+DMTranslate.m in Sources */,
 				8E19EC1213AEFEC4007CE280 /* DMNullQueue.m in Sources */,
 				8EC75F541470872E00850047 /* DMSUHost.m in Sources */,
 				8EC75F561470872E00850047 /* DMSUSystemProfiler.m in Sources */,
