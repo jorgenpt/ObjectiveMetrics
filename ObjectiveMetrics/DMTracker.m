@@ -37,18 +37,6 @@ static DMTracker* defaultInstance = nil;
     return defaultInstance;
 }
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        /* This is enabled by default for compatibility reasons.
-         * In retrospect, it's probably better to not do this.
-         */
-        self.autoflush = YES;
-    }
-    return self;
-}
-
 - (void)dealloc
 {
     self.queue = nil;
@@ -95,10 +83,7 @@ static DMTracker* defaultInstance = nil;
         [[NSNotificationCenter defaultCenter] removeObserver:self];
 
         [self queueMessageWithFlow:[DMEvent stopEvent]];
-
-        if (self.autoflush)
-            [self.queue blockingFlush];
-
+        [self.queue flushAndIncludeCurrent:YES];
         self.queue = nil;
     }
     else

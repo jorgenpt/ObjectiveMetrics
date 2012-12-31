@@ -24,11 +24,6 @@
 @interface DMTracker : NSObject
 
 /**
- * Whether or not we automatically flush the queue at termination.
- */
-@property (assign) BOOL autoflush;
-
-/**
  * Returns the singleton instance of the DMTracker.
  */
 + (DMTracker *)defaultTracker;
@@ -49,17 +44,12 @@
 
 /**
  * Finalize the current app session. Only valid a single time after a call to
- * startApp.
- * It is implicitly called when the app sends a
- * NSApplicationWillTerminateNotification or
- * UIApplicationWillTerminateNotification.  Finalizing the app session will
- * attempt to send all queued messages if autoflush is enabled (default).
- * If it fails or autoflushing is disabled, they will be attempted sent
- * at the next app startup.
+ * stop.
  *
- * @see NSApplicationWillTerminateNotification
- * @see UIApplicationWillTerminateNotification
- * @see setAutoflush
+ * You should send this when your app is exiting.
+ *
+ * Finalizing the app session will attempt to send all queued messages.
+ * If it fails, they will be attempted sent at the next app startup.
  */
 - (void)stop;
 
