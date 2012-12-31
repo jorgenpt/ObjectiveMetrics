@@ -14,7 +14,7 @@
 - (void)add:(NSDictionary *)event { return; }
 
 - (void)flushAndIncludeCurrent:(BOOL)includeCurrent { return; }
-- (BOOL)blockingFlush { return YES; }
+- (void)blockingFlush { return; }
 - (void)discard { return; }
 
 @end

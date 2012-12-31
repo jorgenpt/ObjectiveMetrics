@@ -13,7 +13,7 @@
 - (void)add:(NSDictionary *)event;
 
 - (void)flushAndIncludeCurrent:(BOOL)includeCurrent;
-- (BOOL)blockingFlush;
+- (void)blockingFlush;
 - (void)discard;
 
 @end
@@ -43,15 +43,25 @@
 - (void)disable;
 
 /**
+ * Stop and flush queue, async. Shortcut for [tracker stopAndFlushSynchronously:NO].
+ */
+- (void)stop;
+
+/**
  * Finalize the current app session. Only valid a single time after a call to
- * stop.
+ * start.
  *
  * You should send this when your app is exiting.
  *
  * Finalizing the app session will attempt to send all queued messages.
  * If it fails, they will be attempted sent at the next app startup.
+ *
+ * @param synchronously If YES, then do not return until we've sent our events
+ *  to DeskMetrics. If the sending fails, the events are stored for sending next
+ *  startup.
+ *
  */
-- (void)stop;
+- (void)stopAndFlushSynchronously:(BOOL)synchronously;
 
 /**
  * Manually flush the queue of events, sending them to the server.

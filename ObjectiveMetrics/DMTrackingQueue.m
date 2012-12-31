@@ -80,16 +80,11 @@ static NSString * const kDMNullPlaceholder = @"<[Aija8kua]NULL-VALUE[ep6gae3U]>"
     });
 }
 
-- (BOOL)blockingFlush
+- (void)blockingFlush
 {
-    __block NSUInteger remainingSessions;
-
     dispatch_sync(self.requestQueue, ^{
         [self flushSynchronouslyAndIncludeCurrent:YES];
-        remainingSessions = [self.sessions count];
     });
-
-    return remainingSessions == 0;
 }
 
 - (void)discard

@@ -78,12 +78,22 @@ static DMTracker* defaultInstance = nil;
 
 - (void)stop
 {
+    [self stopAndFlushSynchronously:NO];
+}
+
+- (void)stopAndFlushSynchronously:(BOOL)synchronously
+{
     if (self.queue)
     {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
 
         [self queueMessageWithFlow:[DMEvent stopEvent]];
-        [self.queue flushAndIncludeCurrent:YES];
+        if (synchronously) {
+            [self.queue blockingFlush];
+        } else {
+            [self.queue flushAndIncludeCurrent:YES];
+        }
+
         self.queue = nil;
     }
     else
