@@ -61,9 +61,10 @@ static NSString * const kDMAnalyticsURLFormat = @"http://%@.apiv2.deskmetrics.co
 - (NSString *)userAgent
 {
     DMSUHost *frameworkHost = [DMHosts sharedFrameworkHost];
-    return [NSString stringWithFormat:@"%@ v%@",
-            [frameworkHost objectForInfoDictionaryKey:@"CFBundleName"],
-            [frameworkHost version]];
+    return [NSString stringWithFormat:@"DM SDK/%@ v%@ (%@)",
+            (TARGET_OS_IPHONE ? @"iOS" : @"Mac OS X"),
+            [frameworkHost version],
+            [frameworkHost objectForInfoDictionaryKey:@"CFBundleName"]];
 }
 
 - (BOOL)send:(NSArray *)events
