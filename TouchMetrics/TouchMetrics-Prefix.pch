@@ -1,16 +1,1 @@
-//
-// Prefix header for all source files of the 'TouchMetrics' target in the 'TouchMetrics' project
-//
-
-#include <TargetConditionals.h>
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import "DMHosts.h"
-#endif
-
-#ifdef DEBUG
-#   define DLog(fmt, ...) NSLog((@"%s, line %d: " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#else
-#   define DLog(...)
-#endif
+../ObjectiveMetrics/ObjectiveMetrics-Prefix.pch
