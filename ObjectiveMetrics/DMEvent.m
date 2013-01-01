@@ -17,13 +17,13 @@
 static const int kBytesPerMegabyte = 1024 * 1024;
 
 #pragma mark General message fields
-static NSString * const DMFieldType = @"tp";
+NSString * const kDMFieldType = @"tp";
 NSString * const kDMFieldFlow = @"fl";
 NSString * const kDMFieldTimestamp = @"ts";
 
 
 #pragma mark Start message fields
-static NSString * const DMTypeStart = @"sta";
+NSString * const kDMTypeStart = @"sta";
 static NSString * const DMFieldStartUserCustomId = @"cid";
 static NSString * const DMFieldStartUserEmail = @"uem";
 static NSString * const DMFieldStartOSName = @"os";
@@ -40,16 +40,16 @@ static NSString * const DMFieldStartJavaVersion = @"jav";
 static NSString * const DMFieldStartDotNetVersion = @"net";
 
 #pragma mark Event message fields
-static NSString * const DMTypeEvent = @"evt";
+NSString * const kDMTypeEvent = @"evt";
 static NSString * const DMFieldEventName = @"na";
 static NSString * const DMFieldEventProperties = @"pr";
 
 #pragma mark Log message fields
-static NSString * const DMTypeLog = @"log";
+NSString * const kDMTypeLog = @"log";
 static NSString * const DMFieldLogMessage = @"na";
 
 #pragma mark Stop message fields
-static NSString * const DMTypeStop = @"sto";
+NSString * const kDMTypeStop = @"sto";
 
 
 @implementation DMEvent
@@ -64,14 +64,14 @@ static NSString * const DMTypeStop = @"sto";
 
 + (NSMutableDictionary *)baseMessageWithType:(NSString *)type
 {
-    return [NSMutableDictionary dictionaryWithDictionary:@{DMFieldType : type, kDMFieldTimestamp : [[self class] timestamp]}];
+    return [NSMutableDictionary dictionaryWithDictionary:@{kDMFieldType : type, kDMFieldTimestamp : [[self class] timestamp]}];
 }
 
 #pragma mark - Message generation
 
 + (NSMutableDictionary *)startEvent
 {
-    NSMutableDictionary *event = [self baseMessageWithType:DMTypeStart];
+    NSMutableDictionary *event = [self baseMessageWithType:kDMTypeStart];
 
     DMSUHost *app = [DMHosts sharedAppHost];
     NSArray *systemProfileArray = [app systemProfile];
@@ -137,13 +137,13 @@ static NSString * const DMTypeStop = @"sto";
 
 + (NSMutableDictionary *)stopEvent
 {
-    return [self baseMessageWithType:DMTypeStop];
+    return [self baseMessageWithType:kDMTypeStop];
 }
 
 + (NSMutableDictionary *)event:(NSString *)eventName
                 withProperties:(NSDictionary *)properties
 {
-    NSMutableDictionary *event = [self baseMessageWithType:DMTypeEvent];
+    NSMutableDictionary *event = [self baseMessageWithType:kDMTypeEvent];
     [event setValue:eventName
              forKey:DMFieldEventName];
 
@@ -157,7 +157,7 @@ static NSString * const DMTypeStop = @"sto";
 
 + (NSMutableDictionary *)logEventWithMessage:(NSString *)theMessage
 {
-    NSMutableDictionary *event = [self baseMessageWithType:DMTypeLog];
+    NSMutableDictionary *event = [self baseMessageWithType:kDMTypeLog];
     [event setValue:theMessage
              forKey:DMFieldLogMessage];
     return event;

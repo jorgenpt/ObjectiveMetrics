@@ -10,6 +10,9 @@
 
 NSString * const kDMFieldTimestamp;
 NSString * const kDMFieldFlow;
+NSString * const kDMFieldType;
+
+NSString * const kDMTypeStop;
 
 @interface DMEvent : NSObject
 

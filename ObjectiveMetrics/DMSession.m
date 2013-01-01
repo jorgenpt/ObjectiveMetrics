@@ -82,9 +82,36 @@ static NSString * const kDMHeaderFieldJSONVersion = @"jsn";
         if ([bodyArray count] > 0) {
             self.events = [[bodyArray mutableCopy] autorelease];
         }
+        [self ensureSessionIsTerminated:headerDictionary];
     }
 
     return self;
+}
+
+- (void)ensureSessionIsTerminated:(NSDictionary *)header
+{
+    NSDictionary *lastEvent = [self.events lastObject];
+    NSString *lastEventType = [lastEvent objectForKey:kDMFieldType];
+    if (![lastEventType isEqualToString:kDMTypeStop]) {
+        // We try to estimate the terminating time by adding one second onto when the session was serialized.
+        // If it's not available, we use the timestamp of the last event in the session, and finally, we fall back to
+        // one second before the current time.
+        NSNumber *terminatingEventTime = [header objectForKey:kDMFieldTimestamp];
+        if (!terminatingEventTime) {
+            terminatingEventTime = [lastEvent objectForKey:kDMFieldTimestamp];
+        }
+
+        if (terminatingEventTime) {
+            terminatingEventTime = [NSNumber numberWithInt:[terminatingEventTime intValue] + 1];
+        } else {
+            terminatingEventTime = [NSNumber numberWithInt:[[DMEvent timestamp] intValue] - 1];
+        }
+
+        NSMutableDictionary *terminatingEvent = [DMEvent stopEvent];
+        [terminatingEvent setObject:terminatingEventTime
+                             forKey:kDMFieldTimestamp];
+        [self.events addObject:terminatingEvent];
+    }
 }
 
 - (NSDictionary *)serializeHeaderAsDictionaryWithUserId:(NSString *)userId
