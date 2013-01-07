@@ -94,7 +94,7 @@ licenses:
 * [UIDevice-Extension][uide] is licensed under the [BSD license][bsd-license].
 * [Sparkle][sparkle] is licensed under the [MIT license][mit-license].
 
-[header]: DMTracker.h
+[header]: /jorgenpt/ObjectiveMetrics/blob/master/ObjectiveMetrics/DMTracker.h
 [cocoapods]: http://cocoapods.org/
 [noncocoapods]: /jorgenpt/ObjectiveMetrics/blob/master/README_NON_COCOAPODS.md
 [dm]: http://www.deskmetrics.com
