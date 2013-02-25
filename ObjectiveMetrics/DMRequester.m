@@ -71,13 +71,15 @@ static NSString * const kDMAnalyticsURLFormat = @"https://%@.api.deskmetrics.com
 
 - (BOOL)send:(NSArray *)events
 {
-    NSData *json = [[events JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+    SBJsonWriter *writer = [[[SBJsonWriter alloc] init] autorelease];
+    NSData *json = [writer dataWithObject:events];
     NSMutableURLRequest *sentRequest = [self.request copy];
 
     [sentRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[json length]] forHTTPHeaderField:@"Content-Length"];
     [sentRequest setHTTPBody:json];
 
-    DLog(@"Sending data: %@", [events JSONRepresentation]);
+    DLog(@"Sending data: %@", [[[NSString alloc] initWithData:json
+                                                     encoding:NSUTF8StringEncoding] autorelease]);
 
     NSURLResponse *response = nil;
     NSError *error = nil;
