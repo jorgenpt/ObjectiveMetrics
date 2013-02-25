@@ -14,7 +14,7 @@
 # import <SBJson/SBJson.h>
 #endif
 
-static NSString * const kDMAnalyticsURLFormat = @"https://%@.apiv2.deskmetrics.com/data";
+static NSString * const kDMAnalyticsURLFormat = @"https://%@.api.deskmetrics.com/data";
 
 @interface DMRequester ()
 @property (retain) NSMutableURLRequest *request;
