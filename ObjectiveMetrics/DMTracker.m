@@ -19,15 +19,16 @@
 
 static DMTracker* defaultInstance = nil;
 
-@interface DMTracker () {
-    int flow;
-}
-
+@interface DMTracker ()
 @property (retain) id<DMTrackingQueueProtocol> queue;
+
+- (void)queueMessageWithFlow:(NSMutableDictionary *)message;
 @end
 
 
 @implementation DMTracker
+
+@synthesize queue;
 
 + (DMTracker *)defaultTracker
 {

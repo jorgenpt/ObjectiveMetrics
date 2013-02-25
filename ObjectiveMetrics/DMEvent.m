@@ -64,7 +64,10 @@ NSString * const kDMTypeStop = @"sto";
 
 + (NSMutableDictionary *)baseMessageWithType:(NSString *)type
 {
-    return [NSMutableDictionary dictionaryWithDictionary:@{kDMFieldType : type, kDMFieldTimestamp : [[self class] timestamp]}];
+    return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+            type, kDMFieldType,
+            [[self class] timestamp], kDMFieldTimestamp,
+            nil];
 }
 
 #pragma mark - Message generation

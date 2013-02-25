@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DMSession : NSObject
+@interface DMSession : NSObject {
+@private
+    NSString *sessionId;
+    NSString *appVersion;
+    NSString *jsonVersion;
+    NSMutableArray *events;
+}
 
 - (id)init;
 - (id)initWithDictionary:(NSDictionary *)aDictionary;

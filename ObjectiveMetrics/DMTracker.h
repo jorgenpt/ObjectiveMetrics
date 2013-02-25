@@ -21,7 +21,11 @@
 /**
  * A class representing an ongoing application session for tracking purposes.
  */
-@interface DMTracker : NSObject
+@interface DMTracker : NSObject {
+@private
+    int flow;
+    id<DMTrackingQueueProtocol> queue;
+}
 
 /**
  * Returns the singleton instance of the DMTracker.

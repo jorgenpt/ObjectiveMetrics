@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-@interface DMRequester : NSObject
+@interface DMRequester : NSObject {
+@private
+    NSMutableURLRequest *request;
+}
 
 - (id)initWithApplicationId:(NSString *)appId;
 - (BOOL)send:(NSArray *)data;

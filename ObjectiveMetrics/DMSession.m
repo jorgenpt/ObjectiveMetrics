@@ -35,11 +35,16 @@ static NSString * const kDMHeaderFieldJSONVersion = @"jsn";
 
 - (NSDictionary *)serializeHeaderAsDictionaryWithUserId:(NSString *)userId;
 - (NSDictionary *)serializeAsDictionaryWithUserId:(NSString *)userId;
+- (void)ensureSessionIsTerminated:(NSDictionary *)header;
 
 @end
 
 #pragma mark Implementation
 @implementation DMSession
+
+@synthesize sessionId;
+@synthesize appVersion, jsonVersion;
+@synthesize events;
 
 - (id)init
 {
@@ -65,17 +70,17 @@ static NSString * const kDMHeaderFieldJSONVersion = @"jsn";
     if (self) {
         NSDictionary *headerDictionary = [aDictionary dictionaryForKey:kDMHeaderField];
         if ([headerDictionary count] > 0) {
-            NSString *sessionId = [headerDictionary stringForKey:kDMHeaderFieldSession];
-            if ([sessionId length] == kDMSessionIdLength)
-                self.sessionId = sessionId;
+            NSString *newSessionId = [headerDictionary stringForKey:kDMHeaderFieldSession];
+            if ([newSessionId length] == kDMSessionIdLength)
+                self.sessionId = newSessionId;
 
-            NSString *jsonVersion = [headerDictionary stringForKey:kDMHeaderFieldJSONVersion];
-            if ([jsonVersion length] > 0)
-                self.jsonVersion = jsonVersion;
+            NSString *newJsonVersion = [headerDictionary stringForKey:kDMHeaderFieldJSONVersion];
+            if ([newJsonVersion length] > 0)
+                self.jsonVersion = newJsonVersion;
 
-            NSString *appVersion = [headerDictionary stringForKey:kDMHeaderFieldApplicationVersion];
-            if ([appVersion length] > 0)
-                self.appVersion = appVersion;
+            NSString *newAppVersion = [headerDictionary stringForKey:kDMHeaderFieldApplicationVersion];
+            if ([newAppVersion length] > 0)
+                self.appVersion = newAppVersion;
         }
 
         NSArray *bodyArray = [aDictionary arrayForKey:kDMBodyField];

@@ -26,6 +26,8 @@ static NSString * const kDMAnalyticsURLFormat = @"https://%@.apiv2.deskmetrics.c
 
 @implementation DMRequester
 
+@synthesize request;
+
 - (id)initWithApplicationId:(NSString *)appId
 {
     self = [super init];

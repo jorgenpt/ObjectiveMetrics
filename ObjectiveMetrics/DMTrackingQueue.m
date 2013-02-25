@@ -36,6 +36,10 @@ static int const kDMUserIdLength = 32;
 
 @implementation DMTrackingQueue
 
+@synthesize currentSession, sessions;
+@synthesize requester, requestQueue;
+@synthesize userId;
+
 - (id)initWithApplicationId:(NSString *)appId
 {
     self = [super init];
