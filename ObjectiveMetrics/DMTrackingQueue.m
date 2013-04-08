@@ -105,9 +105,9 @@ static int const kDMUserIdLength = 32;
 
     @synchronized(self)
     {
-        sessionsToSend = [[self.sessions arrayByApplyingTransformation:^id(id object) {
+        sessionsToSend = [[[self.sessions arrayByApplyingTransformation:^id(id object) {
             return [object serializeAsDictionaryWithUserId:self.userId];
-        }] mutableCopy];
+        }] mutableCopy] autorelease];
 
         currentSessionEvents = [self.currentSession.events count];
         if (includeCurrent && currentSessionEvents > 0) {
@@ -120,7 +120,6 @@ static int const kDMUserIdLength = 32;
     }
 
     BOOL messagesDelivered = [self.requester send:sessionsToSend];
-    [sessionsToSend release];
 
     if (messagesDelivered) {
         DLog(@"Messages delivered. Removing %lu events from current sessions.", (unsigned long)currentSessionEvents);
